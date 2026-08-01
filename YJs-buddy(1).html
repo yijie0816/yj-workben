@@ -1,0 +1,1637 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="YJ's buddy">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#DCEAF6">
+<title>YJ's buddy</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23DCEAF6'/%3E%3Cellipse cx='19' cy='24' rx='7' ry='10' fill='%23D9BFA6'/%3E%3Cellipse cx='45' cy='24' rx='7' ry='10' fill='%23D9BFA6'/%3E%3Cellipse cx='32' cy='34' rx='17' ry='15' fill='%23FFF6E6' stroke='%23B79C82' stroke-width='2'/%3E%3Ccircle cx='26' cy='32' r='2.4' fill='%235A5750'/%3E%3Ccircle cx='38' cy='32' r='2.4' fill='%235A5750'/%3E%3Cellipse cx='32' cy='38' rx='3' ry='2.2' fill='%23C9A98C'/%3E%3Cpath d='M27 42q5 4 10 0' stroke='%235A5750' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='20' cy='39' r='3' fill='%23F8DCE0'/%3E%3Ccircle cx='44' cy='39' r='3' fill='%23F8DCE0'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23DCEAF6'/%3E%3Cellipse cx='19' cy='24' rx='7' ry='10' fill='%23D9BFA6'/%3E%3Cellipse cx='45' cy='24' rx='7' ry='10' fill='%23D9BFA6'/%3E%3Cellipse cx='32' cy='34' rx='17' ry='15' fill='%23FFF6E6' stroke='%23B79C82' stroke-width='2'/%3E%3Ccircle cx='26' cy='32' r='2.4' fill='%235A5750'/%3E%3Ccircle cx='38' cy='32' r='2.4' fill='%235A5750'/%3E%3Cellipse cx='32' cy='38' rx='3' ry='2.2' fill='%23C9A98C'/%3E%3Cpath d='M27 42q5 4 10 0' stroke='%235A5750' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='20' cy='39' r='3' fill='%23F8DCE0'/%3E%3Ccircle cx='44' cy='39' r='3' fill='%23F8DCE0'/%3E%3C/svg%3E">
+<style>
+:root{
+--bg:#FBF9F3;--nav:#DCEAF6;--nav-sub:#E9F3FB;--hl:#CBE5F8;
+--card:#FFF8E6;--card2:#FDF2D8;--cardblue:#EDF6FC;
+--text:#5C594F;--sub:#9C978C;--line:#EFE9DD;
+--blue:#BFDDF2;--blue-d:#4E7B96;--yellow:#FCE9B8;--yellow-d:#8A7233;
+--pink:#F8DCE0;--green:#DEEBD9;--orange:#E2955F;--purple:#E6DEF2;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;height:100%;overflow:hidden;}
+body{
+font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","HarmonyOS Sans SC","Noto Sans CJK SC","Source Han Sans SC","Microsoft YaHei",sans-serif;
+font-weight:300;letter-spacing:.2px;color:var(--text);background:var(--bg);font-size:13px;
+-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+}
+input,select,textarea,button{font-family:inherit;font-weight:300;color:var(--text);}
+::-webkit-scrollbar{width:0;height:0;}
+.app{display:flex;height:100dvh;height:100vh;width:100%;overflow:hidden;}
+
+/* ============ 侧边导航 ============ */
+#sidebar{
+width:134px;flex:0 0 134px;background:var(--nav);display:flex;flex-direction:column;
+transition:width .22s ease,flex-basis .22s ease;position:relative;z-index:200;
+box-shadow:1px 0 8px rgba(120,150,175,.18);
+}
+body.sbc #sidebar{width:54px;flex-basis:54px;}
+.sb-head{height:48px;display:flex;align-items:center;gap:4px;padding:0 6px;border-bottom:1px solid rgba(255,255,255,.75);flex:0 0 48px;}
+.sb-logo{flex:1;min-width:0;font-size:12px;font-weight:700;color:#4A7290;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+body.sbc .sb-logo{display:none;}
+.sb-tg{width:38px;height:38px;flex:0 0 38px;border:none;background:rgba(255,255,255,.65);border-radius:11px;display:flex;align-items:center;justify-content:center;padding:0;}
+.sb-tg svg{width:19px;height:19px;}
+.sb-body{flex:1;overflow-y:auto;overflow-x:hidden;padding:4px 0 26px;}
+.grp{margin-bottom:1px;}
+.nav1{
+display:flex;align-items:center;gap:6px;padding:0 7px;height:46px;
+font-size:12.5px;font-weight:700;color:#3F6480;white-space:nowrap;overflow:hidden;cursor:pointer;
+border-radius:0 13px 13px 0;user-select:none;
+}
+.nav1:active{background:rgba(255,255,255,.5);}
+.nav1 .ico{width:24px;height:24px;flex:0 0 24px;display:block;}
+.nav1 .txt{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12.5px;font-weight:700;}
+.nav1 .arw{width:9px;height:9px;flex:0 0 9px;transition:transform .2s;opacity:.55;}
+.grp.open>.nav1 .arw{transform:rotate(90deg);}
+.grp.open>.nav1{background:rgba(255,255,255,.42);}
+.l2wrap{display:none;padding:1px 0 4px;}
+.grp.open>.l2wrap{display:block;}
+.nav2{
+display:flex;align-items:center;gap:5px;min-height:48px;padding:6px 6px 6px 12px;
+font-size:13.5px;font-weight:400;color:#5B6771;white-space:nowrap;overflow:hidden;
+border-radius:0 15px 15px 0;cursor:pointer;position:relative;z-index:1;user-select:none;
+}
+.nav2 .i2{width:16px;height:16px;flex:0 0 16px;opacity:.9;}
+.nav2 .t2{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:13.5px;font-weight:400;}
+.nav2:active{background:rgba(255,255,255,.6);}
+.nav2.on{background:var(--hl);color:#25627F;}
+body.sbc .nav1{justify-content:center;padding:0;gap:0;}
+body.sbc .nav1 .txt,body.sbc .nav1 .arw{display:none;}
+body.sbc .l2wrap{display:none!important;}
+body.sbc .nav1 .ico{width:27px;height:27px;flex-basis:27px;}
+body.sbc .grp.act .nav1{background:rgba(255,255,255,.65);}
+/* 折叠态浮出二级菜单 */
+#flyout{
+position:fixed;left:56px;z-index:210;background:#EAF3FB;border-radius:14px;padding:5px 0;
+box-shadow:0 4px 18px rgba(110,140,165,.3);min-width:126px;max-width:60vw;display:none;
+border:1px solid #D5E7F4;
+}
+#flyout.show{display:block;}
+#flyout .fh{font-size:11.5px;font-weight:700;color:#4A7290;padding:4px 12px 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+#flyout .nav2{padding-left:12px;border-radius:0;}
+
+/* ============ 主体 ============ */
+#main{flex:1;min-width:0;height:100dvh;height:100vh;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:9px 9px 60px;}
+.ptitle{display:flex;align-items:center;gap:6px;font-size:15px;font-weight:600;color:#5F5B50;margin:2px 0 9px;}
+.ptitle svg{width:26px;height:26px;flex:0 0 26px;}
+.card{background:var(--card);border-radius:15px;padding:11px 11px 12px;margin-bottom:10px;box-shadow:0 1px 5px rgba(196,182,150,.16);}
+.card.b{background:var(--cardblue);box-shadow:0 1px 5px rgba(160,190,210,.16);}
+.card.w{background:#fff;}
+.ch{display:flex;align-items:center;gap:5px;font-size:13.5px;font-weight:600;color:#6C6555;margin-bottom:8px;}
+.ch svg{width:19px;height:19px;flex:0 0 19px;}
+.ch .sp{margin-left:auto;font-size:11px;font-weight:300;color:var(--sub);}
+.lbl{font-size:12px;color:var(--sub);margin:8px 0 4px;display:block;}
+.lbl:first-child{margin-top:0;}
+.inp,.sel,.ta{width:100%;border:1px solid var(--line);background:#fff;border-radius:11px;padding:9px 10px;font-size:13px;outline:none;-webkit-appearance:none;appearance:none;}
+.sel{background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 4.5L6 8.5L10 4.5' stroke='%239C978C' stroke-width='1.4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 9px center/11px;padding-right:26px;}
+.ta{min-height:62px;resize:vertical;line-height:1.6;}
+.inp:focus,.ta:focus,.sel:focus{border-color:#B7D8EE;}
+.row{display:flex;gap:7px;}
+.row>*{flex:1;min-width:0;}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:4px;min-height:40px;padding:0 13px;border-radius:20px;border:none;background:#fff;font-size:13px;box-shadow:0 1px 3px rgba(180,170,150,.18);}
+.btn:active{transform:scale(.97);}
+.btn.p{background:var(--blue);color:#2C5F7C;}
+.btn.y{background:var(--yellow);color:var(--yellow-d);}
+.btn.s{min-height:32px;font-size:12px;padding:0 10px;border-radius:16px;}
+.btn.gh{background:transparent;box-shadow:none;color:var(--sub);}
+.btnrow{display:flex;gap:7px;margin-top:10px;}
+.btnrow .btn{flex:1;}
+.chips{display:flex;flex-wrap:wrap;gap:6px;}
+.chips.scr{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;}
+.chip{min-height:36px;padding:4px 11px;border-radius:18px;background:#fff;border:1px solid var(--line);display:inline-flex;align-items:center;gap:4px;font-size:12.5px;white-space:nowrap;flex:0 0 auto;}
+.chip svg{width:17px;height:17px;}
+.chip.on{background:var(--hl);border-color:#A9D2EB;color:#25627F;}
+.chip.on.yl{background:var(--yellow);border-color:#EFD79A;color:var(--yellow-d);}
+.tag{display:inline-block;padding:2px 8px;border-radius:9px;font-size:10.5px;background:#EFF4F8;color:#6B8497;margin-right:4px;}
+.hint{font-size:11px;color:var(--sub);line-height:1.6;}
+.est{color:var(--orange);font-size:10.5px;}
+.neg{color:var(--orange);}
+.big{font-size:19px;font-weight:600;color:#5F5B50;}
+.kv{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px dashed #EDE6D8;font-size:12.5px;gap:8px;}
+.kv:last-child{border-bottom:none;}
+.kv span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:1;display:block;}
+.kv b{font-weight:600;color:#5F5B50;white-space:nowrap;flex:0 0 auto;display:block;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;}
+.stat{background:#fff;border-radius:12px;padding:8px 6px;text-align:center;}
+.stat .n{font-size:15px;font-weight:600;color:#5F5B50;}
+.stat .l{font-size:10.5px;color:var(--sub);margin-top:2px;}
+.emp{text-align:center;color:var(--sub);font-size:12px;padding:14px 0;}
+.item{background:#fff;border-radius:12px;padding:9px 10px;margin-bottom:7px;font-size:12.5px;line-height:1.65;position:relative;}
+.item .del{position:absolute;right:6px;top:6px;width:26px;height:26px;border:none;background:transparent;color:#C4BCAE;font-size:15px;line-height:1;}
+.arch{margin-top:4px;}
+details.day{background:#fff;border-radius:12px;margin-bottom:7px;overflow:hidden;}
+details.day>summary{list-style:none;padding:10px;font-size:12.5px;color:#6D6A60;display:flex;align-items:center;gap:6px;}
+details.day>summary::-webkit-details-marker{display:none;}
+details.day>summary .cnt{margin-left:auto;font-size:11px;color:var(--sub);}
+details.day>summary .ar{width:9px;height:9px;transition:.2s;}
+details.day[open]>summary .ar{transform:rotate(90deg);}
+details.day[open]>summary{background:#FAF6EC;}
+details.day .dbody{padding:2px 8px 8px;}
+.divider{height:1px;background:var(--line);margin:9px 0;}
+
+/* 日历 */
+.calhd{display:flex;align-items:center;gap:6px;margin-bottom:7px;}
+.calhd .m{flex:1;text-align:center;font-size:13.5px;font-weight:600;color:#5F5B50;}
+.calnav{width:32px;height:32px;border:none;background:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;padding:0;}
+.calnav svg{width:12px;height:12px;}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;touch-action:pan-y;}
+.cw{text-align:center;font-size:9.5px;color:var(--sub);padding:1px 0 3px;}
+.cd{min-height:30px;border-radius:8px;background:#fff;border:1px solid #F3EEE4;padding:2px 1px;position:relative;overflow:hidden;}
+.cd.blank{background:transparent;border-color:transparent;}
+.cd .dn{font-size:10px;color:#7D776C;text-align:center;line-height:1.3;}
+.cd.today .dn{color:#2C5F7C;font-weight:600;}
+.cd.today{border-color:#96C2DD;box-shadow:0 0 0 1px #96C2DD inset;}
+.cd .mk{position:absolute;right:2px;bottom:2px;display:flex;gap:1px;}
+.cd .mk i{width:5px;height:5px;border-radius:50%;display:block;}
+.calbig .cd{min-height:60px;padding:2px 2px 3px;}
+.calbig .cd .ln{font-size:8px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:1px;}
+.calbig .cd .ln svg{width:7px;height:7px;flex:0 0 7px;}
+.cd.has{background:#FDF6E7;}
+.cd.full{background:#DCEEF9;}
+.dots{display:flex;gap:2px;flex-wrap:wrap;margin-top:1px;}
+.dots i{width:4px;height:4px;border-radius:50%;}
+.legend{display:flex;flex-wrap:wrap;gap:7px;margin-top:7px;font-size:9.5px;color:var(--sub);}
+.legend span{display:inline-flex;align-items:center;gap:3px;}
+.legend i{width:7px;height:7px;border-radius:2px;display:inline-block;}
+
+/* 表格（爱好） */
+.tblwrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:12px;background:#fff;}
+table.hb{border-collapse:collapse;font-size:12px;min-width:640px;}
+table.hb th{background:#EDF6FC;color:#4E7B96;font-weight:600;font-size:11.5px;padding:7px 6px;white-space:nowrap;border-bottom:1px solid var(--line);}
+table.hb td{padding:5px 6px;border-bottom:1px solid #F5F1E8;vertical-align:top;}
+table.hb .inp,table.hb .sel,table.hb .ta{font-size:12px;padding:6px 7px;border-radius:8px;}
+table.hb .ta{min-height:48px;}
+
+/* 弹窗 */
+.mask{position:fixed;inset:0;background:rgba(96,96,92,.3);display:flex;align-items:center;justify-content:center;padding:22px;z-index:300;animation:fi .18s ease;}
+@keyframes fi{from{opacity:0}to{opacity:1}}
+.dlg{background:#fff;border-radius:20px;padding:15px;width:100%;max-width:330px;max-height:82vh;overflow-y:auto;box-shadow:0 8px 30px rgba(110,110,100,.22);}
+.dlg h3{margin:0 0 10px;font-size:14.5px;font-weight:600;color:#5F5B50;}
+/* 小狗弹窗层级低于导航栏 */
+.dogmask{z-index:60;background:rgba(96,96,92,.22);}
+.dogbox{background:linear-gradient(170deg,#FFFBF0,#EDF6FC);border-radius:24px;padding:16px 15px 14px;width:100%;max-width:290px;text-align:center;box-shadow:0 8px 26px rgba(140,150,140,.24);position:relative;}
+.dogbox .x{position:absolute;right:9px;top:9px;width:28px;height:28px;border:none;background:rgba(255,255,255,.8);border-radius:50%;color:#A9A296;font-size:14px;line-height:1;padding:0;}
+.dogbox .dtxt{font-size:13px;line-height:1.75;color:#5F5B50;margin-top:6px;}
+.dogbox .dsub{font-size:11px;color:var(--sub);margin-top:6px;}
+.toast{position:fixed;left:50%;bottom:64px;transform:translateX(-50%);background:rgba(80,80,76,.88);color:#fff;font-size:12px;padding:8px 15px;border-radius:16px;z-index:400;animation:fi .16s;}
+
+/* 星级 */
+.stars{display:flex;gap:5px;}
+.stars svg{width:25px;height:25px;}
+/* 地图 */
+.mapbox{background:#fff;border-radius:14px;padding:6px;overflow:hidden;}
+.mapbox svg{width:100%;height:auto;display:block;}
+.prov{fill:#ECEAE4;stroke:#fff;stroke-width:.8;transition:fill .2s;}
+.prov.v{fill:#BCDCEF;}
+.prov.v2{fill:#F6D9A8;}
+.pname{font-size:6px;fill:#8A857A;pointer-events:none;font-weight:400;}
+.thumbs{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px;}
+.thumb{width:62px;height:62px;border-radius:10px;object-fit:cover;position:relative;}
+.thumbwrap{position:relative;}
+.thumbwrap button{position:absolute;right:-4px;top:-4px;width:20px;height:20px;border-radius:50%;border:none;background:rgba(90,87,80,.75);color:#fff;font-size:11px;line-height:1;padding:0;}
+/* 资讯 */
+.news .nt{font-size:15px;font-weight:600;color:#5A5750;line-height:1.5;margin:6px 0 8px;}
+.news .np{font-size:13px;line-height:1.95;color:#6E6A61;margin:0 0 10px;}
+.news .src{background:#F7FAFC;border-radius:12px;padding:9px 10px;font-size:12px;line-height:1.85;color:#65707A;}
+.news .src b{color:#4E7B96;font-weight:600;}
+.news .tip{background:#FFF6DE;border-radius:12px;padding:9px 10px;font-size:12px;line-height:1.8;color:#7A6B44;margin-top:8px;}
+.mini{display:flex;align-items:center;gap:8px;}
+.mini .mt{flex:1;min-width:0;font-size:13px;color:#5F5B50;line-height:1.5;}
+.sw{width:44px;height:25px;border-radius:13px;background:#E4E0D6;position:relative;transition:.2s;flex:0 0 44px;border:none;padding:0;}
+.sw::after{content:'';position:absolute;left:3px;top:3px;width:19px;height:19px;border-radius:50%;background:#fff;transition:.2s;box-shadow:0 1px 3px rgba(0,0,0,.14);}
+.sw.on{background:#A9D2EB;}
+.sw.on::after{left:22px;}
+.swrow{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px dashed #EDE6D8;}
+.swrow .nm{flex:1;min-width:0;}
+.swrow .nm input{width:100%;border:none;background:transparent;font-size:13px;padding:4px 0;outline:none;border-bottom:1px solid transparent;}
+.swrow .nm input:focus{border-bottom-color:#CBE5F8;}
+.swrow.l1 .nm input{font-weight:700;color:#3F6480;font-size:12.5px;}
+.chk{width:26px;height:26px;border-radius:9px;border:1.6px solid #DCD5C7;background:#fff;flex:0 0 26px;display:flex;align-items:center;justify-content:center;padding:0;}
+.chk.on{background:#BFDDF2;border-color:#A9D2EB;}
+.chk svg{width:14px;height:14px;}
+.todo{display:flex;align-items:flex-start;gap:9px;background:#fff;border-radius:12px;padding:10px;margin-bottom:7px;}
+.todo .tx{flex:1;min-width:0;font-size:13px;line-height:1.55;word-break:break-all;}
+.todo.done .tx{color:#B6B0A4;text-decoration:line-through;}
+.pv{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--sub);}
+.bar{flex:1;height:6px;border-radius:3px;background:#F0EBE0;overflow:hidden;}
+.bar i{display:block;height:100%;background:#BFDDF2;border-radius:3px;}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside id="sidebar">
+    <div class="sb-head">
+      <div class="sb-logo">YJ's buddy</div>
+      <button class="sb-tg" id="sbTg" aria-label="折叠导航">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#4A7290" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+    <div class="sb-body" id="sbBody"></div>
+  </aside>
+  <main id="main"></main>
+</div>
+<div id="flyout"></div>
+<div id="modalRoot"></div>
+<div id="dogRoot"></div>
+
+<script>
+/* =========================================================
+   YJ's buddy · 单文件本地工作台（localStorage 版）
+   所有数据仅保存在本机浏览器，不上传任何云端
+   ========================================================= */
+"use strict";
+
+/* ---------- 内嵌 SVG 插画 / 图标 ---------- */
+var I = {};
+/* 一级模块彩色插画 */
+I.mHome='<svg class="ico" viewBox="0 0 32 32"><path d="M5 15L16 6l11 9v11a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2z" fill="#FDEFD0" stroke="#D9B87A" stroke-width="1.4" stroke-linejoin="round"/><path d="M3 16L16 5l13 11" stroke="#E8A87C" stroke-width="1.7" fill="none" stroke-linecap="round"/><rect x="13" y="19" width="6" height="9" rx="1.2" fill="#BFDDF2"/><circle cx="24" cy="10" r="2.6" fill="#F8DCE0"/></svg>';
+I.mLife='<svg class="ico" viewBox="0 0 32 32"><circle cx="16" cy="11" r="6" fill="#FFE9C9" stroke="#D9AE72" stroke-width="1.2"/><path d="M10 10q6-6 12 0" fill="#8C6A4F"/><path d="M9 27q1-8 7-8t7 8z" fill="#CFE6F7" stroke="#8FB9D6" stroke-width="1.1"/><circle cx="13.4" cy="11.5" r="1" fill="#5A5750"/><circle cx="18.6" cy="11.5" r="1" fill="#5A5750"/><circle cx="11.6" cy="13.6" r="1.5" fill="#F8C8CF"/><circle cx="20.4" cy="13.6" r="1.5" fill="#F8C8CF"/><path d="M14.6 14.4q1.4 1.3 2.8 0" stroke="#B9856A" stroke-width=".9" fill="none" stroke-linecap="round"/></svg>';
+I.mWork='<svg class="ico" viewBox="0 0 32 32"><rect x="4" y="7" width="24" height="16" rx="2" fill="#DDEBD8" stroke="#8FAE86" stroke-width="1.2"/><rect x="7" y="10" width="18" height="10" rx="1" fill="#FFFDF6"/><path d="M9.5 13h9M9.5 16h12M9.5 19h6" stroke="#A9C3D6" stroke-width="1.2" stroke-linecap="round"/><rect x="11" y="24" width="10" height="2.6" rx="1.3" fill="#E8C89A"/><path d="M25 4l3 3-7 7-3.6.6.6-3.6z" fill="#F8DCE0" stroke="#D79AA5" stroke-width="1"/></svg>';
+I.mNews='<svg class="ico" viewBox="0 0 32 32"><rect x="4" y="6" width="21" height="21" rx="2" fill="#FFF6E0" stroke="#D9B87A" stroke-width="1.3"/><path d="M25 11h3v14a2 2 0 0 1-2 2h-1z" fill="#E6DEF2" stroke="#B4A5CE" stroke-width="1.1"/><rect x="7" y="9.5" width="9" height="7" rx="1" fill="#BFDDF2"/><path d="M18 10.5h4M18 13.5h4M7 19.5h15M7 22.5h11" stroke="#C3B9A5" stroke-width="1.2" stroke-linecap="round"/></svg>';
+I.mSet='<svg class="ico" viewBox="0 0 32 32"><circle cx="16" cy="16" r="9" fill="#EDF6FC" stroke="#8FB9D6" stroke-width="1.3"/><circle cx="16" cy="16" r="3.4" fill="#FCE9B8" stroke="#D9B87A" stroke-width="1.1"/><path d="M16 3v3.4M16 25.6V29M3 16h3.4M25.6 16H29M7 7l2.4 2.4M22.6 22.6L25 25M25 7l-2.4 2.4M9.4 22.6L7 25" stroke="#A9C3D6" stroke-width="1.6" stroke-linecap="round"/></svg>';
+/* 二级 & 通用小图标 */
+function ic(p,f,s){return '<svg class="i2" viewBox="0 0 24 24" fill="'+(f||'none')+'" stroke="'+(s||'#7E8C97')+'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">'+p+'</svg>';}
+I.todo=ic('<rect x="4" y="4" width="16" height="16" rx="3" fill="#FFF3D0"/><path d="M8 12l3 3 5-6" stroke="#7FA8C4"/>','none','#C9A96A');
+I.diet=ic('<path d="M7 3v8a3 3 0 0 0 6 0V3M10 11v10" /><path d="M18 3c-1.5 2-2 4-2 6s.7 3 2 3v9" fill="#FFF3D0"/>');
+I.sport=ic('<circle cx="12" cy="5" r="2.2" fill="#DDEBD8"/><path d="M8 21l3-6 3 2 2 4M6 12l4-3 4 1 3 3"/>');
+I.read=ic('<path d="M4 5h6a2 2 0 0 1 2 2v12a2 2 0 0 0-2-2H4z" fill="#EDF6FC"/><path d="M20 5h-6a2 2 0 0 0-2 2v12a2 2 0 0 1 2-2h6z" fill="#FFF3D0"/>');
+I.money=ic('<rect x="3" y="6" width="18" height="12" rx="2.5" fill="#FFF3D0"/><circle cx="12" cy="12" r="3"/><path d="M6 9v6M18 9v6"/>');
+I.hobby=ic('<path d="M12 20s-7-4.3-7-9.2A3.9 3.9 0 0 1 12 8a3.9 3.9 0 0 1 7 2.8C19 15.7 12 20 12 20z" fill="#F8DCE0"/>');
+I.mood=ic('<circle cx="12" cy="12" r="8.4" fill="#FFF3D0"/><circle cx="9.3" cy="10.5" r="1" fill="#5A5750" stroke="none"/><circle cx="14.7" cy="10.5" r="1" fill="#5A5750" stroke="none"/><path d="M9 14.6q3 2.4 6 0"/>');
+I.travel=ic('<path d="M12 21s-6.4-6-6.4-10.4A6.4 6.4 0 0 1 12 4.2a6.4 6.4 0 0 1 6.4 6.4C18.4 15 12 21 12 21z" fill="#DDEBD8"/><circle cx="12" cy="10.4" r="2.3" fill="#fff"/>');
+I.wc=ic('<rect x="4" y="3.5" width="16" height="17" rx="2.4" fill="#EDF6FC"/><path d="M8 8h8M8 12h8M8 16h5"/>');
+I.wi=ic('<path d="M13 2L5 13h6l-1 9 8-11h-6z" fill="#FCE9B8"/>');
+I.wo=ic('<circle cx="12" cy="12" r="8.4" fill="#EDF6FC"/><path d="M12 7.4V12l3 2"/>');
+I.we=ic('<path d="M20 12a8 8 0 1 1-3.2-6.4" fill="#F8DCE0"/><path d="M8.6 12.6q3.4 2.6 6.8 0"/><circle cx="9.4" cy="9.8" r=".9" fill="#5A5750" stroke="none"/><circle cx="14.6" cy="9.8" r=".9" fill="#5A5750" stroke="none"/>');
+I.wq=ic('<rect x="4" y="3" width="16" height="18" rx="2.2" fill="#FFF3D0"/><path d="M8 8h8M8 12h8M8 16h4"/><circle cx="17.5" cy="16.5" r="3" fill="#DDEBD8"/><path d="M16.2 16.6l1 1 1.8-2"/>');
+I.news2=ic('<rect x="3.5" y="5" width="17" height="14" rx="2" fill="#FFF6E0"/><rect x="6" y="8" width="6" height="5" rx="1" fill="#BFDDF2" stroke="none"/><path d="M14 8.5h4M14 11.5h4M6 16h12"/>');
+I.set2=ic('<circle cx="12" cy="12" r="7.4" fill="#EDF6FC"/><circle cx="12" cy="12" r="2.6" fill="#FCE9B8"/>');
+I.chev='<svg class="arw" viewBox="0 0 12 12" fill="none" stroke="#4A7290" stroke-width="2" stroke-linecap="round"><path d="M4 2l4 4-4 4"/></svg>';
+I.chevS='<svg class="ar" viewBox="0 0 12 12" fill="none" stroke="#A9A296" stroke-width="2" stroke-linecap="round"><path d="M4 2l4 4-4 4"/></svg>';
+I.tick='<svg viewBox="0 0 24 24" fill="none" stroke="#2C5F7C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5.5 5.5L20 6.5"/></svg>';
+I.plus='<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>';
+I.left='<svg viewBox="0 0 12 12" fill="none" stroke="#7E8C97" stroke-width="2" stroke-linecap="round"><path d="M8 2L4 6l4 4"/></svg>';
+I.right='<svg viewBox="0 0 12 12" fill="none" stroke="#7E8C97" stroke-width="2" stroke-linecap="round"><path d="M4 2l4 4-4 4"/></svg>';
+/* 运动类型线条图标 */
+var SPORT_ICONS={
+'散步':'<circle cx="14" cy="4" r="2.2"/><path d="M12 8l-2 5 3 2 1 5M10 13l-3 4M15 10l4 2"/>',
+'羽毛球':'<circle cx="16" cy="5" r="2"/><path d="M14 9l-3 5 4 3 1 5M11 14l-4 3"/><path d="M17 12l4-4M20 6l2 2"/>',
+'游泳':'<circle cx="7" cy="8" r="2"/><path d="M9 10l5 2 4-3"/><path d="M2 17q3-2 5 0t5 0 5 0 5 0"/><path d="M2 21q3-2 5 0t5 0 5 0 5 0"/>',
+'健身':'<path d="M4 9v6M7 7v10M17 7v10M20 9v6M7 12h10"/>',
+'瑜伽':'<circle cx="12" cy="4.6" r="2.1"/><path d="M12 8v6M4 20q8-4 16 0M8 12h8"/>',
+'骑行':'<circle cx="5.5" cy="17" r="3.2"/><circle cx="18.5" cy="17" r="3.2"/><path d="M8 17l3-6h4l-2 6M14 7h3M11 11l-2-3"/>',
+'跳绳':'<circle cx="12" cy="4.4" r="2"/><path d="M12 7v5l-2 4M12 12l2 4"/><path d="M6 8q-3 6 0 11M18 8q3 6 0 11"/>',
+'乒乓球':'<ellipse cx="9" cy="9" rx="5" ry="6" transform="rotate(-30 9 9)"/><path d="M13 14l5 6"/><circle cx="18" cy="8" r="1.8"/>',
+'登山':'<path d="M2 19l7-11 4 6 2-3 7 8z"/><circle cx="18" cy="6" r="2"/>',
+'有氧操':'<circle cx="12" cy="4.4" r="2"/><path d="M12 7v6M12 13l-3 7M12 13l3 7M5 8l7 2 7-2"/>'
+};
+function sportSvg(n,sz,col){return '<svg viewBox="0 0 24 24" width="'+(sz||18)+'" height="'+(sz||18)+'" fill="none" stroke="'+(col||'#7E8C97')+'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">'+(SPORT_ICONS[n]||'')+'</svg>';}
+/* 心情小女孩头像（马卡龙多色） */
+function moodSvg(k,sz){
+ var s=sz||44;
+ if(k==='happy')return '<svg viewBox="0 0 48 48" width="'+s+'" height="'+s+'"><circle cx="24" cy="25" r="15" fill="#FFF0D6"/><path d="M9 22q3-14 15-14t15 14q-4-6-15-6T9 22z" fill="#F3B7A0"/><circle cx="9.5" cy="26" r="3.4" fill="#F3B7A0"/><circle cx="38.5" cy="26" r="3.4" fill="#F3B7A0"/><path d="M17.5 24q2.2-2.4 4.4 0" stroke="#5A5750" stroke-width="1.8" fill="none" stroke-linecap="round"/><path d="M26.1 24q2.2-2.4 4.4 0" stroke="#5A5750" stroke-width="1.8" fill="none" stroke-linecap="round"/><circle cx="15.5" cy="29.5" r="3.2" fill="#F8B6C2" opacity=".85"/><circle cx="32.5" cy="29.5" r="3.2" fill="#F8B6C2" opacity=".85"/><path d="M20 30q4 4.6 8 0z" fill="#E58C93"/><path d="M33 12q3-3 6-1t1 6" stroke="#A8D8C8" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="12" cy="14" r="2.6" fill="#FCE08A"/></svg>';
+ if(k==='calm')return '<svg viewBox="0 0 48 48" width="'+s+'" height="'+s+'"><circle cx="24" cy="25" r="15" fill="#FFF0D6"/><path d="M9 23q2-15 15-15t15 15q-3-7-15-7T9 23z" fill="#C4A98E"/><path d="M8 24q-1 8 2 12" stroke="#C4A98E" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M40 24q1 8-2 12" stroke="#C4A98E" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M16.5 25.5h5.5M26 25.5h5.5" stroke="#5A5750" stroke-width="1.9" stroke-linecap="round"/><circle cx="15.5" cy="30" r="3" fill="#F6C9CE" opacity=".8"/><circle cx="32.5" cy="30" r="3" fill="#F6C9CE" opacity=".8"/><path d="M21.5 31.5q2.5 1.6 5 0" stroke="#D18D93" stroke-width="1.8" fill="none" stroke-linecap="round"/><circle cx="36" cy="14" r="3" fill="#BFDDF2"/></svg>';
+ return '<svg viewBox="0 0 48 48" width="'+s+'" height="'+s+'"><circle cx="24" cy="25" r="15" fill="#FFF0D6"/><path d="M9 23q2-15 15-15t15 15q-3-7-15-7T9 23z" fill="#9FB6C9"/><path d="M16.5 23.5q2.5 2.2 5 0" stroke="#5A5750" stroke-width="1.8" fill="none" stroke-linecap="round"/><path d="M26 23.5q2.5 2.2 5 0" stroke="#5A5750" stroke-width="1.8" fill="none" stroke-linecap="round"/><circle cx="15.5" cy="29.5" r="3" fill="#D7C7E8" opacity=".85"/><circle cx="32.5" cy="29.5" r="3" fill="#D7C7E8" opacity=".85"/><path d="M21 33q3-2.4 6 0" stroke="#8C9AA6" stroke-width="1.9" fill="none" stroke-linecap="round"/><path d="M31.5 27.5q1 3 0 5" stroke="#9CC8E4" stroke-width="1.6" fill="none" stroke-linecap="round"/><circle cx="12" cy="15" r="2.4" fill="#C9D8E8"/></svg>';
+}
+var MOOD_MINI={happy:'#F6B26B',calm:'#9DC3DE',down:'#B9A8D0'};
+function moodMini(k){
+ if(k==='happy')return '<svg viewBox="0 0 12 12" width="9" height="9"><circle cx="6" cy="6" r="5.2" fill="#FCE0B0"/><circle cx="4.2" cy="5" r=".8" fill="#5A5750"/><circle cx="7.8" cy="5" r=".8" fill="#5A5750"/><path d="M4 7.4q2 1.8 4 0" stroke="#C97F52" stroke-width="1" fill="none" stroke-linecap="round"/></svg>';
+ if(k==='calm')return '<svg viewBox="0 0 12 12" width="9" height="9"><circle cx="6" cy="6" r="5.2" fill="#CFE6F7"/><path d="M3.4 5.2h1.6M7 5.2h1.6M4.6 8h2.8" stroke="#5C7C92" stroke-width="1" stroke-linecap="round"/></svg>';
+ if(k==='down')return '<svg viewBox="0 0 12 12" width="9" height="9"><circle cx="6" cy="6" r="5.2" fill="#E0D7EE"/><circle cx="4.2" cy="5" r=".8" fill="#6B6478"/><circle cx="7.8" cy="5" r=".8" fill="#6B6478"/><path d="M4.2 8.4q1.8-1.6 3.6 0" stroke="#6B6478" stroke-width="1" fill="none" stroke-linecap="round"/></svg>';
+ return '';
+}
+/* 线条小狗（圆润 + 柔和浅色填充） */
+function dogSvg(sz,pose){
+ var s=sz||118;
+ var extra='';
+ if(pose==='cheer')extra='<path d="M18 40q-6-8-2-14" stroke="#EFC98E" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M102 40q6-8 2-14" stroke="#EFC98E" stroke-width="2.6" fill="none" stroke-linecap="round"/><circle cx="14" cy="24" r="3.4" fill="#F8C8CF"/><circle cx="106" cy="24" r="3.4" fill="#BFDDF2"/><path d="M60 8l2.6 5.4 5.8.8-4.2 4.2 1 5.8-5.2-2.8-5.2 2.8 1-5.8-4.2-4.2 5.8-.8z" fill="#FCE9B8" stroke="#E4C88A" stroke-width="1.2"/>';
+ if(pose==='hug')extra='<path d="M26 78q-8 4-9 12" stroke="#D9BFA6" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M94 78q8 4 9 12" stroke="#D9BFA6" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M60 96c-6-8-16-6-16 2 0 6 9 11 16 15 7-4 16-9 16-15 0-8-10-10-16-2z" fill="#F8DCE0" stroke="#E1AFB8" stroke-width="1.4"/>';
+ return '<svg viewBox="0 0 120 120" width="'+s+'" height="'+s+'">'+
+ '<ellipse cx="60" cy="106" rx="30" ry="6" fill="#EDE7DC" opacity=".55"/>'+
+ '<ellipse cx="26" cy="46" rx="12" ry="19" fill="#E8CBAE" stroke="#C4A184" stroke-width="2"/>'+
+ '<ellipse cx="94" cy="46" rx="12" ry="19" fill="#E8CBAE" stroke="#C4A184" stroke-width="2"/>'+
+ '<ellipse cx="26" cy="48" rx="6" ry="11" fill="#F6DFCC"/>'+
+ '<ellipse cx="94" cy="48" rx="6" ry="11" fill="#F6DFCC"/>'+
+ '<ellipse cx="60" cy="86" rx="27" ry="22" fill="#FFF7EA" stroke="#C4A184" stroke-width="2"/>'+
+ '<ellipse cx="60" cy="90" rx="16" ry="13" fill="#FDEEDC"/>'+
+ '<circle cx="60" cy="52" r="32" fill="#FFF7EA" stroke="#C4A184" stroke-width="2.2"/>'+
+ '<ellipse cx="60" cy="62" rx="19" ry="14" fill="#FDF3E6"/>'+
+ '<circle cx="48" cy="47" r="4.2" fill="#5A5750"/><circle cx="49.4" cy="45.6" r="1.4" fill="#fff"/>'+
+ '<circle cx="72" cy="47" r="4.2" fill="#5A5750"/><circle cx="73.4" cy="45.6" r="1.4" fill="#fff"/>'+
+ '<ellipse cx="60" cy="58" rx="5.4" ry="4" fill="#C9A08C"/>'+
+ '<ellipse cx="58.4" cy="56.8" rx="1.6" ry="1.1" fill="#EFD3C6"/>'+
+ '<path d="M60 62v3.4M60 65.4q-4.6 5-9 0M60 65.4q4.6 5 9 0" stroke="#A8836C" stroke-width="2.2" fill="none" stroke-linecap="round"/>'+
+ '<ellipse cx="40" cy="58" rx="6" ry="4.4" fill="#F8C8CF" opacity=".8"/>'+
+ '<ellipse cx="80" cy="58" rx="6" ry="4.4" fill="#F8C8CF" opacity=".8"/>'+
+ '<path d="M44 76q16 8 32 0" stroke="#E3D3BF" stroke-width="1.6" fill="none" stroke-linecap="round"/>'+
+ '<path d="M86 96q10 2 12-8" stroke="#C4A184" stroke-width="3" fill="none" stroke-linecap="round"/>'+
+ '<path d="M40 26q4-8 12-6" stroke="#C4A184" stroke-width="2" fill="none" stroke-linecap="round"/>'+
+ '<rect x="46" y="80" width="28" height="9" rx="4.5" fill="#BFDDF2" opacity=".75"/>'+
+ extra+'</svg>';
+}
+
+/* ---------- 存储层 ---------- */
+var KEY='yjbuddy_data_v1';
+function nid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7);}
+function defDB(){
+ return {
+  todos:{}, meals:[], sports:[], reads:[], money:{income:{},days:{}},
+  hobbies:[], moods:{}, travels:[], visited:{},
+  wcontent:{}, wtags:['日常教学','备课','批改作业','课后辅导','教研活动','公开课','专题讲座'],
+  wint:{}, woff:{}, wemo:{}, quiz:[],
+  events:{}, favs:[], newsPick:{}, cheered:{},
+  cfg:{weight:55,collapsed:false,names:{},off:{}}
+ };
+}
+var DB;
+try{ DB=JSON.parse(localStorage.getItem(KEY))||defDB(); }catch(e){ DB=defDB(); }
+(function(){var d=defDB();for(var k in d){if(DB[k]===undefined)DB[k]=d[k];}
+ for(var c in d.cfg){if(DB.cfg[c]===undefined)DB.cfg[c]=d.cfg[c];}})();
+function save(){ try{localStorage.setItem(KEY,JSON.stringify(DB));}catch(e){toast('存储空间不足啦，试试删掉些旅行照片~');} }
+/* 保存并全局联动刷新 */
+function sync(){ save(); render(); checkAllDone(); }
+
+/* ---------- 日期工具 ---------- */
+function pad(n){return n<10?'0'+n:''+n;}
+function fmt(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());}
+function parseD(s){var a=s.split('-');return new Date(+a[0],+a[1]-1,+a[2]);}
+var WK=['周日','周一','周二','周三','周四','周五','周六'];
+function today(){return fmt(new Date());}
+function weekStart(d){var x=new Date(d);var w=(x.getDay()+6)%7;x.setDate(x.getDate()-w);x.setHours(0,0,0,0);return x;}
+function weekDays(base){var s=weekStart(base||new Date()),a=[];for(var i=0;i<7;i++){var t=new Date(s);t.setDate(s.getDate()+i);a.push(fmt(t));}return a;}
+function lastWeekDays(){var s=weekStart(new Date());s.setDate(s.getDate()-7);return weekDays(s);}
+function monthKey(s){return s.slice(0,7);}
+function inMonth(s,y,m){return s.slice(0,7)===y+'-'+pad(m+1);}
+function num(v){var n=parseFloat(v);return isNaN(n)?0:n;}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function mins2txt(m){ if(!m)return '0分钟'; var h=Math.floor(m/60),mm=m%60; return (h?h+'小时':'')+(mm?mm+'分钟':(h?'':'0分钟')); }
+var DUR=[{v:30,t:'30分钟'},{v:60,t:'1小时'},{v:90,t:'1小时30分'},{v:120,t:'2小时'},{v:150,t:'2小时30分'},{v:180,t:'3小时'}];
+
+/* ---------- 轻提示 & 弹窗 ---------- */
+function toast(t){
+ var d=document.createElement('div');d.className='toast';d.textContent=t;document.body.appendChild(d);
+ setTimeout(function(){d.remove();},1800);
+}
+function modal(html,onOpen){
+ var r=document.getElementById('modalRoot');
+ r.innerHTML='<div class="mask" id="_mk"><div class="dlg" onclick="event.stopPropagation()">'+html+'</div></div>';
+ document.getElementById('_mk').onclick=closeModal;
+ if(onOpen)onOpen();
+}
+function closeModal(){document.getElementById('modalRoot').innerHTML='';}
+function dog(text,sub,pose){
+ var r=document.getElementById('dogRoot');
+ r.innerHTML='<div class="mask dogmask" id="_dk"><div class="dogbox" onclick="event.stopPropagation()">'+
+  '<button class="x" onclick="closeDog()">✕</button>'+dogSvg(112,pose||'')+
+  '<div class="dtxt">'+text+'</div>'+(sub?'<div class="dsub">'+sub+'</div>':'')+'</div></div>';
+ document.getElementById('_dk').onclick=closeDog;
+}
+function closeDog(){document.getElementById('dogRoot').innerHTML='';}
+
+/* ---------- 模块结构（一级 / 二级） ---------- */
+var NAV=[
+ {id:'g0',name:'首页',icon:I.mHome,kids:[{id:'home',name:'今日总览',icon:I.todo}]},
+ {id:'g1',name:'生活管理',icon:I.mLife,kids:[
+   {id:'todo',name:'To do list',icon:I.todo},
+   {id:'diet',name:'饮食',icon:I.diet},
+   {id:'sport',name:'运动',icon:I.sport},
+   {id:'read',name:'阅读',icon:I.read},
+   {id:'money',name:'记账',icon:I.money},
+   {id:'hobby',name:'爱好',icon:I.hobby},
+   {id:'mood',name:'心情',icon:I.mood},
+   {id:'travel',name:'旅行',icon:I.travel}
+ ]},
+ {id:'g2',name:'教师工作',icon:I.mWork,kids:[
+   {id:'wc',name:'工作内容',icon:I.wc},
+   {id:'wi',name:'工作强度',icon:I.wi},
+   {id:'wo',name:'下班打卡',icon:I.wo},
+   {id:'we',name:'情绪复盘',icon:I.we},
+   {id:'wq',name:'刷题记录',icon:I.wq}
+ ]},
+ {id:'g3',name:'每日资讯',icon:I.mNews,kids:[{id:'news',name:'综合知识资讯',icon:I.news2}]},
+ {id:'g4',name:'个性设置',icon:I.mSet,kids:[{id:'setting',name:'模块管理',icon:I.set2}]}
+];
+function nameOf(id,def){return DB.cfg.names[id]||def;}
+function isOff(id){return !!DB.cfg.off[id];}
+function firstPage(){
+ for(var i=0;i<NAV.length;i++){var g=NAV[i];if(isOff(g.id))continue;
+  for(var j=0;j<g.kids.length;j++){if(!isOff(g.kids[j].id))return g.kids[j].id;}}
+ return 'setting';
+}
+var CUR='home', OPEN='g0';
+
+/* ---------- 导航渲染 ---------- */
+function renderNav(){
+ var h='';
+ NAV.forEach(function(g){
+  if(isOff(g.id))return;
+  var kids=g.kids.filter(function(k){return !isOff(k.id);});
+  if(!kids.length)return;
+  var has=kids.some(function(k){return k.id===CUR;});
+  h+='<div class="grp'+(OPEN===g.id?' open':'')+(has?' act':'')+'" data-g="'+g.id+'">'+
+     '<div class="nav1" onclick="tapG1(\''+g.id+'\',event)">'+g.icon+
+     '<span class="txt">'+esc(nameOf(g.id,g.name))+'</span>'+I.chev+'</div><div class="l2wrap">';
+  kids.forEach(function(k){
+   h+='<div class="nav2'+(CUR===k.id?' on':'')+'" onclick="go(\''+k.id+'\')">'+k.icon+
+      '<span class="t2">'+esc(nameOf(k.id,k.name))+'</span></div>';
+  });
+  h+='</div></div>';
+ });
+ document.getElementById('sbBody').innerHTML=h;
+}
+function tapG1(gid,ev){
+ /* 一级模块仅展开/收起，不跳转页面 */
+ if(document.body.classList.contains('sbc')){ showFly(gid,ev); return; }
+ OPEN=(OPEN===gid?'':gid); hideFly(); renderNav();
+}
+function showFly(gid,ev){
+ var g=NAV.filter(function(x){return x.id===gid;})[0]; if(!g)return;
+ var kids=g.kids.filter(function(k){return !isOff(k.id);});
+ var f=document.getElementById('flyout');
+ var h='<div class="fh">'+esc(nameOf(g.id,g.name))+'</div>';
+ kids.forEach(function(k){h+='<div class="nav2'+(CUR===k.id?' on':'')+'" onclick="go(\''+k.id+'\')"><span class="t2">'+esc(nameOf(k.id,k.name))+'</span></div>';});
+ f.innerHTML=h; f.classList.add('show');
+ var y=(ev&&ev.currentTarget)?ev.currentTarget.getBoundingClientRect().top:60;
+ var mh=f.offsetHeight; if(y+mh>window.innerHeight-8)y=Math.max(8,window.innerHeight-mh-8);
+ f.style.top=y+'px';
+}
+function hideFly(){var f=document.getElementById('flyout');f.classList.remove('show');f.innerHTML='';}
+document.addEventListener('click',function(e){
+ var f=document.getElementById('flyout');
+ if(f.classList.contains('show')&&!f.contains(e.target)&&!e.target.closest('.nav1'))hideFly();
+},true);
+function go(pid){
+ CUR=pid; hideFly();
+ NAV.forEach(function(g){if(g.kids.some(function(k){return k.id===pid;}))OPEN=g.id;});
+ renderNav(); renderPage(); document.getElementById('main').scrollTop=0;
+}
+document.getElementById('sbTg').onclick=function(){
+ document.body.classList.toggle('sbc');
+ DB.cfg.collapsed=document.body.classList.contains('sbc'); save(); hideFly();
+};
+function render(){ renderNav(); renderPage(); }
+
+/* =========================================================
+   聚合统计（所有模块共用，新增/改/删后自动重算）
+   ========================================================= */
+var COST_KEYS=[['traffic','交通','#9DC3DE'],['shop','购物','#F0B6C1'],['food','饮食','#F3CE8E'],['life','生活','#A9CFA0'],['emo','情感','#C7B6E0'],['hob','爱好','#8FCFC6']];
+function dayMeal(d){var o={k:0,p:0,c:0,f:0,n:0};DB.meals.forEach(function(m){if(m.date===d){o.k+=m.kcal;o.p+=m.p;o.c+=m.c;o.f+=m.f;o.n++;}});return o;}
+function daySport(d){var o={min:0,k:0,n:0,types:{}};DB.sports.forEach(function(s){if(s.date===d){o.min+=s.min;o.k+=s.kcal;o.n++;o.types[s.type]=(o.types[s.type]||0)+1;}});return o;}
+function dayRead(d){var o={min:0,n:0};DB.reads.forEach(function(r){if(r.date===d){o.min+=r.min;o.n++;}});return o;}
+function dayCost(d){var x=DB.money.days[d];if(!x)return 0;var s=0;COST_KEYS.forEach(function(c){s+=num(x[c[0]]);});return s;}
+function dayHobby(d){var n=0;DB.hobbies.forEach(function(h){if((h.checks||[]).indexOf(d)>=0)n++;});return n;}
+function dayTodo(d){var l=DB.todos[d]||[];return{n:l.length,done:l.filter(function(t){return t.done;}).length};}
+function dayWorkEmo(d){var e=DB.wemo[d];return e&&((e.warm||'').trim()||(e.bad||'').trim());}
+function monthCost(ym){var s=0;for(var d in DB.money.days){if(d.slice(0,7)===ym)s+=dayCost(d);}return s;}
+/* 当日打卡清单（仅统计已开启模块） */
+function checklist(d){
+ var L=[];
+ function add(id,def,ok){if(!isOff(id)&&!isOff(gidOf(id)))L.push({id:id,name:nameOf(id,def),ok:!!ok});}
+ var t=dayTodo(d);
+ add('todo','To do list',t.n>0&&t.done===t.n);
+ add('diet','饮食',dayMeal(d).n>0);
+ add('sport','运动',daySport(d).n>0);
+ add('read','阅读',dayRead(d).n>0);
+ add('money','记账',!!DB.money.days[d]);
+ add('hobby','爱好',dayHobby(d)>0);
+ add('mood','心情',!!DB.moods[d]);
+ add('wc','工作内容',!!DB.wcontent[d]);
+ add('wo','下班打卡',!!DB.woff[d]);
+ return L;
+}
+function gidOf(kid){var r='';NAV.forEach(function(g){g.kids.forEach(function(k){if(k.id===kid)r=g.id;});});return r;}
+function allDone(d){var L=checklist(d);return L.length>0&&L.every(function(x){return x.ok;});}
+function hasAny(d){
+ return dayMeal(d).n>0||daySport(d).n>0||dayRead(d).n>0||!!DB.money.days[d]||dayHobby(d)>0||
+  !!DB.moods[d]||(DB.todos[d]||[]).length>0||!!DB.wcontent[d]||!!DB.woff[d]||!!DB.wint[d]||
+  dayWorkEmo(d)||DB.quiz.some(function(q){return q.date===d;})||(DB.events[d]||[]).length>0;
+}
+function checkAllDone(){
+ var d=today();
+ if(allDone(d)&&DB.cheered[d]!==1){
+  DB.cheered[d]=1;save();
+  dog('哇！今天所有模块都打卡完成啦～<br>YJ 你真的好棒好棒！','小狗把今天的小星星送给你，晚安要早点休息哦','cheer');
+ }
+}
+
+/* =========================================================
+   首页
+   ========================================================= */
+var homeCalY,homeCalM,evCalY,evCalM;
+(function(){var n=new Date();homeCalY=evCalY=n.getFullYear();homeCalM=evCalM=n.getMonth();})();
+
+function weekSum(days){
+ var r={dietDays:0,kcal:0,sportMin:0,sportN:0,sportTypes:{},readMin:0,readBooks:{},readDone:0,readPct:[],
+  cost:{},costAll:0,hobbyChecks:{},hobbyDoing:0,ot:0,quizMin:0,quizN:0,emoGood:0,emoBad:0};
+ COST_KEYS.forEach(function(c){r.cost[c[0]]=0;});
+ days.forEach(function(d){
+  var m=dayMeal(d);if(m.n){r.dietDays++;r.kcal+=m.k;}
+  var s=daySport(d);r.sportMin+=s.min;r.sportN+=s.n;for(var t in s.types)r.sportTypes[t]=(r.sportTypes[t]||0)+s.types[t];
+  DB.reads.forEach(function(x){if(x.date===d){r.readMin+=x.min;r.readBooks[x.book]=x;if(x.total&&x.page>=x.total)r.readDone++;if(x.total)r.readPct.push(Math.min(100,x.page/x.total*100));}});
+  var c=DB.money.days[d];if(c)COST_KEYS.forEach(function(k){r.cost[k[0]]+=num(c[k[0]]);});
+  DB.hobbies.forEach(function(h){if((h.checks||[]).indexOf(d)>=0)r.hobbyChecks[h.name||'未命名']=(r.hobbyChecks[h.name||'未命名']||0)+1;});
+  if(DB.woff[d]&&DB.woff[d].status==='加班')r.ot++;
+  DB.quiz.forEach(function(q){if(q.date===d){r.quizMin+=q.min;r.quizN+=num(q.total);}});
+  var e=DB.wemo[d];if(e){if((e.warm||'').trim())r.emoGood++;if((e.bad||'').trim())r.emoBad++;}
+ });
+ COST_KEYS.forEach(function(c){r.costAll+=r.cost[c[0]];});
+ r.hobbyDoing=DB.hobbies.filter(function(h){return h.status==='进行中';}).length;
+ return r;
+}
+function renderHome(){
+ var d=today(),dt=new Date();
+ var h='';
+ /* 顶部日期栏 */
+ h+='<div class="card b" style="text-align:center;padding:13px 10px" onclick="dailyWord()">'+
+  '<div style="font-size:18px;font-weight:600;letter-spacing:1.5px;color:#4E7B96">'+dt.getFullYear()+'-'+pad(dt.getMonth()+1)+'-'+pad(dt.getDate())+'</div>'+
+  '<div style="font-size:12px;color:#8FA9BC;margin-top:4px">'+WK[dt.getDay()]+' · 点一下，小狗有话说</div></div>';
+ /* 今日打卡进度 */
+ var L=checklist(d),done=L.filter(function(x){return x.ok;}).length;
+ h+='<div class="card"><div class="ch">'+I.todo+'今日打卡<span class="sp">'+done+' / '+L.length+'</span></div>'+
+  '<div class="pv"><span class="bar"><i style="width:'+(L.length?done/L.length*100:0)+'%"></i></span></div>'+
+  '<div class="chips" style="margin-top:8px">'+L.map(function(x){return '<span class="chip'+(x.ok?' on':'')+'" onclick="go(\''+x.id+'\')">'+esc(x.name)+(x.ok?' ✓':'')+'</span>';}).join('')+'</div></div>';
+ /* 本周汇总 */
+ var wd=weekDays(),lw=lastWeekDays(),W=weekSum(wd),LW=weekSum(lw);
+ h+='<div class="card"><div class="ch">'+I.mLife.replace('class="ico"','')+'本周汇总<span class="sp">'+wd[0].slice(5)+' ~ '+wd[6].slice(5)+'</span></div>';
+ h+=sec('饮食','#F3CE8E',[['记录天数',W.dietDays+' 天'],['平均每日摄入',(W.dietDays?Math.round(W.kcal/W.dietDays):0)+' kcal'],['本周总摄入',Math.round(W.kcal)+' kcal']]);
+ var stx=Object.keys(W.sportTypes).map(function(k){return k+'×'+W.sportTypes[k];}).join('、')||'暂无';
+ h+=sec('运动','#A9CFA0',[['运动总时长',mins2txt(W.sportMin)],['运动次数',W.sportN+' 次'],['类型频次',stx]]);
+ var avg=W.readPct.length?Math.round(W.readPct.reduce(function(a,b){return a+b;},0)/W.readPct.length):0;
+ h+=sec('阅读','#9DC3DE',[['累计阅读时长',mins2txt(W.readMin)],['涉及书本',Object.keys(W.readBooks).length+' 本（读完 '+W.readDone+' 本）'],['平均阅读进度',avg+'%']]);
+ var cdiff=W.costAll-LW.costAll;
+ h+=sec('收支','#F0B6C1',COST_KEYS.map(function(c){return [c[1],'¥'+W.cost[c[0]].toFixed(2)];}).concat([['本周总花费','¥'+W.costAll.toFixed(2)],['较上周',(cdiff>=0?'多花 ¥'+cdiff.toFixed(2):'少花 ¥'+Math.abs(cdiff).toFixed(2))]]));
+ var hbx=Object.keys(W.hobbyChecks).map(function(k){return k+'×'+W.hobbyChecks[k];}).join('、')||'暂无';
+ h+=sec('爱好打卡','#8FCFC6',[['本周落地完成',hbx],['进行中爱好',W.hobbyDoing+' 个']]);
+ h+=sec('教师工作','#C7B6E0',[['本周加班',W.ot+' 天'],['刷题总时长',mins2txt(W.quizMin)+'（'+W.quizN+' 题）'],['情绪事件','正向 '+W.emoGood+' · 负向 '+W.emoBad]]);
+ h+='</div>';
+ /* 重要日程日历 */
+ h+='<div class="card b" id="evCard">'+evCalHtml()+'</div>';
+ /* 月度总览日历 */
+ h+='<div class="card" id="ovCard">'+ovCalHtml()+'</div>';
+ /* 资讯迷你卡 */
+ if(!isOff('news')&&!isOff('g3')){
+  var nw=todayNews();
+  h+='<div class="card b" onclick="go(\'news\')"><div class="ch">'+I.news2.replace('class="i2"','')+'今日资讯</div>'+
+   '<div class="mini"><div class="mt"><span class="tag" style="background:'+nw.color+'">'+nw.cat+'</span><br>'+esc(nw.title)+'</div>'+
+   '<svg viewBox="0 0 12 12" width="12" height="12" fill="none" stroke="#9C978C" stroke-width="2" stroke-linecap="round"><path d="M4 2l4 4-4 4"/></svg></div></div>';
+ }
+ return h;
+}
+function sec(name,color,rows){
+ var h='<div style="margin-bottom:9px"><div style="display:flex;align-items:center;gap:5px;font-size:12.5px;color:#6C6555;margin-bottom:4px"><i style="width:8px;height:8px;border-radius:3px;background:'+color+';display:inline-block"></i><b style="font-weight:600">'+name+'</b></div>'+
+ '<div style="background:#fff;border-radius:11px;padding:6px 9px">';
+ rows.forEach(function(r){h+='<div class="kv"><span style="color:#9C978C">'+r[0]+'</span><b>'+esc(r[1])+'</b></div>';});
+ return h+'</div></div>';
+}
+function dailyWord(){
+ var W=['今天也要好好吃饭、慢慢呼吸呀~','日子软软的，你也可以慢一点点。','把小事做好，就是很了不起的一天。','就算只完成一件事，也值得被夸奖哦。','阳光很好，记得抬头看看天空~','累了就靠一会儿，小狗一直在这里。','你已经比昨天更好一点点啦。','世界很吵，你可以慢慢来。','今天的心情，允许它是任何样子。','记得喝水，记得对自己温柔。'];
+ var d=new Date(),i=(d.getFullYear()*372+d.getMonth()*31+d.getDate())%W.length;
+ dog('汪！今天是 '+fmt(d)+' '+WK[d.getDay()]+'<br>'+W[i],'点空白处就可以关掉我啦','hug');
+}
+/* ---- 重要日程日历 ---- */
+function evCalHtml(){
+ var y=evCalY,m=evCalM;
+ var h='<div class="ch">'+I.mNews.replace('class="ico"','')+'月度重要日程</div>'+
+  '<div class="calhd"><button class="calnav" onclick="evMove(-1)">'+I.left+'</button><div class="m">'+y+' 年 '+(m+1)+' 月</div><button class="calnav" onclick="evMove(1)">'+I.right+'</button></div>'+
+  '<div class="cal" id="evCal">';
+ ['一','二','三','四','五','六','日'].forEach(function(w){h+='<div class="cw">'+w+'</div>';});
+ var first=new Date(y,m,1),blank=(first.getDay()+6)%7,dim=new Date(y,m+1,0).getDate();
+ for(var i=0;i<blank;i++)h+='<div class="cd blank"></div>';
+ for(var dd=1;dd<=dim;dd++){
+  var ds=y+'-'+pad(m+1)+'-'+pad(dd),ev=DB.events[ds]||[];
+  h+='<div class="cd'+(ds===today()?' today':'')+(ev.length?' has':'')+'" data-d="'+ds+'" onclick="evEdit(\''+ds+'\')" oncontextmenu="evEdit(\''+ds+'\');return false;">'+
+     '<div class="dn">'+dd+'</div>'+
+     (ev.length?'<div class="mk">'+ev.slice(0,3).map(function(e){return '<i style="background:'+e.color+'"></i>';}).join('')+'</div>':'')+'</div>';
+ }
+ h+='</div><div class="hint" style="margin-top:6px">点击日期添加 / 编辑重要事项，左右滑动切换月份</div>';
+ var list=[];for(var k in DB.events){if(k.slice(0,7)===y+'-'+pad(m+1))(DB.events[k]||[]).forEach(function(e){list.push({d:k,e:e});});}
+ list.sort(function(a,b){return a.d<b.d?-1:1;});
+ if(list.length){h+='<div class="divider"></div>';list.forEach(function(x){
+  h+='<div style="display:flex;align-items:center;gap:6px;font-size:12px;padding:4px 0"><i style="width:8px;height:8px;border-radius:50%;background:'+x.e.color+';flex:0 0 8px"></i><span style="color:#9C978C">'+x.d.slice(5)+'</span><span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(x.e.text)+'</span><button class="btn s gh" onclick="evEdit(\''+x.d+'\')">编辑</button></div>';});}
+ return h;
+}
+function evMove(n){evCalM+=n;if(evCalM<0){evCalM=11;evCalY--;}if(evCalM>11){evCalM=0;evCalY++;}refreshHome();}
+var EVC=['#F3B7A0','#9DC3DE','#A9CFA0','#E6B7CE','#C7B6E0','#F0CE7E'];
+function evEdit(ds){
+ var list=DB.events[ds]||[];
+ var h='<h3>'+ds+' 重要日程</h3>';
+ list.forEach(function(e,i){
+  h+='<div style="display:flex;align-items:center;gap:6px;margin-bottom:6px"><i style="width:10px;height:10px;border-radius:50%;background:'+e.color+';flex:0 0 10px"></i>'+
+   '<span style="flex:1;min-width:0;font-size:12.5px">'+esc(e.text)+'</span>'+
+   '<button class="btn s" onclick="evDel(\''+ds+'\','+i+')">删除</button></div>';
+ });
+ h+='<label class="lbl">新增事项（生日 / 考试 / 教研 / 纪念日…）</label><input class="inp" id="_evt" placeholder="写点什么呢~">'+
+  '<label class="lbl">标记颜色</label><div class="chips" id="_evc">'+
+  EVC.map(function(c,i){return '<span class="chip'+(i===0?' on':'')+'" data-c="'+c+'" onclick="pickOne(this,\'_evc\')"><i style="width:14px;height:14px;border-radius:50%;background:'+c+';display:inline-block"></i></span>';}).join('')+'</div>'+
+  '<div class="btnrow"><button class="btn" onclick="closeModal()">取消</button><button class="btn p" onclick="evSave(\''+ds+'\')">保存</button></div>';
+ modal(h);
+}
+function pickOne(el,wrapId){
+ var w=document.getElementById(wrapId);
+ [].forEach.call(w.querySelectorAll('.chip'),function(c){c.classList.remove('on');});
+ el.classList.add('on');
+}
+function evSave(ds){
+ var t=document.getElementById('_evt').value.trim();
+ if(!t){closeModal();return;}
+ var c=document.querySelector('#_evc .chip.on');
+ (DB.events[ds]=DB.events[ds]||[]).push({text:t,color:c?c.dataset.c:EVC[0]});
+ closeModal();sync();toast('已记下这个重要日子~');
+}
+function evDel(ds,i){DB.events[ds].splice(i,1);if(!DB.events[ds].length)delete DB.events[ds];sync();evEdit(ds);}
+/* ---- 月度总览日历 ---- */
+function ovCalHtml(){
+ var y=homeCalY,m=homeCalM;
+ var h='<div class="ch">'+I.mHome.replace('class="ico"','')+'月度总览</div>'+
+  '<div class="calhd"><button class="calnav" onclick="ovMove(-1)">'+I.left+'</button><div class="m">'+y+' 年 '+(m+1)+' 月</div><button class="calnav" onclick="ovMove(1)">'+I.right+'</button></div>'+
+  '<div class="cal calbig" id="ovCal">';
+ ['一','二','三','四','五','六','日'].forEach(function(w){h+='<div class="cw">'+w+'</div>';});
+ var blank=(new Date(y,m,1).getDay()+6)%7,dim=new Date(y,m+1,0).getDate();
+ for(var i=0;i<blank;i++)h+='<div class="cd blank"></div>';
+ for(var dd=1;dd<=dim;dd++){
+  var ds=y+'-'+pad(m+1)+'-'+pad(dd);
+  var me=dayMeal(ds),sp=daySport(ds),rd=dayRead(ds),ct=dayCost(ds),hb=dayHobby(ds),mo=DB.moods[ds],we=dayWorkEmo(ds);
+  var cls=allDone(ds)?'full':(hasAny(ds)?'has':'');
+  h+='<div class="cd '+cls+(ds===today()?' today':'')+'" onclick="dayDetail(\''+ds+'\')">'+
+   '<div class="dn">'+dd+(mo?' '+moodMini(mo):'')+'</div>';
+  if(me.k)h+='<div class="ln" style="color:#C08A3E">摄'+Math.round(me.k)+'</div>';
+  if(sp.min)h+='<div class="ln" style="color:#6E9B62">'+sportSvg('散步',7,'#6E9B62')+mins2txt(sp.min).replace('小时','h').replace('分钟','m')+'</div>';
+  if(rd.min)h+='<div class="ln" style="color:#5B87A5">读'+mins2txt(rd.min).replace('小时','h').replace('分钟','m')+'</div>';
+  if(ct)h+='<div class="ln" style="color:#C77B8B">¥'+(ct>=100?Math.round(ct):ct.toFixed(0))+'</div>';
+  var dots='';
+  if(hb)dots+='<i style="background:#8FCFC6"></i>';
+  if(we)dots+='<i style="background:#C7B6E0"></i>';
+  if((DB.events[ds]||[]).length)dots+='<i style="background:#F3B7A0"></i>';
+  if(dots)h+='<div class="dots">'+dots+'</div>';
+  h+='</div>';
+ }
+ h+='</div><div class="legend">'+
+  '<span><i style="background:#fff;border:1px solid #E4DED2"></i>无记录</span>'+
+  '<span><i style="background:#FDF6E7"></i>有记录</span>'+
+  '<span><i style="background:#DCEEF9"></i>全部打卡</span>'+
+  '<span><i style="background:#8FCFC6;border-radius:50%"></i>爱好</span>'+
+  '<span><i style="background:#C7B6E0;border-radius:50%"></i>工作情绪</span>'+
+  '<span><i style="background:#F3B7A0;border-radius:50%"></i>重要日程</span></div>'+
+  '<div class="hint" style="margin-top:5px">点击日期查看当日全记录，左右滑动切换月份</div>';
+ return h;
+}
+function ovMove(n){homeCalM+=n;if(homeCalM<0){homeCalM=11;homeCalY--;}if(homeCalM>11){homeCalM=0;homeCalY++;}refreshHome();}
+function refreshHome(){ if(CUR==='home')renderPage(); }
+/* 日历左右滑动 */
+function bindSwipe(el,cb){
+ if(!el)return;var x0=0,y0=0,t0=0;
+ el.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;y0=e.touches[0].clientY;t0=Date.now();},{passive:true});
+ el.addEventListener('touchend',function(e){
+  var dx=e.changedTouches[0].clientX-x0,dy=e.changedTouches[0].clientY-y0;
+  if(Date.now()-t0<600&&Math.abs(dx)>44&&Math.abs(dx)>Math.abs(dy)*1.6)cb(dx<0?1:-1);
+ },{passive:true});
+}
+/* 当日全记录详情 */
+function dayDetail(ds){
+ var me=dayMeal(ds),sp=daySport(ds),rd=dayRead(ds),ct=dayCost(ds),td=dayTodo(ds);
+ var h='<h3>'+ds+' · '+WK[parseD(ds).getDay()]+'</h3>';
+ var body='';
+ if(DB.moods[ds])body+='<div class="item" style="display:flex;align-items:center;gap:8px">'+moodSvg(DB.moods[ds],36)+'<span>今日心情：'+({happy:'开心',calm:'平静',down:'低落'})[DB.moods[ds]]+'</span></div>';
+ if(td.n)body+='<div class="item"><b>待办</b> '+td.done+'/'+td.n+' 完成<br>'+(DB.todos[ds]||[]).map(function(t){return (t.done?'✓ ':'· ')+esc(t.text);}).join('<br>')+'</div>';
+ if(me.n){body+='<div class="item"><b>饮食</b> 共 '+me.n+' 餐 · '+Math.round(me.k)+' kcal（蛋白 '+me.p.toFixed(1)+'g / 碳水 '+me.c.toFixed(1)+'g / 脂肪 '+me.f.toFixed(1)+'g）<br>'+
+  DB.meals.filter(function(m){return m.date===ds;}).map(function(m){return '· '+m.type+'：'+esc(m.food)+' '+esc(m.amt)+' — '+Math.round(m.kcal)+'kcal';}).join('<br>')+'</div>';}
+ if(sp.n){body+='<div class="item"><b>运动</b> '+mins2txt(sp.min)+' · 约 '+Math.round(sp.k)+' kcal<br>'+
+  DB.sports.filter(function(s){return s.date===ds;}).map(function(s){return sportSvg(s.type,13)+' '+s.type+' '+mins2txt(s.min)+' · '+s.level+' · '+s.feel;}).join('<br>')+'</div>';}
+ if(rd.n){body+='<div class="item"><b>阅读</b> '+mins2txt(rd.min)+'<br>'+
+  DB.reads.filter(function(r){return r.date===ds;}).map(function(r){return '· 《'+esc(r.book)+'》 '+(r.total?Math.round(r.page/r.total*100)+'%':'第'+r.page+'页')+' · '+mins2txt(r.min);}).join('<br>')+'</div>';}
+ if(DB.money.days[ds]){var mm=DB.money.days[ds];
+  body+='<div class="item"><b>支出</b> 合计 ¥'+ct.toFixed(2)+'<br>'+COST_KEYS.filter(function(c){return num(mm[c[0]]);}).map(function(c){return '· '+c[1]+' ¥'+num(mm[c[0]]).toFixed(2);}).join('<br>')+'</div>';}
+ var hbs=DB.hobbies.filter(function(x){return (x.checks||[]).indexOf(ds)>=0;});
+ if(hbs.length)body+='<div class="item"><b>爱好打卡</b><br>'+hbs.map(function(x){return '· '+esc(x.name||'未命名')+'（'+x.status+' '+(x.pct||0)+'%）';}).join('<br>')+'</div>';
+ if(DB.wcontent[ds]){var w=DB.wcontent[ds];body+='<div class="item"><b>工作内容</b><br>'+(w.tags||[]).map(esc).join('、')+(w.other?'<br>其他：'+esc(w.other):'')+'</div>';}
+ if(DB.wint[ds])body+='<div class="item"><b>工作强度</b> '+esc(DB.wint[ds].level)+(DB.wint[ds].reason?' · '+esc(DB.wint[ds].reason):'')+'</div>';
+ if(DB.woff[ds])body+='<div class="item"><b>下班</b> '+esc(DB.woff[ds].status)+(DB.woff[ds].reason?' · '+esc(DB.woff[ds].reason):'')+'</div>';
+ if(dayWorkEmo(ds)){var e=DB.wemo[ds];body+='<div class="item"><b>情绪复盘</b><br>'+(e.warm?'暖心：'+esc(e.warm)+'<br>':'')+(e.bad?'糟心：'+esc(e.bad)+'<br>':'')+(e.fix?'调整：'+esc(e.fix):'')+'</div>';}
+ var qz=DB.quiz.filter(function(q){return q.date===ds;});
+ if(qz.length)body+='<div class="item"><b>刷题</b><br>'+qz.map(function(q){return '· '+esc(q.subject)+' '+mins2txt(q.min)+' · '+q.total+'题 错'+q.wrong+'题';}).join('<br>')+'</div>';
+ if((DB.events[ds]||[]).length)body+='<div class="item"><b>重要日程</b><br>'+DB.events[ds].map(function(e){return '· '+esc(e.text);}).join('<br>')+'</div>';
+ modal(h+(body||'<div class="emp">这一天还没有记录哦~</div>')+'<div class="btnrow"><button class="btn p" onclick="closeModal()">好的</button></div>');
+}
+
+/* =========================================================
+   一级模块 1：生活管理
+   ========================================================= */
+var T={};/* 表单临时状态 */
+function pick(wrap,val,key){
+ var w=document.getElementById(wrap);
+ [].forEach.call(w.querySelectorAll('.chip'),function(c){c.classList.toggle('on',c.dataset.v===val);});
+ T[key]=val;
+}
+function chipsHtml(wrap,key,arr,cls){
+ return '<div class="chips'+(cls||'')+'" id="'+wrap+'">'+arr.map(function(a){
+  var v=a.v!==undefined?a.v:a,t=a.t!==undefined?a.t:a;
+  return '<span class="chip'+(String(T[key])===String(v)?' on':'')+'" data-v="'+v+'" onclick="pick(\''+wrap+'\',\''+v+'\',\''+key+'\')">'+(a.ico||'')+t+'</span>';
+ }).join('')+'</div>';
+}
+function dateInput(id,val){return '<input type="date" class="inp" id="'+id+'" value="'+(val||today())+'">';}
+/* 通用：按日期归档折叠 */
+function archive(groups,renderItem){
+ var keys=Object.keys(groups).sort().reverse();
+ if(!keys.length)return '<div class="emp">还没有记录哦，从今天开始吧~</div>';
+ return keys.map(function(k){
+  return '<details class="day"'+(k===today()?' open':'')+'><summary>'+I.chevS+'<span>'+k+' '+WK[parseD(k).getDay()]+'</span><span class="cnt">'+groups[k].length+' 条</span></summary><div class="dbody">'+
+   groups[k].map(renderItem).join('')+'</div></details>';
+ }).join('');
+}
+function groupBy(list,f){var g={};list.forEach(function(x){var k=f(x);(g[k]=g[k]||[]).push(x);});return g;}
+
+/* ---------------- To do list ---------------- */
+function renderTodo(){
+ var d=T.tdate||today(),l=DB.todos[d]||[];
+ var h='<div class="card"><div class="ch">'+I.todo.replace('class="i2"','')+'新增待办</div>'+
+  '<label class="lbl">日期</label>'+dateInput('_td',d)+
+  '<label class="lbl">任务内容</label><input class="inp" id="_tt" placeholder="今天想完成什么呀~">'+
+  '<div class="btnrow"><button class="btn p" onclick="todoAdd()">'+I.plus+' 添加任务</button></div></div>';
+ h+='<div class="card w"><div class="ch">'+I.tickIco()+'当日任务<span class="sp">'+l.filter(function(t){return t.done;}).length+' / '+l.length+' 完成</span></div>';
+ h+=l.length?l.map(function(t,i){
+  return '<div class="todo'+(t.done?' done':'')+'"><button class="chk'+(t.done?' on':'')+'" onclick="todoTick(\''+d+'\','+i+')">'+(t.done?I.tick:'')+'</button>'+
+   '<span class="tx">'+esc(t.text)+'</span><button class="btn s gh" onclick="todoDel(\''+d+'\','+i+')">删除</button></div>';
+ }).join(''):'<div class="emp">这一天还没有待办，添加一条试试~</div>';
+ h+='</div>';
+ var g={};for(var k in DB.todos){if((DB.todos[k]||[]).length)g[k]=DB.todos[k];}
+ h+='<div class="card b"><div class="ch">历史归档</div>'+archive(g,function(t){return '<div style="font-size:12.5px;padding:3px 0;color:'+(t.done?'#B6B0A4':'#5C594F')+'">'+(t.done?'✓ ':'○ ')+esc(t.text)+'</div>';})+'</div>';
+ return h;
+}
+I.tickIco=function(){return '<svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="#7FA8C4" stroke-width="1.8" stroke-linecap="round"><rect x="4" y="4" width="16" height="16" rx="3" fill="#FFF3D0" stroke="#D9B87A"/><path d="M8 12.4l3 3 5-6"/></svg>';};
+function todoAdd(){
+ var d=document.getElementById('_td').value||today(),t=document.getElementById('_tt').value.trim();
+ if(!t){toast('先写点内容吧~');return;}
+ (DB.todos[d]=DB.todos[d]||[]).push({text:t,done:false});
+ T.tdate=d;sync();toast('已添加');
+}
+function todoTick(d,i){DB.todos[d][i].done=!DB.todos[d][i].done;T.tdate=d;sync();}
+function todoDel(d,i){DB.todos[d].splice(i,1);if(!DB.todos[d].length)delete DB.todos[d];T.tdate=d;sync();}
+
+/* ---------------- 饮食 ---------------- */
+/* 离线食材营养库：每100g [热量,蛋白,碳水,脂肪,单个克重] */
+var FOODDB={
+'米饭':[116,2.6,25.9,0.3,150],'白粥':[46,1.1,9.9,0.3,250],'面条':[110,4.4,23,0.5,200],'馒头':[223,7,47,1.1,80],
+'包子':[227,7,40,4,100],'饺子':[240,9,30,9,15],'面包':[312,8.3,58.6,5.1,35],'吐司':[280,8,50,4,30],
+'燕麦':[377,15,61,6.7,40],'玉米':[112,4,22.8,1.2,200],'红薯':[90,1.1,20.7,0.2,180],'土豆':[77,2,17.2,0.2,150],
+'鸡蛋':[144,13.3,2.8,8.8,50],'牛奶':[54,3,3.4,3.2,250],'酸奶':[86,3.2,12,2.7,150],'豆浆':[31,3,1.2,1.6,250],
+'豆腐':[82,8.1,4.2,3.7,100],'鸡胸肉':[133,19.4,2.5,5,120],'鸡腿':[181,16,0,13,100],'牛肉':[125,19.9,2,4.2,100],
+'猪肉':[143,20.3,1.5,6.2,100],'五花肉':[508,7.7,2.4,50.8,100],'排骨':[278,16.7,1,23,100],'鱼肉':[104,18,0,3.4,120],
+'三文鱼':[139,17.2,0,7.8,100],'虾':[93,18.6,2.8,0.8,15],'鸡翅':[194,17.4,4.6,11.8,50],'火腿':[330,16,4.9,27.4,30],
+'白菜':[17,1.5,3.2,0.1,100],'西兰花':[36,4.1,4.3,0.6,100],'菠菜':[24,2.6,2.8,0.3,100],'生菜':[15,1.3,2,0.3,100],
+'黄瓜':[16,0.8,2.9,0.2,200],'番茄':[20,0.9,4,0.2,150],'胡萝卜':[39,1,8.8,0.2,120],'蘑菇':[20,2.7,2.4,0.1,20],
+'茄子':[23,1.1,4.9,0.2,180],'豆角':[30,2,5.7,0.4,100],'青椒':[22,1,5.4,0.2,80],'洋葱':[40,1.1,9,0.2,150],
+'苹果':[53,0.4,13.5,0.2,200],'香蕉':[93,1.4,22,0.2,120],'橙子':[48,0.8,11.1,0.2,200],'葡萄':[44,0.5,10.3,0.2,8],
+'草莓':[32,1,7.1,0.2,15],'西瓜':[31,0.6,8,0.1,300],'梨':[51,0.4,13.3,0.2,200],'蓝莓':[57,0.7,14.5,0.3,2],
+'坚果':[600,15,20,55,10],'花生':[574,24,16,49,1],'核桃':[646,14.9,19.1,58.8,10],'瓜子':[606,22.6,17.3,52.8,1],
+'咖啡':[3,0.2,0.4,0,250],'奶茶':[72,1,13,2,450],'可乐':[43,0,10.8,0,330],'果汁':[45,0.3,11,0.1,250],
+'沙拉':[85,2.5,7,5,200],'汤':[35,2,3,1.5,250],'巧克力':[586,4.3,51.9,40.1,10],'蛋糕':[347,7,55,11,100],
+'薯片':[547,6,53,35,20],'饼干':[435,7,71,14,10],'冰淇淋':[127,2.5,20,4.5,80],'披萨':[266,11,33,10,120],
+'汉堡':[295,17,24,14,150],'炸鸡':[279,20,8,19,100],'寿司':[150,5,30,1,25],'粥米':[46,1.1,9.9,0.3,250]
+};
+var MEALS=['早餐','午餐','晚餐','加餐'],UNITS=['g','个','碗'];
+function calcFood(str,amt,unit){
+ var names=String(str).split(/[、,，\/\s]+/).filter(function(x){return x;});
+ if(!names.length)return null;
+ var share=amt/names.length,est=false,r={k:0,p:0,c:0,f:0};
+ names.forEach(function(n){
+  var key=null;
+  for(var k in FOODDB){ if(n===k){key=k;break;} }
+  if(!key){for(var k2 in FOODDB){ if(n.indexOf(k2)>=0||k2.indexOf(n)>=0){key=k2;break;} }}
+  var d=key?FOODDB[key]:[150,5,20,5,100];
+  if(!key)est=true;
+  var g=unit==='g'?share:(unit==='碗'?share*250:share*(d[4]||100));
+  r.k+=d[0]*g/100;r.p+=d[1]*g/100;r.c+=d[2]*g/100;r.f+=d[3]*g/100;
+ });
+ r.est=est;return r;
+}
+function renderDiet(){
+ T.meal=T.meal||'早餐';T.unit=T.unit||'g';
+ var d=T.ddate||today(),s=dayMeal(d);
+ var h='<div class="card"><div class="ch">'+I.diet.replace('class="i2"','')+'记录一餐</div>'+
+  '<label class="lbl">日期</label>'+dateInput('_dd',d)+
+  '<label class="lbl">餐次</label>'+chipsHtml('_dm','meal',MEALS)+
+  '<label class="lbl">食物名称（多食材用顿号「、」隔开）</label><input class="inp" id="_df" placeholder="例：米饭、鸡胸肉、西兰花">'+
+  '<label class="lbl">食用分量</label><div class="row"><input class="inp" id="_da" type="number" inputmode="decimal" placeholder="数量" style="flex:2">'+
+  '<div style="flex:3">'+chipsHtml('_du','unit',UNITS)+'</div></div>'+
+  '<div class="btnrow"><button class="btn y" onclick="dietCalc()">智能计算营养</button></div>'+
+  '<div id="_dres" style="margin-top:9px"></div>'+
+  '<div class="btnrow"><button class="btn p" onclick="dietSave()">保存这条记录</button></div>'+
+  '<div class="hint" style="margin-top:6px">内置离线食材库，小众食材会给出估算数值并标注</div></div>';
+ h+='<div class="card w"><div class="ch">当日营养合计<span class="sp">'+d+'</span></div><div class="g2">'+
+  st(Math.round(s.k),'总热量 kcal')+st(s.p.toFixed(1),'蛋白质 g')+st(s.c.toFixed(1),'碳水 g')+st(s.f.toFixed(1),'脂肪 g')+'</div>';
+ var todayList=DB.meals.filter(function(m){return m.date===d;});
+ h+=todayList.length?'<div style="margin-top:8px">'+todayList.map(mealItem).join('')+'</div>':'<div class="emp">这一天还没有饮食记录</div>';
+ h+='</div>';
+ h+='<div class="card b"><div class="ch">历史归档</div>'+archive(groupBy(DB.meals,function(m){return m.date;}),mealItem)+'</div>';
+ return h;
+}
+function st(n,l){return '<div class="stat"><div class="n">'+n+'</div><div class="l">'+l+'</div></div>';}
+function mealItem(m){
+ return '<div class="item"><button class="del" onclick="mealDel(\''+m.id+'\')">✕</button>'+
+  '<span class="tag" style="background:#FFF0D0;color:#9C8244">'+m.type+'</span>'+esc(m.food)+' <span style="color:#9C978C">'+esc(m.amt)+'</span>'+
+  (m.est?' <span class="est">估算参考</span>':'')+
+  '<br><span style="color:#9C978C">'+Math.round(m.kcal)+' kcal · 蛋白 '+m.p.toFixed(1)+'g · 碳水 '+m.c.toFixed(1)+'g · 脂肪 '+m.f.toFixed(1)+'g</span></div>';
+}
+function dietCalc(){
+ var f=document.getElementById('_df').value.trim(),a=num(document.getElementById('_da').value);
+ if(!f){toast('先填食物名称呀~');return null;}
+ if(!a){toast('填一下分量吧~');return null;}
+ var r=calcFood(f,a,T.unit);
+ document.getElementById('_dres').innerHTML='<div class="g2">'+st(Math.round(r.k),'热量 kcal')+st(r.p.toFixed(1),'蛋白质 g')+st(r.c.toFixed(1),'碳水 g')+st(r.f.toFixed(1),'脂肪 g')+'</div>'+
+  (r.est?'<div class="est" style="margin-top:5px">部分食材未收录，已生成估算参考值</div>':'');
+ return r;
+}
+function dietSave(){
+ var r=dietCalc();if(!r)return;
+ var d=document.getElementById('_dd').value||today();
+ DB.meals.push({id:nid(),date:d,type:T.meal,food:document.getElementById('_df').value.trim(),
+  amt:document.getElementById('_da').value+T.unit,kcal:r.k,p:r.p,c:r.c,f:r.f,est:r.est});
+ T.ddate=d;sync();toast('记录好啦，小狗给你比心~');
+}
+function mealDel(id){DB.meals=DB.meals.filter(function(m){return m.id!==id;});sync();}
+
+/* ---------------- 运动 ---------------- */
+var SPORTS=['散步','羽毛球','游泳','健身','瑜伽','骑行','跳绳','乒乓球','登山','有氧操'];
+var MET={'散步':3.5,'羽毛球':5.5,'游泳':7,'健身':6,'瑜伽':3,'骑行':6.8,'跳绳':11,'乒乓球':4,'登山':7,'有氧操':7.3};
+var LEVELS=[{v:'低强度',f:.85},{v:'中等强度',f:1},{v:'高强度',f:1.2}];
+var FEELS=[{v:'愉快',c:'#F6B26B'},{v:'适中',c:'#9DC3DE'},{v:'累',c:'#B9A8D0'}];
+function feelFace(k,sz){
+ var s=sz||17,c=({'愉快':'#FCE0B0','适中':'#CFE6F7','累':'#E0D7EE'})[k]||'#eee';
+ var mouth=k==='愉快'?'<path d="M7 14q5 4 10 0" stroke="#8A6A45" stroke-width="1.5" fill="none" stroke-linecap="round"/>':
+  (k==='适中'?'<path d="M8 14.5h8" stroke="#5C7C92" stroke-width="1.5" stroke-linecap="round"/>':'<path d="M8 15.5q4-3 8 0" stroke="#6B6478" stroke-width="1.5" fill="none" stroke-linecap="round"/>');
+ return '<svg viewBox="0 0 24 24" width="'+s+'" height="'+s+'"><circle cx="12" cy="12" r="10" fill="'+c+'"/><circle cx="8.6" cy="10" r="1.3" fill="#5A5750"/><circle cx="15.4" cy="10" r="1.3" fill="#5A5750"/>'+mouth+'</svg>';
+}
+function renderSport(){
+ T.stype=T.stype||'散步';T.smin=T.smin||'30';T.slevel=T.slevel||'中等强度';T.sfeel=T.sfeel||'适中';
+ var d=T.sdate||today(),s=daySport(d);
+ var h='<div class="card"><div class="ch">'+I.sport.replace('class="i2"','')+'记录运动</div>'+
+  '<label class="lbl">日期</label>'+dateInput('_sd',d)+
+  '<label class="lbl">① 运动类型（横向滑动选择）</label>'+
+  chipsHtml('_st','stype',SPORTS.map(function(n){return {v:n,t:n,ico:sportSvg(n,17)};}),' scr')+
+  '<label class="lbl">② 运动时长</label>'+chipsHtml('_sm','smin',DUR.map(function(x){return {v:x.v,t:x.t};}))+
+  '<label class="lbl">③ 运动强度</label>'+chipsHtml('_sl','slevel',LEVELS.map(function(x){return {v:x.v,t:x.v};}))+
+  '<label class="lbl">④ 训练感受</label>'+chipsHtml('_sf','sfeel',FEELS.map(function(x){return {v:x.v,t:x.v,ico:feelFace(x.v)};}))+
+  '<div class="btnrow"><button class="btn p" onclick="sportSave()">保存运动记录</button></div></div>';
+ h+='<div class="card w"><div class="ch">当日汇总<span class="sp">'+d+'</span></div><div class="g3">'+
+  st(mins2txt(s.min),'运动总时长')+st(s.n,'运动次数')+st(Math.round(s.k),'消耗 kcal')+'</div>'+
+  (s.n?'<div style="margin-top:8px">'+DB.sports.filter(function(x){return x.date===d;}).map(sportItem).join('')+'</div>':'<div class="emp">今天还没运动，散散步也很好呀~</div>')+'</div>';
+ var wd=weekDays(),W=weekSum(wd);
+ h+='<div class="card b"><div class="ch">本周运动统计<span class="sp">'+wd[0].slice(5)+'~'+wd[6].slice(5)+'</span></div>'+
+  '<div class="g3">'+st(mins2txt(W.sportMin),'本周时长')+st(W.sportN,'本周次数')+st(Object.keys(W.sportTypes).length,'运动种类')+'</div>'+
+  '<div style="margin-top:8px">'+wd.map(function(x){var m=daySport(x).min;
+   return '<div class="pv" style="margin:4px 0"><span style="width:42px">'+x.slice(5)+'</span><span class="bar"><i style="width:'+Math.min(100,m/180*100)+'%"></i></span><span style="width:52px;text-align:right">'+mins2txt(m)+'</span></div>';}).join('')+'</div></div>';
+ h+='<div class="card"><div class="ch">历史归档</div>'+archive(groupBy(DB.sports,function(x){return x.date;}),sportItem)+'</div>';
+ return h;
+}
+function sportItem(s){
+ return '<div class="item"><button class="del" onclick="sportDel(\''+s.id+'\')">✕</button>'+
+  '<span style="display:inline-flex;align-items:center;gap:5px">'+sportSvg(s.type,18,'#6E9B62')+'<b style="font-weight:600">'+s.type+'</b></span> '+mins2txt(s.min)+
+  '<br><span style="color:#9C978C">'+s.level+' · 感受 '+s.feel+' · 约消耗 '+Math.round(s.kcal)+' kcal</span></div>';
+}
+function sportSave(){
+ var d=document.getElementById('_sd').value||today(),m=+T.smin;
+ var f=LEVELS.filter(function(x){return x.v===T.slevel;})[0].f;
+ var kcal=(MET[T.stype]||4)*num(DB.cfg.weight||55)*(m/60)*f;
+ DB.sports.push({id:nid(),date:d,type:T.stype,min:m,level:T.slevel,feel:T.sfeel,kcal:kcal});
+ T.sdate=d;sync();toast('运动打卡成功，好厉害！');
+}
+function sportDel(id){DB.sports=DB.sports.filter(function(x){return x.id!==id;});sync();}
+
+/* ---------------- 阅读 ---------------- */
+function starSvg(on){return '<svg viewBox="0 0 24 24" fill="'+(on?'#FADFA0':'#F1EDE4')+'" stroke="'+(on?'#E2C275':'#DCD5C7')+'" stroke-width="1.3" stroke-linejoin="round"><path d="M12 3.2l2.7 5.6 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1L3.2 9.7l6.1-.9z"/></svg>';}
+function renderRead(){
+ T.rstar=T.rstar||0;T.rmin=T.rmin||'30';
+ var d=T.rdate||today();
+ var h='<div class="card"><div class="ch">'+I.read.replace('class="i2"','')+'阅读打卡</div>'+
+  '<label class="lbl">日期</label>'+dateInput('_rd',d)+
+  '<label class="lbl">书籍名称</label><input class="inp" id="_rb" placeholder="在读的是哪本书呀" oninput="readProg()">'+
+  '<label class="lbl">作者（选填）</label><input class="inp" id="_ra" placeholder="选填">'+
+  '<div class="row"><div><label class="lbl">全书总页码</label><input class="inp" id="_rt" type="number" inputmode="numeric" placeholder="总页数" oninput="readProg()"></div>'+
+  '<div><label class="lbl">今日读到页码</label><input class="inp" id="_rp" type="number" inputmode="numeric" placeholder="当前页" oninput="readProg()"></div></div>'+
+  '<div id="_rpv" class="hint" style="margin-top:6px">填写总页码后自动计算阅读进度</div>'+
+  '<label class="lbl">书籍评分</label><div class="stars" id="_rs">'+[1,2,3,4,5].map(function(i){return '<span onclick="setStar('+i+')">'+starSvg(i<=T.rstar)+'</span>';}).join('')+'</div>'+
+  '<label class="lbl">阅读时长</label>'+chipsHtml('_rm','rmin',DUR.map(function(x){return {v:x.v,t:x.t};}))+
+  '<label class="lbl">当日阅读章节</label><input class="inp" id="_rc" placeholder="例：第三章 山中来信">'+
+  '<label class="lbl">读书笔记</label><textarea class="ta" id="_rn" placeholder="记下今天被打动的句子吧~"></textarea>'+
+  '<div class="btnrow"><button class="btn p" onclick="readSave()">保存阅读记录</button></div></div>';
+ var wd=weekDays(),W=weekSum(wd);
+ h+='<div class="card w"><div class="ch">阅读统计</div><div class="g3">'+
+  st(mins2txt(W.readMin),'本周时长')+st(Object.keys(W.readBooks).length,'本周书本')+st(mins2txt(dayRead(d).min),'当日时长')+'</div>';
+ var books={};DB.reads.forEach(function(r){var b=books[r.book]=books[r.book]||{page:0,total:0,min:0,star:0,n:0};
+  b.page=Math.max(b.page,num(r.page));b.total=Math.max(b.total,num(r.total));b.min+=r.min;b.star=r.star||b.star;b.n++;});
+ var bk=Object.keys(books);
+ h+=bk.length?'<div style="margin-top:8px">'+bk.map(function(n){var b=books[n];var p=b.total?Math.min(100,Math.round(b.page/b.total*100)):0;
+  return '<div class="item"><b style="font-weight:600">《'+esc(n)+'》</b> '+(b.total?p+'%':'第'+b.page+'页')+' · 累计 '+mins2txt(b.min)+' · '+b.n+' 次打卡'+
+   '<div class="pv" style="margin-top:5px"><span class="bar"><i style="width:'+p+'%"></i></span><span>'+(b.total?b.page+'/'+b.total+'页':'未填总页码')+'</span></div></div>';}).join('')+'</div>':'<div class="emp">还没有读书记录~</div>';
+ h+='</div>';
+ h+='<div class="card b"><div class="ch">历史归档</div>'+archive(groupBy(DB.reads,function(r){return r.date;}),readItem)+'</div>';
+ return h;
+}
+function readItem(r){
+ var p=r.total?Math.min(100,Math.round(r.page/r.total*100))+'%':'第'+r.page+'页';
+ return '<div class="item"><button class="del" onclick="readDel(\''+r.id+'\')">✕</button>'+
+  '<b style="font-weight:600">《'+esc(r.book)+'》</b>'+(r.author?' <span style="color:#9C978C">'+esc(r.author)+'</span>':'')+
+  '<br><span style="color:#E2A44A">'+'★'.repeat(r.star||0)+'</span><span style="color:#D8D2C6">'+'★'.repeat(5-(r.star||0))+'</span>'+
+  ' <span style="color:#9C978C">'+p+' · '+mins2txt(r.min)+'</span>'+
+  (r.chapter?'<br>章节：'+esc(r.chapter):'')+(r.note?'<br><span style="color:#7C7768">'+esc(r.note)+'</span>':'')+'</div>';
+}
+function setStar(i){T.rstar=i;document.getElementById('_rs').innerHTML=[1,2,3,4,5].map(function(x){return '<span onclick="setStar('+x+')">'+starSvg(x<=i)+'</span>';}).join('');}
+function readProg(){
+ var t=num(document.getElementById('_rt').value),p=num(document.getElementById('_rp').value);
+ document.getElementById('_rpv').innerHTML=t?('当前阅读进度：<b style="color:#4E7B96">'+Math.min(100,Math.round(p/t*100))+'%</b>（'+p+' / '+t+' 页）'):'填写总页码后自动计算阅读进度';
+}
+function readSave(){
+ var b=document.getElementById('_rb').value.trim();
+ if(!b){toast('先写下书名吧~');return;}
+ DB.reads.push({id:nid(),date:document.getElementById('_rd').value||today(),book:b,
+  author:document.getElementById('_ra').value.trim(),total:num(document.getElementById('_rt').value),
+  page:num(document.getElementById('_rp').value),star:T.rstar,min:+T.rmin,
+  chapter:document.getElementById('_rc').value.trim(),note:document.getElementById('_rn').value.trim()});
+ T.rdate=document.getElementById('_rd').value;sync();toast('阅读打卡完成~');
+}
+function readDel(id){DB.reads=DB.reads.filter(function(r){return r.id!==id;});sync();}
+
+/* ---------------- 记账 ---------------- */
+function pieSvg(data,total){
+ var cx=70,cy=70,r=54,a=-Math.PI/2,h='';
+ data.forEach(function(d){
+  if(!d.v)return;
+  var ang=d.v/total*Math.PI*2,e=a+ang;
+  if(ang>=Math.PI*2-0.001){h+='<circle cx="70" cy="70" r="54" fill="'+d.c+'"/>';return;}
+  var x1=cx+r*Math.cos(a),y1=cy+r*Math.sin(a),x2=cx+r*Math.cos(e),y2=cy+r*Math.sin(e);
+  h+='<path d="M'+cx+' '+cy+' L'+x1.toFixed(2)+' '+y1.toFixed(2)+' A'+r+' '+r+' 0 '+(ang>Math.PI?1:0)+' 1 '+x2.toFixed(2)+' '+y2.toFixed(2)+' Z" fill="'+d.c+'" stroke="#fff" stroke-width="1.2"/>';
+  a=e;
+ });
+ return '<svg viewBox="0 0 140 140" width="140" height="140">'+h+'<circle cx="70" cy="70" r="27" fill="#FFF8E6"/><text x="70" y="67" text-anchor="middle" font-size="9" fill="#9C978C">本周支出</text><text x="70" y="80" text-anchor="middle" font-size="12" fill="#5C594F">¥'+total.toFixed(0)+'</text></svg>';
+}
+function renderMoney(){
+ var d=T.mdate||today(),ym=monthKey(d),cur=DB.money.days[d]||{};
+ var inc=num(DB.money.income[ym]),spent=monthCost(ym),left=inc-spent;
+ var h='<div class="card"><div class="ch">'+I.money.replace('class="i2"','')+'月度总收入</div>'+
+  '<label class="lbl">'+ym+' 当月总收入（元）</label>'+
+  '<input class="inp" id="_mi" type="number" inputmode="decimal" value="'+(inc||'')+'" placeholder="填写当月整体总收入" onchange="incSave(\''+ym+'\')">'+
+  '<div class="hint" style="margin-top:5px">修改后全月结余、攒钱卡片、饼图自动重算</div></div>';
+ h+='<div class="card"><div class="ch">当日支出录入</div><label class="lbl">日期</label>'+dateInput('_md',d)+
+  '<div class="g2" style="margin-top:8px">'+COST_KEYS.map(function(c){
+   return '<div><label class="lbl" style="margin-top:0"><i style="width:8px;height:8px;border-radius:3px;background:'+c[2]+';display:inline-block;margin-right:4px"></i>'+c[1]+'</label>'+
+    '<input class="inp" type="number" inputmode="decimal" id="_c_'+c[0]+'" value="'+(cur[c[0]]!==undefined?cur[c[0]]:'')+'" placeholder="0"></div>';}).join('')+'</div>'+
+  '<div class="btnrow"><button class="btn p" onclick="moneySave()">保存当日支出</button><button class="btn" onclick="moneyDel()">清除当日</button></div>'+
+  '<div class="kv" style="margin-top:8px"><span>当日总支出</span><b>¥'+dayCost(d).toFixed(2)+'</b></div></div>';
+ h+='<div class="card b"><div class="ch">月度攒钱卡片<span class="sp">'+ym+'</span></div><div class="g3">'+
+  st('¥'+inc.toFixed(0),'月总收入')+st('¥'+spent.toFixed(0),'累计支出')+
+  '<div class="stat"><div class="n'+(left<0?' neg':'')+'">¥'+left.toFixed(0)+'</div><div class="l">剩余可存</div></div></div>'+
+  (left<0?'<div class="est" style="margin-top:6px;text-align:center">本月已超支 ¥'+Math.abs(left).toFixed(2)+'，下个月我们慢慢来~</div>':'')+'</div>';
+ var wd=weekDays(),W=weekSum(wd);
+ h+='<div class="card w"><div class="ch">本周支出占比</div>';
+ if(W.costAll>0){
+  h+='<div style="display:flex;align-items:center;gap:8px"><div>'+pieSvg(COST_KEYS.map(function(c){return {v:W.cost[c[0]],c:c[2]};}),W.costAll)+'</div>'+
+   '<div style="flex:1;min-width:0">'+COST_KEYS.map(function(c){var v=W.cost[c[0]];
+    return '<div class="kv" style="padding:3px 0"><span><i style="width:8px;height:8px;border-radius:3px;background:'+c[2]+';display:inline-block;margin-right:4px"></i>'+c[1]+'</span><b>'+(W.costAll?(v/W.costAll*100).toFixed(0):0)+'% · ¥'+v.toFixed(0)+'</b></div>';}).join('')+'</div></div>';
+ }else h+='<div class="emp">本周还没有支出记录哦</div>';
+ h+='</div>';
+ var g={};for(var k in DB.money.days){if(dayCost(k)||Object.keys(DB.money.days[k]).length)g[k]=[DB.money.days[k]];}
+ var keys=Object.keys(g).sort().reverse();
+ h+='<div class="card"><div class="ch">支出归档</div>'+(keys.length?keys.map(function(k){
+  return '<details class="day"'+(k===today()?' open':'')+'><summary>'+I.chevS+'<span>'+k+'</span><span class="cnt">¥'+dayCost(k).toFixed(2)+'</span></summary><div class="dbody">'+
+   COST_KEYS.map(function(c){var v=num(DB.money.days[k][c[0]]);return v?'<div class="kv"><span><i style="width:8px;height:8px;border-radius:3px;background:'+c[2]+';display:inline-block;margin-right:4px"></i>'+c[1]+'</span><b>¥'+v.toFixed(2)+'</b></div>':'';}).join('')+
+   '</div></details>';}).join(''):'<div class="emp">还没有记账记录~</div>')+'</div>';
+ /* 按月聚合 */
+ var ms={};for(var k2 in DB.money.days){var mk=k2.slice(0,7);ms[mk]=(ms[mk]||0)+dayCost(k2);}
+ var mks=Object.keys(ms).sort().reverse();
+ if(mks.length)h+='<div class="card b"><div class="ch">按月聚合</div>'+mks.map(function(mk){var i2=num(DB.money.income[mk]);
+  return '<div class="kv"><span>'+mk+'</span><b>收 ¥'+i2.toFixed(0)+' · 支 ¥'+ms[mk].toFixed(0)+' · <span class="'+((i2-ms[mk])<0?'neg':'')+'">存 ¥'+(i2-ms[mk]).toFixed(0)+'</span></b></div>';}).join('')+'</div>';
+ return h;
+}
+function incSave(ym){DB.money.income[ym]=num(document.getElementById('_mi').value);sync();}
+function moneySave(){
+ var d=document.getElementById('_md').value||today(),o={};
+ COST_KEYS.forEach(function(c){o[c[0]]=num(document.getElementById('_c_'+c[0]).value);});
+ DB.money.days[d]=o;T.mdate=d;sync();toast('记账完成，理财小能手！');
+}
+function moneyDel(){var d=document.getElementById('_md').value||today();delete DB.money.days[d];T.mdate=d;sync();}
+
+/* ---------------- 爱好 ---------------- */
+var HSTATUS=['未开始','规划中','进行中','已完成','暂停'];
+function renderHobby(){
+ T.hf=T.hf||'全部';
+ var list=DB.hobbies.filter(function(h){return T.hf==='全部'||h.status===T.hf;});
+ var h='<div class="card"><div class="ch">'+I.hobby.replace('class="i2"','')+'我的爱好清单<span class="sp">共 '+DB.hobbies.length+' 项</span></div>'+
+  '<div class="row"><button class="btn p" onclick="hobbyAdd()">'+I.plus+' 新增爱好</button>'+
+  '<select class="sel" onchange="T.hf=this.value;renderPage()">'+['全部'].concat(HSTATUS).map(function(s){return '<option'+(T.hf===s?' selected':'')+'>'+s+'</option>';}).join('')+'</select></div>'+
+  '<div class="hint" style="margin-top:6px">表格可左右滑动查看全部列</div></div>';
+ h+='<div class="tblwrap"><table class="hb"><tr><th>爱好类型</th><th>计划内容</th><th>达成目标</th><th>落地程度</th><th>实施后感受</th><th>操作</th></tr>';
+ h+=list.length?list.map(function(x){
+  var i=DB.hobbies.indexOf(x);
+  return '<tr><td style="min-width:92px"><input class="inp" value="'+esc(x.name)+'" placeholder="如手帐" onchange="hobbySet('+i+',\'name\',this.value)"></td>'+
+   '<td style="min-width:120px"><textarea class="ta" placeholder="计划内容" onchange="hobbySet('+i+',\'plan\',this.value)">'+esc(x.plan)+'</textarea></td>'+
+   '<td style="min-width:120px"><textarea class="ta" placeholder="达成目标" onchange="hobbySet('+i+',\'goal\',this.value)">'+esc(x.goal)+'</textarea></td>'+
+   '<td style="min-width:104px"><select class="sel" onchange="hobbySet('+i+',\'status\',this.value)">'+HSTATUS.map(function(s){return '<option'+(x.status===s?' selected':'')+'>'+s+'</option>';}).join('')+'</select>'+
+   '<input class="inp" type="number" inputmode="numeric" style="margin-top:4px" value="'+(x.pct||0)+'" placeholder="%" onchange="hobbySet('+i+',\'pct\',this.value)">'+
+   '<div class="pv" style="margin-top:3px"><span class="bar"><i style="width:'+Math.min(100,num(x.pct))+'%"></i></span></div></td>'+
+   '<td style="min-width:120px"><textarea class="ta" placeholder="实施后感受" onchange="hobbySet('+i+',\'feel\',this.value)">'+esc(x.feel)+'</textarea></td>'+
+   '<td style="min-width:82px"><button class="btn s y" onclick="hobbyCheck('+i+')">今日打卡</button>'+
+   '<div style="font-size:10px;color:#9C978C;margin:3px 0">'+(x.checks||[]).length+' 次打卡</div>'+
+   '<button class="btn s" onclick="hobbyDel('+i+')">删除</button></td></tr>';
+ }).join(''):'<tr><td colspan="6"><div class="emp">还没有爱好记录，点上方新增吧~</div></td></tr>';
+ h+='</table></div>';
+ var g={};DB.hobbies.forEach(function(x){(x.checks||[]).forEach(function(d){(g[d]=g[d]||[]).push(x);});});
+ h+='<div class="card b" style="margin-top:10px"><div class="ch">打卡归档</div>'+
+  archive(g,function(x){return '<div style="font-size:12.5px;padding:3px 0">· '+esc(x.name||'未命名')+'（'+x.status+' '+(x.pct||0)+'%）</div>';})+'</div>';
+ return h;
+}
+function hobbyAdd(){DB.hobbies.push({id:nid(),name:'',plan:'',goal:'',status:'未开始',pct:0,feel:'',checks:[],date:today()});sync();}
+function hobbySet(i,k,v){DB.hobbies[i][k]=(k==='pct')?num(v):v;save();if(k==='status'||k==='pct')renderPage();refreshHome();}
+function hobbyCheck(i){
+ var d=today(),h=DB.hobbies[i];h.checks=h.checks||[];
+ if(h.checks.indexOf(d)<0)h.checks.push(d);
+ h.status='进行中';sync();toast('今日爱好打卡成功~');
+}
+function hobbyDel(i){DB.hobbies.splice(i,1);sync();}
+
+/* ---------------- 心情 ---------------- */
+function renderMood(){
+ var d=T.modate||today(),cur=DB.moods[d];
+ var MS=[{k:'happy',n:'开心'},{k:'calm',n:'平静'},{k:'down',n:'低落'}];
+ var h='<div class="card"><div class="ch">'+I.mood.replace('class="i2"','')+'今天心情怎么样呀</div>'+
+  '<label class="lbl">日期</label>'+dateInput('_mod',d)+
+  '<div class="g3" style="margin-top:10px">'+MS.map(function(m){
+   return '<div class="stat" style="background:'+(cur===m.k?'#DCEEF9':'#fff')+';padding:10px 4px" onclick="moodSet(\''+m.k+'\')">'+
+    moodSvg(m.k,52)+'<div class="l" style="margin-top:4px;font-size:12px;color:'+(cur===m.k?'#2C5F7C':'#9C978C')+'">'+m.n+'</div></div>';}).join('')+'</div>'+
+  '<div class="hint" style="margin-top:8px">选择后自动同步到首页月度日历的心情标识</div></div>';
+ var g={};for(var k in DB.moods)g[k]=[DB.moods[k]];
+ h+='<div class="card b"><div class="ch">心情归档</div>'+archive(g,function(m){
+  return '<div style="display:flex;align-items:center;gap:8px;padding:3px 0">'+moodSvg(m,32)+'<span>'+({happy:'开心',calm:'平静',down:'低落'})[m]+'</span></div>';})+'</div>';
+ return h;
+}
+function moodSet(k){
+ var d=document.getElementById('_mod').value||today();
+ DB.moods[d]=k;T.modate=d;sync();
+ dog(k==='happy'?'看到你开心，小狗尾巴摇成了小风扇~':(k==='calm'?'平平静静的一天，也很珍贵呀。':'抱抱你，难过是允许的，我陪着你。'),'',k==='down'?'hug':'cheer');
+}
+
+/* ---------------- 旅行（内嵌矢量中国地图） ---------------- */
+var MAP_DATA={
+w:320.0,h:318.2,
+polys:{"北京":["227.8,82.3 228.7,81.8 225.8,81.5 224.2,79.3 222.6,80.1 223.1,81.2 219.5,82.6 220.6,84.3 218.0,85.8 218.3,88.6 221.8,88.6 223.0,89.6 223.5,88.6 224.9,88.6 225.7,87.4 224.9,85.8 227.8,85.2 227.1,82.8 227.8,82.3"],"天津":["230.0,89.8 230.8,88.7 229.4,88.7 228.6,86.6 230.0,85.6 228.1,84.4 227.0,85.6 226.9,88.3 225.0,88.5 225.5,91.7 224.7,93.9 227.3,95.2 229.8,94.4 229.3,93.5 230.4,93.3 231.5,90.9 228.7,90.1 230.0,89.8"],"河北":["228.4,81.9 227.2,83.7 230.0,85.6 228.7,86.4 229.3,88.5 230.8,88.7 230.2,90.1 233.7,92.9 234.2,91.5 236.0,91.6 237.8,90.1 239.2,86.7 240.9,86.3 239.3,82.5 237.7,82.6 235.6,80.8 237.6,77.7 233.0,77.5 231.9,75.0 232.9,74.3 232.7,73.0 231.8,73.1 230.0,69.4 225.6,70.8 224.9,73.5 222.4,73.4 221.3,74.8 219.9,73.7 216.7,76.1 214.9,75.9 214.9,72.7 213.3,72.5 211.4,74.7 211.6,76.4 209.8,76.9 210.5,78.2 209.5,79.1 212.0,83.7 213.2,83.8 209.9,85.9 212.5,86.9 213.4,88.7 212.2,91.9 209.9,91.9 209.6,93.9 208.1,95.2 208.0,97.0 209.5,97.6 211.1,100.8 209.2,104.1 209.2,106.0 207.6,106.9 209.0,109.1 215.2,111.1 216.2,110.1 218.1,110.4 217.0,108.2 219.1,106.3 220.7,102.9 222.0,102.8 222.5,101.4 223.0,102.0 225.0,99.7 228.3,99.6 230.0,97.9 231.0,96.3 230.0,96.3 229.3,94.7 227.3,95.2 224.7,93.9 225.5,91.7 225.0,88.5 223.0,89.6 221.8,88.6 219.5,89.1 217.9,87.6 218.5,87.2 218.0,85.8 220.6,84.3 219.5,82.6 223.1,81.2 222.6,80.1 224.0,79.3 225.8,81.5 228.4,81.9"],"山西":["191.6,120.3 197.8,118.7 199.0,117.3 200.3,117.4 200.3,116.0 204.0,116.4 208.5,113.7 209.0,109.1 207.6,106.9 209.2,106.0 209.2,104.1 211.1,100.8 209.5,97.6 208.0,97.0 208.1,95.2 209.6,93.9 209.9,91.9 212.2,91.9 213.4,88.7 212.5,86.9 209.9,85.9 213.2,83.8 212.0,83.7 211.1,81.3 210.7,82.7 208.1,83.8 205.4,83.7 203.9,85.0 201.6,84.4 199.7,88.4 197.4,88.2 195.6,89.8 196.1,90.4 194.2,95.8 192.3,97.5 193.7,101.5 191.6,104.9 192.8,113.7 190.8,118.5 191.6,120.3"],"内蒙古":["123.0,68.3 126.5,75.5 125.3,76.9 129.0,80.2 129.1,82.4 130.7,81.1 131.4,82.2 132.4,81.1 133.0,81.7 133.4,80.6 138.2,80.5 138.5,84.3 134.8,86.7 139.0,88.0 140.3,89.8 142.0,89.8 142.7,92.7 144.0,92.2 144.6,93.8 146.9,94.5 148.4,93.1 147.6,91.7 150.4,90.7 153.3,91.7 155.0,90.3 158.9,89.7 159.5,92.4 155.4,96.1 156.0,97.7 155.1,98.5 155.4,99.6 159.4,102.5 167.6,100.0 168.7,92.9 172.0,90.0 172.9,90.0 173.9,92.2 171.3,96.7 175.0,97.7 179.4,100.9 183.3,100.7 183.4,98.4 184.1,99.2 184.8,98.6 184.1,97.4 184.7,96.0 189.2,91.7 189.1,90.6 190.8,90.6 190.4,89.5 192.9,90.7 195.5,88.6 195.3,90.0 196.6,89.7 197.4,88.2 199.7,88.4 201.6,84.4 203.9,85.0 205.4,83.7 207.8,83.9 210.7,82.7 209.7,77.1 211.6,76.4 211.4,74.7 213.3,72.5 214.9,72.7 214.9,75.9 216.7,76.1 219.9,73.7 221.3,74.8 222.4,73.4 224.9,73.5 225.6,70.8 230.0,69.4 231.8,73.1 232.7,73.0 232.9,74.3 231.9,75.0 233.2,77.7 237.4,77.9 238.6,76.1 237.6,72.1 239.0,70.9 240.8,72.0 242.1,75.3 244.0,72.7 248.8,70.3 250.4,70.6 251.6,69.0 254.0,69.0 254.2,68.0 256.4,68.8 258.3,68.1 258.5,67.0 260.1,67.0 260.8,64.6 258.8,63.9 259.9,63.0 259.2,59.6 257.8,57.4 253.4,59.0 252.2,54.9 253.2,52.6 251.8,49.9 250.1,49.5 251.2,47.8 255.8,49.8 256.1,47.5 258.1,46.4 257.2,44.3 260.3,43.6 260.3,42.3 258.7,41.6 259.1,42.7 257.2,43.3 256.4,41.2 254.1,39.4 263.7,31.9 264.5,34.7 265.1,34.4 265.1,31.8 266.6,28.2 268.7,27.7 268.9,21.9 271.9,19.0 271.5,17.9 273.1,16.0 268.2,12.1 266.8,13.8 264.5,14.5 260.9,13.7 257.2,14.3 255.2,9.5 256.1,8.3 252.8,6.7 251.7,8.0 250.5,7.9 247.7,6.1 250.9,3.5 250.3,2.0 245.8,1.9 241.7,5.0 242.0,6.2 245.4,6.5 244.8,7.9 245.7,8.9 245.0,10.4 242.0,12.0 237.0,20.1 238.2,20.3 238.2,21.5 230.2,25.6 224.5,23.6 219.7,32.0 219.9,33.6 218.3,34.3 218.6,35.8 220.5,37.3 222.2,36.1 224.9,35.9 228.0,37.6 230.2,35.2 234.1,35.3 240.1,40.4 241.1,43.7 238.3,44.1 235.9,43.1 229.9,44.7 228.2,44.3 227.9,45.7 223.8,46.1 221.7,49.9 217.5,51.8 213.3,51.9 208.5,55.9 204.4,55.3 202.3,53.9 199.5,54.0 197.0,58.4 199.8,62.6 194.9,64.9 191.9,68.4 187.2,70.3 176.5,70.4 163.7,76.0 161.2,75.5 161.2,74.1 155.4,74.1 148.4,71.9 147.0,70.1 142.1,69.1 135.1,69.7 123.0,68.3"],"辽宁":["259.9,87.4 263.1,87.6 266.2,83.7 271.1,81.1 270.6,80.1 271.7,78.6 269.1,74.5 270.1,72.5 269.1,72.4 266.9,68.3 266.9,66.1 264.8,68.0 263.8,65.5 261.3,63.9 260.1,67.0 258.5,67.0 258.3,68.1 251.6,69.0 250.4,70.6 248.8,70.3 244.0,72.7 242.1,75.3 240.8,72.0 239.0,70.9 237.8,71.7 238.5,76.7 235.6,80.8 237.7,82.6 239.3,82.5 240.8,86.1 244.1,84.8 247.4,80.5 251.0,80.3 253.2,82.7 251.9,85.2 247.9,88.8 248.2,90.0 250.5,90.1 250.1,91.9 247.2,92.9 247.5,94.1 250.5,93.2 250.3,92.3 251.6,92.6 254.1,89.8 259.9,87.4"],"吉林":["291.5,70.7 293.3,66.9 295.0,67.7 294.9,68.8 296.9,70.6 295.6,68.7 299.5,67.4 300.4,63.8 298.0,64.2 295.7,62.9 295.4,60.4 293.9,61.7 293.3,60.5 289.7,61.8 289.5,63.2 287.7,63.6 285.1,57.4 283.4,58.4 283.6,59.8 282.0,60.2 280.5,58.1 280.8,57.0 278.2,57.1 277.8,53.5 275.7,52.7 272.7,53.3 271.1,51.1 269.4,51.8 267.1,50.9 264.4,51.5 262.4,49.4 262.1,46.1 258.4,46.2 256.1,47.5 255.8,49.8 254.3,48.5 253.3,49.2 250.7,48.0 250.1,49.5 251.8,49.9 253.2,52.6 252.2,54.9 253.4,59.0 257.8,57.4 259.9,62.5 258.7,63.5 259.3,64.4 261.6,64.1 263.8,65.5 264.8,68.0 266.9,66.1 266.9,68.3 269.1,72.4 270.1,72.5 269.1,73.6 269.2,75.4 271.7,78.6 270.6,80.4 273.0,80.1 275.5,77.4 275.9,75.4 277.6,74.5 279.3,76.6 283.7,77.4 284.8,76.0 283.3,73.3 288.1,73.2 290.2,70.4 291.5,70.7"],"黑龙江":["260.1,46.5 262.1,46.1 262.4,49.4 264.4,51.5 267.1,50.9 269.4,51.8 271.1,51.1 272.7,53.3 275.7,52.7 277.8,53.5 278.2,57.1 280.8,57.0 280.5,58.1 282.0,60.2 283.6,59.8 283.4,58.4 285.1,57.4 287.7,63.6 289.5,63.2 289.7,61.8 293.3,60.5 293.9,61.7 295.4,60.4 295.7,62.9 299.5,64.3 300.3,63.8 300.3,60.4 298.5,55.3 301.3,54.5 303.3,52.1 308.9,54.2 309.8,53.5 309.9,51.6 313.8,46.4 315.2,39.6 318.4,37.1 317.2,35.4 317.8,33.7 320.0,32.5 309.8,34.4 307.4,35.6 306.8,37.1 298.9,37.2 297.0,34.6 297.9,33.4 296.3,31.4 297.1,29.7 294.8,29.8 291.0,26.3 288.8,26.7 287.0,25.2 282.2,25.2 280.7,23.7 281.1,21.1 279.7,20.4 279.5,17.8 277.5,15.9 277.9,14.2 277.0,14.5 277.5,13.7 275.1,10.2 275.6,9.1 272.6,5.9 273.3,5.0 271.1,4.5 270.7,3.0 268.3,2.3 266.9,2.9 259.8,0.0 250.4,1.1 249.4,1.4 251.0,3.2 247.7,6.1 251.1,8.1 252.8,6.7 256.1,8.3 255.2,9.5 257.2,14.3 260.9,13.7 264.5,14.5 266.8,13.8 268.2,12.1 273.1,16.0 271.5,17.9 271.9,19.0 268.9,21.9 268.7,27.7 266.6,28.2 265.1,31.8 265.1,34.4 264.5,34.7 263.7,31.9 254.1,39.4 256.4,41.2 257.3,43.4 259.1,42.7 258.7,41.6 260.3,42.3 260.3,43.6 257.2,44.3 258.1,46.4 260.1,46.5"],"上海":["246.3,143.0 248.2,145.2 251.9,144.0 250.5,141.2 248.6,139.9 246.3,143.0","251.8,139.2 248.4,137.6 247.4,138.3 251.0,140.3 251.8,139.2"],"江苏":["227.6,120.5 226.9,121.3 224.9,117.9 222.9,118.7 222.7,120.0 225.8,121.6 226.2,123.1 229.3,123.9 229.9,125.9 232.0,125.8 230.9,129.0 232.3,129.2 233.1,132.2 235.1,132.1 235.6,130.7 237.3,131.5 236.8,133.9 234.1,133.0 234.8,134.7 233.2,136.3 233.7,138.2 235.6,139.1 235.3,141.6 238.2,141.2 239.5,142.4 241.2,142.0 244.2,144.6 248.7,139.6 247.8,137.8 251.8,139.2 249.0,134.0 246.6,132.9 243.2,122.1 237.6,119.0 237.9,117.0 235.7,117.6 235.3,119.5 233.6,119.9 233.2,121.4 232.1,121.7 230.9,119.8 229.1,121.1 227.6,120.5"],"浙江":["233.4,160.3 235.3,160.6 235.9,165.6 237.8,165.8 239.5,164.2 240.4,166.5 242.9,165.7 244.4,167.5 245.6,163.6 246.5,162.8 247.8,163.3 246.7,162.4 247.1,161.5 248.1,161.9 249.3,160.2 250.0,160.5 249.6,158.0 250.8,156.7 249.9,154.7 251.8,155.5 252.0,152.1 251.1,151.6 252.7,150.1 250.5,149.5 247.3,146.2 248.2,144.9 246.7,144.1 246.7,143.0 244.2,144.6 243.8,143.6 239.9,142.0 238.7,145.3 237.6,145.6 238.5,147.1 235.8,147.4 235.1,151.1 231.4,154.5 233.4,157.8 233.4,160.3"],"安徽":["223.9,124.0 224.1,124.8 221.6,125.9 220.6,124.0 219.0,123.7 218.9,126.7 217.4,127.2 217.1,129.6 215.1,129.6 215.0,130.5 216.6,131.3 216.6,133.0 218.9,134.2 220.3,133.2 220.3,137.9 218.2,138.8 217.5,140.9 221.1,143.0 219.6,145.1 221.5,150.6 224.3,149.0 225.5,149.8 224.5,152.2 226.6,151.3 227.1,149.9 228.8,152.1 232.8,153.1 235.8,149.8 235.8,147.4 238.5,147.1 237.6,145.6 238.7,145.3 239.7,143.0 238.2,141.2 235.3,141.6 235.6,139.1 233.1,137.2 234.8,134.7 234.1,133.0 236.8,133.9 237.3,131.5 235.6,130.7 235.1,132.1 233.1,132.2 232.3,129.2 230.9,129.0 232.0,125.8 229.9,125.9 229.3,123.9 227.0,123.6 225.8,121.6 222.7,120.0 221.6,121.2 223.8,122.4 223.9,124.0"],"福建":["236.4,181.3 235.9,179.5 237.0,181.1 237.1,179.7 238.4,179.6 237.5,178.2 239.5,179.0 240.9,178.3 240.5,176.9 239.9,178.1 238.9,177.2 240.1,174.7 239.5,173.7 241.3,172.6 239.4,170.9 241.3,169.8 240.7,171.5 242.3,170.8 241.9,169.3 244.0,167.6 242.9,165.7 240.4,166.5 239.5,164.2 237.8,165.8 235.9,165.6 235.3,160.6 233.4,160.3 233.0,161.6 229.8,163.4 228.7,162.2 226.0,164.5 226.9,166.6 223.6,169.5 223.9,172.5 221.5,175.7 220.1,181.4 222.1,182.5 222.8,181.9 223.5,183.7 225.0,183.3 225.9,188.4 227.6,190.4 232.0,185.8 231.8,183.9 234.4,184.2 235.3,182.6 234.5,182.2 236.4,181.3"],"江西":["232.2,153.3 231.2,152.1 228.8,152.1 227.1,149.9 226.6,151.3 224.5,152.2 225.5,149.8 224.3,149.0 222.2,150.8 218.3,150.5 217.1,151.9 216.2,151.4 216.4,152.6 212.0,153.5 210.2,155.2 211.7,160.1 209.1,162.6 208.2,165.0 208.4,166.3 209.7,166.0 209.7,170.6 211.0,171.2 210.2,173.9 211.6,173.9 210.0,176.5 210.5,179.4 213.2,178.5 214.3,179.4 211.3,183.1 212.5,184.3 217.7,182.5 220.0,183.9 220.0,179.8 224.1,171.8 223.6,169.5 226.9,166.6 226.0,164.5 228.7,162.2 229.8,163.4 233.0,161.6 233.7,160.1 233.1,157.0 231.4,155.1 232.2,153.3"],"山东":["222.7,120.0 223.1,118.4 224.9,117.9 226.9,121.3 227.9,120.4 230.2,120.8 230.9,119.8 232.1,121.7 233.2,121.4 233.6,119.9 235.3,119.5 235.7,117.6 238.3,117.2 239.8,114.0 243.2,111.6 242.5,110.1 243.5,110.1 243.1,111.1 245.3,110.6 245.2,108.9 246.6,108.4 246.0,107.5 249.7,106.1 250.2,106.8 252.0,105.3 254.7,105.7 255.6,102.4 252.8,102.3 252.7,101.5 249.7,102.3 245.4,99.8 242.8,100.7 240.2,104.2 238.1,104.3 236.1,101.7 237.7,100.9 237.9,99.5 237.2,99.9 235.9,97.8 234.1,98.4 230.6,96.8 228.3,99.6 225.0,99.7 223.0,102.0 222.5,101.4 222.0,102.8 220.7,102.9 219.1,106.3 217.4,107.4 218.1,110.6 217.3,112.7 221.3,110.7 214.7,117.4 216.7,118.0 218.5,120.5 222.7,120.0"],"河南":["203.7,134.5 206.3,134.0 207.4,135.0 209.0,134.2 209.6,137.8 213.4,138.3 213.3,139.5 214.7,140.2 216.5,139.3 217.2,140.7 218.2,138.8 220.2,138.2 220.3,133.2 218.9,134.2 216.6,133.0 216.6,131.3 215.0,130.5 215.1,129.6 217.2,129.5 217.4,127.2 218.9,126.7 218.8,123.9 220.6,124.0 222.2,125.8 224.1,124.7 223.8,122.4 222.7,122.4 221.3,120.2 218.3,120.4 216.7,118.0 214.7,117.4 221.3,110.7 217.5,112.8 218.0,110.3 216.2,110.1 215.2,111.1 209.0,109.1 208.5,113.7 205.9,115.6 204.0,116.4 200.3,116.0 200.3,117.4 199.0,117.3 197.8,118.7 191.6,120.3 191.9,122.5 193.0,123.1 192.7,124.8 194.8,126.7 194.7,128.8 196.1,131.2 200.8,134.4 203.7,134.5"],"湖北":["195.1,129.3 187.6,128.7 186.7,129.5 190.4,131.9 189.7,133.3 187.7,133.0 187.0,134.9 187.5,138.5 190.2,140.5 190.7,142.1 190.0,144.4 189.1,143.7 186.3,146.4 184.6,145.3 181.4,146.3 182.3,147.8 181.2,150.5 181.8,151.3 182.7,150.4 185.1,154.7 185.8,155.0 186.7,152.4 188.5,151.0 192.5,151.3 192.2,149.1 194.0,148.6 199.0,150.1 201.5,152.5 204.7,150.8 204.9,152.8 206.0,152.9 208.2,150.4 209.1,153.0 208.4,154.2 209.9,155.6 212.0,153.5 216.4,152.6 216.2,151.4 217.1,151.9 218.3,150.5 220.3,151.2 221.5,150.6 219.6,145.1 221.2,143.4 220.1,142.2 218.6,142.2 216.5,139.3 214.7,140.2 213.3,139.5 213.4,138.3 210.3,138.3 209.1,136.8 209.0,134.2 207.4,135.0 206.3,134.0 201.7,134.7 197.8,133.0 195.1,129.3"],"湖南":["200.1,182.8 201.0,180.0 203.4,180.3 204.5,181.8 205.4,179.9 204.5,179.0 206.5,177.9 208.2,179.2 210.1,178.4 210.4,174.7 211.6,173.9 210.2,173.9 211.0,171.2 209.7,170.6 209.7,166.0 208.4,166.3 208.2,165.0 209.1,162.6 211.7,160.1 211.2,156.9 208.8,155.3 209.0,152.1 208.2,150.4 205.6,153.0 204.7,151.9 205.3,150.9 201.5,152.5 199.0,150.1 193.5,148.7 192.2,149.1 192.5,151.3 188.9,150.9 186.7,152.4 185.4,158.1 186.8,164.9 183.3,167.9 186.9,167.6 187.5,170.0 185.9,170.4 186.5,171.4 185.8,172.7 186.8,172.8 186.8,174.5 188.2,174.9 188.0,175.6 189.5,173.6 191.0,175.1 192.8,172.7 196.3,173.1 195.8,175.1 197.3,175.7 194.7,181.3 196.2,180.2 197.2,181.0 197.2,183.3 200.1,182.8"],"广东":["208.1,198.8 208.7,195.6 209.8,197.4 212.4,196.4 213.0,197.4 214.1,195.2 215.0,196.8 216.6,195.0 218.6,196.1 219.0,194.7 219.9,195.5 223.4,194.3 225.4,190.7 227.0,190.3 225.0,183.3 223.5,183.7 222.8,181.9 222.1,182.5 220.2,181.6 220.0,183.9 217.7,182.5 212.6,184.4 211.3,183.1 214.2,180.4 213.2,178.5 210.6,179.6 210.4,178.4 208.2,179.2 206.4,177.9 204.5,179.0 205.4,179.9 204.5,181.8 203.4,180.3 201.0,180.0 200.9,182.0 199.7,183.1 199.7,187.6 196.9,190.9 196.7,194.5 193.5,196.7 193.1,199.1 191.4,198.9 191.7,200.9 189.6,200.9 188.3,202.6 189.1,203.8 187.8,207.0 189.2,211.5 192.4,210.2 191.7,207.7 190.6,207.2 191.8,205.3 199.9,202.7 200.7,201.5 204.8,201.2 205.7,199.4 206.6,201.0 208.1,198.8"],"广西":["186.9,174.6 186.2,176.5 183.9,176.6 184.8,176.6 184.6,177.9 182.8,177.2 182.5,179.2 181.0,177.8 179.8,179.8 178.0,180.4 177.5,179.2 176.5,179.8 175.1,177.3 173.8,178.4 173.9,179.7 169.6,181.4 169.0,183.5 164.7,181.2 162.2,183.6 161.0,183.4 162.1,185.5 162.4,184.6 164.2,184.9 165.0,187.1 169.1,186.9 169.6,190.2 167.0,191.3 166.6,193.4 173.2,195.1 171.7,197.3 172.5,200.4 174.0,200.5 175.9,202.7 178.5,202.4 179.8,203.3 180.5,202.7 180.4,203.4 182.5,202.2 185.1,202.9 185.1,204.1 187.6,203.0 188.5,203.6 189.3,201.2 191.7,200.9 191.4,198.9 193.1,199.1 193.5,196.7 196.7,194.5 196.9,190.9 199.7,187.6 200.1,182.8 197.2,183.3 197.2,181.0 196.2,180.2 194.7,181.3 197.3,175.7 195.8,175.1 196.3,173.1 192.8,172.7 191.0,175.1 189.5,173.6 188.5,175.7 186.9,174.6"],"海南":["190.2,212.7 186.0,213.4 182.6,217.0 182.8,222.7 187.5,224.6 192.2,221.4 193.1,217.4 195.0,214.4 193.2,211.8 190.2,212.7"],"重庆":["170.8,158.8 171.3,156.8 172.5,159.3 174.1,156.5 176.0,156.7 176.1,154.6 177.9,154.5 178.5,156.0 180.8,155.3 181.0,157.8 182.5,158.2 182.2,160.0 182.9,159.0 183.1,160.7 184.9,161.0 186.1,158.5 185.4,158.1 186.1,155.5 184.7,153.2 184.0,153.7 182.7,150.4 181.8,151.3 181.2,150.5 182.3,147.8 181.4,146.3 184.6,145.3 186.3,146.4 189.1,143.7 190.0,144.4 190.2,140.5 181.3,135.5 180.6,137.0 182.1,138.9 180.2,140.0 178.5,144.4 176.5,144.1 176.7,145.4 174.3,149.2 172.6,149.3 171.7,147.4 170.0,148.3 167.8,146.7 166.4,148.5 167.5,150.1 165.2,152.4 165.8,153.8 167.3,154.0 167.8,156.2 169.9,156.4 170.8,158.8"],"四川":["143.7,167.2 143.6,168.3 145.5,169.9 144.9,171.1 146.1,173.4 147.2,174.5 148.6,174.4 151.0,172.5 151.7,173.5 153.2,172.5 152.6,166.6 155.8,163.4 156.2,160.7 157.8,160.1 157.7,157.9 160.7,158.2 159.8,158.7 160.8,160.6 160.0,161.8 161.4,163.1 164.0,161.5 165.0,162.2 165.2,164.0 170.4,163.3 169.9,161.3 168.3,161.4 167.0,160.1 166.9,158.8 168.7,157.3 170.8,159.1 169.9,156.4 167.8,156.2 167.3,154.0 165.4,153.0 165.2,152.2 167.5,150.1 166.4,148.5 167.9,146.7 170.0,148.3 171.7,147.4 172.6,149.3 174.3,149.2 176.7,145.4 176.5,144.1 178.5,144.4 180.2,140.0 182.1,138.9 180.6,137.0 181.9,135.2 179.1,135.8 176.3,133.4 175.1,134.0 174.4,132.3 171.0,132.9 169.1,131.3 166.7,132.3 166.1,130.9 166.0,132.1 164.6,132.8 161.8,132.6 160.0,131.5 160.6,128.3 159.4,126.6 154.1,125.3 154.2,123.6 152.8,122.1 151.4,123.6 148.8,124.3 150.5,127.0 149.1,129.0 147.2,129.7 147.2,126.6 146.2,129.8 143.5,129.0 143.7,132.6 141.3,132.5 141.0,133.4 139.7,132.0 138.2,132.7 137.0,130.1 136.2,132.1 133.9,131.2 131.2,128.7 129.4,123.5 125.5,123.3 125.3,124.6 124.0,125.2 124.2,126.6 126.0,127.8 123.9,131.1 124.6,132.6 128.4,134.6 129.4,137.8 131.9,140.7 130.4,141.9 132.3,144.6 133.3,159.4 134.4,161.0 134.6,158.7 136.2,156.8 138.6,160.1 137.8,161.2 139.3,163.9 141.2,162.6 143.7,167.2"],"贵州":["185.8,159.0 184.9,161.0 183.2,160.8 182.9,159.0 182.2,160.0 182.5,158.2 181.0,157.8 180.8,155.3 178.5,156.0 177.9,154.5 176.3,154.5 176.0,156.7 174.1,156.5 172.5,159.3 171.3,156.8 170.8,159.1 168.7,157.3 166.9,158.8 168.3,161.4 170.2,161.7 170.1,163.6 165.5,163.7 164.6,166.1 163.0,166.6 160.3,165.5 159.3,166.8 158.1,165.7 156.4,168.1 157.3,168.8 157.2,171.1 158.8,171.6 160.7,170.3 162.0,172.4 160.1,177.0 162.7,179.7 161.2,182.9 162.2,183.6 164.7,181.2 169.0,183.5 169.6,181.4 173.9,179.7 173.8,178.4 175.1,177.3 176.5,179.8 177.5,179.2 178.4,180.4 179.8,179.8 180.8,177.8 182.5,179.2 182.8,177.2 184.6,177.9 184.8,176.6 183.9,176.6 186.2,176.5 187.1,174.0 186.8,172.8 185.8,172.7 186.5,171.4 185.9,170.4 187.0,170.0 187.1,168.1 183.3,167.9 186.8,164.9 185.8,159.0"],"云南":["165.2,164.0 165.0,162.2 164.0,161.5 163.1,162.7 161.1,162.9 159.8,159.6 160.7,158.2 157.7,157.9 157.8,160.1 156.2,160.7 155.8,163.4 152.6,166.6 153.1,172.7 151.7,173.5 151.0,172.5 147.2,174.5 141.2,162.6 139.3,163.9 137.8,161.2 138.6,160.1 136.2,156.8 134.6,158.7 134.4,161.0 133.3,159.4 133.1,154.4 132.3,154.7 132.3,156.9 130.5,156.1 131.0,160.7 129.3,161.4 128.4,159.9 128.0,162.2 128.9,165.2 129.6,164.3 130.9,165.0 131.3,170.9 131.0,174.0 130.3,174.1 130.9,175.7 128.9,177.7 128.2,177.2 128.0,178.7 125.8,180.6 126.2,182.1 124.9,182.8 124.8,184.7 125.6,184.6 126.0,186.5 124.8,188.0 125.4,188.5 127.7,187.0 131.8,186.5 130.8,188.8 131.9,189.9 131.9,192.5 135.2,193.4 135.4,194.3 134.1,195.5 134.5,197.1 133.3,199.2 137.5,199.8 138.5,203.5 140.7,203.7 143.5,201.6 144.0,205.0 146.8,205.6 147.2,202.6 145.7,198.7 146.4,197.2 149.5,197.5 150.7,195.3 153.4,197.4 154.9,195.1 156.0,196.4 156.6,195.1 158.3,197.0 159.1,195.1 160.4,195.8 162.3,194.9 163.0,192.8 165.3,191.4 166.5,192.7 167.0,191.3 169.6,190.2 169.8,188.3 168.8,186.7 165.0,187.1 164.2,184.9 162.4,184.6 162.1,185.5 161.4,184.8 161.0,183.4 162.7,179.7 160.1,177.0 161.9,172.1 160.7,170.3 157.5,171.5 156.4,168.1 158.1,165.7 159.3,166.8 160.3,165.5 161.6,166.5 164.6,166.1 165.2,164.0"],"西藏":["84.2,110.8 77.8,108.3 72.3,108.7 66.4,110.3 65.2,112.4 62.9,113.6 60.0,113.0 55.4,115.5 50.0,115.2 49.2,113.5 46.6,113.2 44.3,115.7 42.5,116.2 36.0,114.9 32.7,121.0 28.8,121.4 28.2,123.1 26.8,123.5 26.9,126.3 29.4,129.3 30.2,133.0 28.4,134.7 27.2,132.3 25.4,133.4 25.8,136.0 27.3,137.1 27.3,140.8 29.1,143.2 32.0,143.2 34.0,145.6 39.1,147.9 39.6,149.3 41.1,146.8 44.7,147.3 45.1,149.0 50.7,152.2 52.4,154.7 55.1,154.0 55.8,156.5 57.1,157.5 59.0,158.5 60.4,157.8 60.3,159.9 62.9,160.5 63.5,159.8 64.9,162.7 65.9,161.1 67.1,162.7 68.6,161.5 71.3,163.3 79.3,161.7 79.4,165.5 80.4,167.1 81.8,163.4 84.6,160.6 89.4,161.6 91.0,163.0 93.3,162.1 93.9,165.0 96.4,166.0 96.7,169.4 105.5,168.3 107.9,164.8 111.1,163.8 116.0,160.3 118.3,160.7 122.6,163.8 124.1,162.9 123.9,160.6 125.0,158.7 128.0,161.2 128.8,159.7 129.3,161.4 131.0,160.7 130.5,156.1 132.3,156.9 132.8,149.9 132.3,144.6 130.4,141.9 131.9,140.7 129.4,137.8 128.4,134.6 123.9,133.2 123.7,136.3 120.6,136.7 120.9,138.8 117.9,137.4 117.7,139.3 116.8,137.9 116.0,138.8 114.3,138.3 114.0,135.8 112.1,135.0 112.8,134.2 111.2,134.1 109.7,132.5 107.2,134.0 105.0,133.1 104.0,133.7 101.4,132.1 97.4,132.2 97.2,131.3 95.9,131.6 93.7,129.8 90.4,129.9 87.8,128.8 83.8,123.8 85.0,122.0 84.3,119.9 85.0,118.9 83.5,118.4 82.9,116.3 84.5,114.7 84.7,112.4 82.6,111.3 84.2,110.8"],"陕西":["191.6,120.3 190.8,118.5 192.8,113.7 191.6,104.9 193.7,101.5 192.3,97.5 194.3,95.4 196.1,90.4 195.1,89.8 195.5,88.6 193.3,90.6 190.4,89.5 190.8,90.6 189.1,90.6 189.2,91.7 184.7,96.0 184.1,97.4 184.8,98.6 184.1,99.2 183.4,98.4 183.3,100.7 179.9,101.1 177.6,99.4 175.6,101.2 175.6,105.6 182.6,109.0 182.8,111.3 181.8,112.2 182.4,115.6 177.9,115.8 178.5,117.7 176.8,118.3 171.7,117.2 171.8,119.2 170.5,120.4 172.6,121.7 171.6,122.2 171.0,124.7 171.9,126.8 168.3,126.9 167.3,128.0 168.7,129.1 168.4,130.5 166.2,131.0 166.6,132.2 169.1,131.3 171.0,132.9 174.4,132.3 175.4,134.2 176.3,133.4 179.1,135.8 181.7,135.0 185.9,138.6 187.5,138.5 187.7,133.0 190.7,132.7 190.2,131.5 188.5,131.2 188.6,130.0 186.7,129.5 187.1,128.9 192.4,128.8 193.3,129.8 194.9,128.3 194.8,126.7 192.7,124.8 193.0,123.1 191.9,122.5 191.6,120.3"],"甘肃":["171.5,113.1 170.7,116.2 169.7,115.0 168.3,115.1 169.1,114.6 168.0,114.6 167.6,113.1 165.6,112.7 165.4,111.2 166.3,110.5 164.5,105.1 161.8,103.8 162.0,102.5 159.4,102.5 155.4,99.6 155.2,98.1 156.0,97.7 155.4,96.1 159.5,92.4 158.9,89.7 155.0,90.3 153.3,91.7 150.4,90.7 147.6,91.7 148.4,93.1 146.9,94.5 144.6,93.8 144.0,92.2 142.7,92.7 142.0,89.8 140.3,89.8 139.0,88.0 134.8,86.7 138.5,84.3 138.2,80.5 133.4,80.6 133.0,81.7 132.4,81.1 131.4,82.2 130.7,81.1 129.1,82.4 129.0,80.2 125.3,76.9 126.5,75.5 123.0,68.3 117.4,69.5 117.2,73.7 113.2,76.1 112.4,74.8 109.3,76.5 106.5,79.0 105.2,81.8 100.9,82.4 98.0,92.0 101.9,91.2 102.2,92.8 105.1,92.8 105.9,94.1 108.4,93.9 109.4,96.5 115.3,96.2 118.3,97.8 118.8,97.0 120.3,97.2 121.0,94.9 122.4,94.9 121.9,91.1 123.9,91.3 127.8,93.7 128.7,92.2 130.3,92.8 131.5,91.8 138.3,97.2 138.0,95.4 142.4,97.6 142.3,98.6 143.9,99.7 148.0,100.5 151.4,104.4 150.4,105.3 153.6,110.0 152.6,110.9 153.0,112.5 151.6,112.8 151.9,114.6 150.7,114.0 149.6,115.0 150.2,116.6 147.6,118.5 147.7,120.4 149.4,121.8 147.8,123.4 142.6,121.6 141.6,122.9 143.7,126.2 145.9,126.1 146.1,127.2 147.5,126.8 147.4,129.8 150.5,127.6 148.8,124.3 151.4,123.6 152.8,122.1 154.2,123.6 154.1,125.3 159.4,126.6 160.6,128.3 160.0,131.5 161.8,132.6 164.2,133.0 166.0,132.1 165.8,130.9 168.1,130.8 168.7,129.1 167.3,128.0 168.3,126.9 171.9,126.8 171.0,124.7 171.6,122.2 172.6,121.7 170.5,120.4 171.8,119.2 171.7,117.2 173.5,117.1 175.3,118.5 178.4,117.9 177.9,115.8 182.3,115.9 182.6,109.0 175.6,105.6 175.0,104.1 172.0,104.2 172.2,106.8 170.8,107.9 171.5,109.7 173.8,110.8 173.5,112.9 171.5,113.1"],"青海":["152.4,109.1 151.2,106.9 151.8,106.5 150.4,105.3 151.2,103.9 148.0,100.5 143.9,99.7 142.3,98.6 142.4,97.6 138.0,95.4 138.3,97.2 131.5,91.8 130.3,92.8 128.7,92.2 127.8,93.7 123.9,91.3 121.9,91.1 122.4,94.9 121.0,94.9 120.3,97.2 118.8,97.0 118.3,97.8 115.3,96.2 109.4,96.5 108.4,93.9 105.9,94.1 105.1,92.8 102.2,92.8 101.9,91.2 98.9,91.7 86.3,95.7 87.2,97.2 88.5,96.7 88.4,100.4 91.3,102.0 92.5,105.0 89.5,106.2 89.6,107.7 91.1,108.0 91.3,110.8 90.1,111.3 85.7,109.6 85.4,111.0 82.7,111.1 82.7,111.9 84.7,112.4 84.5,114.7 82.9,116.3 83.5,118.4 85.0,118.9 84.3,119.9 85.0,122.0 83.8,123.8 86.3,127.5 89.4,129.6 93.7,129.8 95.9,131.6 97.2,131.3 97.4,132.2 101.4,132.1 104.0,133.7 105.0,133.1 107.2,134.0 109.7,132.5 111.2,134.1 112.8,134.2 112.1,135.0 114.0,135.8 114.3,138.3 116.0,138.8 116.8,137.9 118.0,139.3 118.2,137.2 120.9,138.8 120.6,136.7 123.7,136.3 123.8,133.3 125.9,133.4 123.9,131.1 126.0,127.8 124.2,126.6 124.0,125.1 126.3,122.8 129.4,123.5 131.2,128.7 133.9,131.2 136.2,132.1 137.0,130.1 138.7,132.9 139.7,132.0 141.0,133.4 141.3,132.5 143.7,132.6 143.5,129.0 146.2,129.8 146.9,127.0 146.1,127.2 145.5,126.0 143.7,126.2 141.9,122.1 143.9,121.9 146.7,123.6 149.4,121.8 147.7,120.4 147.6,118.5 150.2,116.6 149.6,115.0 150.7,114.0 152.3,114.2 151.6,112.8 153.0,112.5 152.6,110.9 153.6,110.0 152.4,109.1"],"宁夏":["175.4,104.4 175.6,101.2 177.5,99.7 175.0,97.7 171.3,96.7 173.8,92.7 172.7,89.9 170.3,90.7 168.7,92.9 167.6,100.0 159.9,102.3 162.0,102.5 161.8,103.8 164.5,105.1 166.3,110.5 165.4,111.2 165.6,112.7 167.6,113.1 168.0,114.6 169.2,114.5 170.7,116.2 171.1,113.4 173.7,112.6 173.7,110.5 171.5,109.7 170.7,107.7 172.2,106.8 172.0,104.2 175.4,104.4"],"新疆":["118.9,68.7 114.4,60.6 113.4,60.5 113.8,58.8 110.2,58.5 103.9,54.5 90.3,53.1 89.2,50.6 91.1,47.8 90.4,46.0 91.2,43.4 87.7,37.5 83.5,35.0 80.9,35.4 78.0,32.7 75.2,31.6 75.8,30.7 74.0,29.7 74.9,29.1 74.4,27.8 69.5,28.1 67.9,31.9 63.8,32.6 62.8,34.1 63.4,39.8 62.6,41.3 59.5,42.5 58.4,41.6 54.2,41.8 49.5,40.3 45.5,50.4 47.0,51.6 47.1,53.0 43.7,52.8 43.0,51.9 33.2,54.9 35.8,56.7 35.8,59.8 37.9,65.9 35.7,66.8 36.9,67.7 35.1,68.1 34.5,73.1 24.2,77.2 22.2,79.5 17.6,79.5 14.7,83.8 14.4,83.2 11.5,84.2 10.9,81.8 9.0,83.2 7.0,82.7 7.3,83.9 2.7,85.5 1.9,89.3 0.0,89.9 1.8,92.3 1.0,93.3 1.5,94.8 4.8,94.6 7.1,95.6 7.2,100.8 8.5,102.8 5.2,103.5 5.2,104.6 9.9,105.3 10.2,106.8 12.3,107.2 13.8,112.5 15.9,111.9 17.0,113.6 19.2,114.4 24.1,114.6 23.5,116.3 24.5,119.5 28.0,121.8 32.7,121.0 36.0,114.9 42.5,116.2 44.3,115.7 46.6,113.2 49.2,113.5 50.0,115.2 55.4,115.5 60.0,113.0 62.9,113.6 65.2,112.4 65.9,110.6 72.0,108.7 77.8,108.3 84.5,110.9 85.9,109.6 90.1,111.3 91.6,110.7 91.1,108.0 89.6,107.7 89.5,106.2 92.5,105.0 92.4,104.0 91.3,102.0 88.4,100.4 88.5,96.7 87.2,97.2 86.3,95.7 98.3,92.3 97.9,90.9 99.4,89.1 100.9,82.4 105.2,81.8 106.5,79.0 109.3,76.5 112.4,74.8 113.2,76.1 117.2,73.7 117.8,72.0 116.8,70.6 118.9,68.7"],"中国台湾":["243.9,197.4 246.0,200.9 252.0,181.1 249.8,179.2 246.9,180.9 242.1,189.4 241.7,193.4 243.9,197.4"],"中国香港":["210.6,197.0 209.6,199.0 210.8,198.1 211.8,198.9 212.5,197.4 210.6,197.0"],"中国澳门":["208.1,199.5 208.1,198.8 208.1,199.5"]},
+nine:["254.7,190.9 256.1,183.8 254.7,190.9","247.7,207.8 251.5,202.1 247.7,207.8","238.8,225.5 241.7,219.0 238.8,225.5","236.8,244.3 236.7,237.9 236.7,244.6 236.8,244.3","234.7,268.7 233.9,270.6 234.8,268.8 236.3,263.6 234.7,268.7","218.4,294.4 222.1,289.0 218.4,294.4","201.6,317.3 198.9,318.1 202.7,317.0 204.5,316.0 201.6,317.3","180.6,301.1 180.8,301.6 180.4,298.3 180.4,294.8 180.3,295.6 180.3,298.3 180.6,301.1","190.3,267.6 189.9,268.4 191.0,266.1 191.3,264.0 191.3,262.0 191.1,265.0 190.3,267.6","188.7,243.1 188.9,243.7 188.5,241.7 188.0,240.3 186.0,236.9 187.9,240.4 188.7,243.1"],
+cent:{"北京":[223.0,84.8],"天津":[227.8,90.6],"河北":[221.5,88.9],"山西":[201.5,101.4],"内蒙古":[210.0,60.1],"辽宁":[255.1,77.9],"吉林":[273.8,62.7],"黑龙江":[282.0,36.1],"上海":[249.0,142.7],"江苏":[238.9,130.6],"浙江":[242.1,154.7],"安徽":[227.2,137.9],"福建":[231.2,174.5],"江西":[219.4,164.6],"山东":[232.1,109.1],"河南":[208.4,124.8],"湖北":[201.4,143.3],"湖南":[198.5,164.6],"广东":[207.4,191.8],"广西":[183.3,188.7],"海南":[188.3,218.0],"重庆":[178.6,149.1],"四川":[151.7,145.5],"贵州":[173.4,169.7],"云南":[145.4,181.3],"西藏":[77.6,140.0],"陕西":[183.8,116.5],"甘肃":[140.8,99.5],"青海":[117.1,113.5],"宁夏":[169.7,103.3],"新疆":[60.7,78.9],"中国台湾":[246.6,189.1],"中国香港":[211.1,197.8],"中国澳门":[208.1,199.2]}
+};
+var PROV_NAMES=["北京","天津","河北","山西","内蒙古","辽宁","吉林","黑龙江","上海","江苏","浙江","安徽","福建","江西","山东","河南","湖北","湖南","广东","广西","海南","重庆","四川","贵州","云南","西藏","陕西","甘肃","青海","宁夏","新疆","中国台湾","中国香港","中国澳门"];
+function provVisited(n){ return DB.visited[n] || DB.travels.some(function(t){return t.prov===n;}); }
+function provCount(n){ return DB.travels.filter(function(t){return t.prov===n;}).length; }
+function chinaMap(){
+ var w=MAP_DATA.w,h=MAP_DATA.h;
+ var html='<svg viewBox="0 0 '+w+' '+h+'" preserveAspectRatio="xMidYMid meet">'+
+  '<rect x="0" y="0" width="'+w+'" height="'+h+'" fill="#F7FAFC" rx="10"/>';
+ for(var nm in MAP_DATA.polys){
+  var cnt=provCount(nm),v=provVisited(nm);
+  MAP_DATA.polys[nm].forEach(function(pts){
+   html+='<polygon class="prov'+(cnt?' v2':(v?' v':''))+'" points="'+pts+'" data-n="'+nm+'" onclick="provTap(\''+nm+'\')"><title>'+nm+'（旅行记录 '+cnt+' 条）</title></polygon>';
+  });
+ }
+ /* 九段线 */
+ MAP_DATA.nine.forEach(function(pts){
+  html+='<polygon points="'+pts+'" fill="#8FB9D6"/>';
+ });
+ /* 城市点位 */
+ DB.travels.forEach(function(t){
+  var c=MAP_DATA.cent[t.prov];if(!c)return;
+  var hs=0,ss=String(t.id||'')+String(t.place||'');
+  for(var q=0;q<ss.length;q++)hs=(hs*31+ss.charCodeAt(q))&65535;
+  var jx=((hs%7)-3)*0.7,jy=((Math.floor(hs/7)%5)-2)*0.7;
+  html+='<circle cx="'+(c[0]+jx)+'" cy="'+(c[1]+jy)+'" r="2.2" fill="#E2955F" stroke="#fff" stroke-width=".7"><title>'+esc(t.place)+'</title></circle>';
+ });
+ /* 省份标注（小省份省略） */
+ var hide={'北京':1,'天津':1,'上海':1,'宁夏':1,'中国香港':1,'中国澳门':1};
+ for(var nm in MAP_DATA.cent){
+  if(hide[nm])continue;
+  var c=MAP_DATA.cent[nm];
+  html+='<text class="pname" x="'+c[0]+'" y="'+c[1]+'" text-anchor="middle">'+nm+'</text>';
+ }
+ html+='</svg>';
+ return html;
+}
+function provTap(n){
+ var c=provCount(n);
+ if(c){ dog('「'+n+'」这里你去过 '+c+' 次啦~','下面可以翻看这些旅行记录哦','hug'); return; }
+ var nv=DB.visited[n]?0:1;
+ if(nv)DB.visited[n]=1;else delete DB.visited[n];
+ sync();toast(nv?'已标记去过「'+n+'」':'已取消「'+n+'」标记');
+}
+function renderTravel(){
+ var provs=Object.keys(DB.visited).filter(function(k){return DB.visited[k];});
+ PROV_NAMES.forEach(function(p){if(provCount(p)&&provs.indexOf(p)<0)provs.push(p);});
+ var cities={},cost=0;
+ DB.travels.forEach(function(t){cities[t.place]=1;cost+=num(t.cost);});
+ var h='<div class="card"><div class="ch">'+I.travel.replace('class="i2"','')+'我的足迹地图</div>'+
+  '<div class="mapbox">'+chinaMap()+'</div>'+
+  '<div class="legend" style="justify-content:center"><span><i style="background:#ECEAE4"></i>未到访</span><span><i style="background:#BCDCEF"></i>已标记</span><span><i style="background:#F6D9A8"></i>有旅行记录</span><span><i style="background:#E2955F;border-radius:50%"></i>城市点位</span></div>'+
+  '<div class="hint" style="text-align:center;margin-top:4px">内嵌矢量示意地图 · 点击省份标记到访，长按/点击点位查看记录条数</div>'+
+  '<div class="g3" style="margin-top:9px">'+st(provs.length,'到访省份')+st(Object.keys(cities).length,'去过城市')+st('¥'+cost.toFixed(0),'累计花销')+'</div></div>';
+ h+='<div class="card"><div class="ch">'+(T.tEdit?'编辑旅行记录':'新增旅行记录')+'</div>'+
+  '<label class="lbl">旅行地点（城市 / 景区）</label><input class="inp" id="_tp" value="'+esc(T.tf.place)+'" placeholder="例：大理古城">'+
+  '<label class="lbl">所属省份</label><select class="sel" id="_tv">'+PROV_NAMES.map(function(p){return '<option'+(T.tf.prov===p?' selected':'')+'>'+p+'</option>';}).join('')+'</select>'+
+  '<div class="row"><div><label class="lbl">出发日期</label><input type="date" class="inp" id="_ts" value="'+(T.tf.start||today())+'"></div>'+
+  '<div><label class="lbl">返程日期</label><input type="date" class="inp" id="_te" value="'+(T.tf.end||today())+'"></div></div>'+
+  '<label class="lbl">同行人员</label><input class="inp" id="_tm" value="'+esc(T.tf.mates)+'" placeholder="和谁一起呀">'+
+  '<label class="lbl">旅行总花销（元）</label><input class="inp" id="_tc" type="number" inputmode="decimal" value="'+(T.tf.cost||'')+'" placeholder="0">'+
+  '<label class="lbl">旅行收获 / 感想</label><textarea class="ta" id="_tn" placeholder="这趟旅行让你想到了什么呢~">'+esc(T.tf.note)+'</textarea>'+
+  '<label class="lbl">照片（jpg/png，单张≤5MB，可多选）</label>'+
+  '<input type="file" id="_tfile" accept="image/jpeg,image/png" multiple onchange="travelPics(this)" style="font-size:12px">'+
+  '<div class="thumbs" id="_tth">'+(T.tf.pics||[]).map(function(p,i){return '<div class="thumbwrap"><img class="thumb" src="'+p+'"><button onclick="picDel('+i+')">✕</button></div>';}).join('')+'</div>'+
+  '<div class="btnrow"><button class="btn p" onclick="travelSave()">'+(T.tEdit?'保存修改':'保存旅行记录')+'</button>'+
+  (T.tEdit?'<button class="btn" onclick="travelCancel()">取消</button>':'')+'</div></div>';
+ var list=DB.travels.slice().sort(function(a,b){return a.start<b.start?1:-1;});
+ h+='<div class="card b"><div class="ch">旅行足迹<span class="sp">'+list.length+' 段旅程</span></div>';
+ h+=list.length?list.map(function(t){
+  return '<div class="item"><b style="font-weight:600">'+esc(t.place)+'</b> <span class="tag">'+esc(t.prov)+'</span>'+
+   '<br><span style="color:#9C978C">'+t.start+' ~ '+t.end+' · ¥'+num(t.cost).toFixed(0)+(t.mates?' · 同行：'+esc(t.mates):'')+'</span>'+
+   ((t.pics||[]).length?'<div class="thumbs">'+t.pics.slice(0,4).map(function(p){return '<img class="thumb" src="'+p+'">';}).join('')+'</div>':'')+
+   (t.note?'<div style="color:#7C7768;margin-top:4px">'+esc(t.note.slice(0,60))+(t.note.length>60?'…':'')+'</div>':'')+
+   '<div class="btnrow" style="margin-top:6px"><button class="btn s" onclick="travelEdit(\''+t.id+'\')">编辑</button><button class="btn s" onclick="travelDel(\''+t.id+'\')">删除</button></div></div>';
+ }).join(''):'<div class="emp">还没有旅行记录，期待你的第一次出发~</div>';
+ h+='</div>';
+ return h;
+}
+function travelPics(inp){
+ var fs=inp.files,n=0;
+ T.tf.pics=T.tf.pics||[];
+ [].forEach.call(fs,function(f){
+  if(!/image\/(jpeg|png)/.test(f.type)){toast('只支持 jpg / png 哦');return;}
+  if(f.size>5*1024*1024){toast('「'+f.name+'」超过 5MB 啦');return;}
+  var r=new FileReader();
+  r.onload=function(e){T.tf.pics.push(e.target.result);n++;drawThumbs();};
+  r.readAsDataURL(f);
+ });
+ inp.value='';
+}
+function drawThumbs(){
+ document.getElementById('_tth').innerHTML=(T.tf.pics||[]).map(function(p,i){
+  return '<div class="thumbwrap"><img class="thumb" src="'+p+'"><button onclick="picDel('+i+')">✕</button></div>';}).join('');
+}
+function picDel(i){T.tf.pics.splice(i,1);drawThumbs();}
+function collectTravel(){
+ T.tf.place=document.getElementById('_tp').value.trim();
+ T.tf.prov=document.getElementById('_tv').value;
+ T.tf.start=document.getElementById('_ts').value;
+ T.tf.end=document.getElementById('_te').value;
+ T.tf.mates=document.getElementById('_tm').value.trim();
+ T.tf.cost=num(document.getElementById('_tc').value);
+ T.tf.note=document.getElementById('_tn').value.trim();
+}
+function travelSave(){
+ collectTravel();
+ if(!T.tf.place){toast('填一下旅行地点吧~');return;}
+ if(T.tEdit){
+  DB.travels.forEach(function(t,i){if(t.id===T.tEdit)DB.travels[i]=Object.assign({},t,T.tf);});
+  T.tEdit=null;
+ }else{
+  DB.travels.push(Object.assign({id:nid(),date:T.tf.start},T.tf));
+ }
+ T.tf=emptyTravel();sync();toast('旅行记录已保存~');
+}
+function emptyTravel(){return {place:'',prov:'北京',start:today(),end:today(),mates:'',cost:'',note:'',pics:[]};}
+function travelEdit(id){
+ var t=DB.travels.filter(function(x){return x.id===id;})[0];if(!t)return;
+ T.tEdit=id;T.tf=JSON.parse(JSON.stringify(t));renderPage();document.getElementById('main').scrollTop=260;
+}
+function travelCancel(){T.tEdit=null;T.tf=emptyTravel();renderPage();}
+function travelDel(id){DB.travels=DB.travels.filter(function(t){return t.id!==id;});sync();toast('已删除，地图标记同步清除');}
+
+/* =========================================================
+   一级模块 2：教师工作
+   ========================================================= */
+function renderWC(){
+ var d=T.wcdate||today(),cur=DB.wcontent[d]||{tags:[],other:''};
+ T.wctags=T.wctags||cur.tags.slice();
+ var h='<div class="card"><div class="ch">'+I.wc.replace('class="i2"','')+'今日工作内容</div>'+
+  '<label class="lbl">日期</label><input type="date" class="inp" id="_wcd" value="'+d+'" onchange="T.wcdate=this.value;T.wctags=null;renderPage()">'+
+  '<label class="lbl">勾选当日完成的工作</label><div class="chips">'+
+  DB.wtags.map(function(t){return '<span class="chip'+(T.wctags.indexOf(t)>=0?' on':'')+'" onclick="wcTag(\''+esc(t)+'\')">'+esc(t)+'</span>';}).join('')+
+  '<span class="chip" onclick="wcNew()">'+I.plus+' 自定义</span></div>'+
+  '<label class="lbl">其他工作补充</label><textarea class="ta" id="_wco" placeholder="还有什么想记下来的呢">'+esc(cur.other||'')+'</textarea>'+
+  '<div class="btnrow"><button class="btn p" onclick="wcSave()">保存</button></div></div>';
+ var g={};for(var k in DB.wcontent)g[k]=[DB.wcontent[k]];
+ h+='<div class="card b"><div class="ch">历史归档</div>'+archive(g,function(x){
+  return '<div style="font-size:12.5px;padding:3px 0">'+(x.tags||[]).map(function(t){return '<span class="tag">'+esc(t)+'</span>';}).join('')+(x.other?'<div style="color:#7C7768;margin-top:3px">'+esc(x.other)+'</div>':'')+'</div>';})+'</div>';
+ return h;
+}
+function wcTag(t){var i=T.wctags.indexOf(t);if(i<0)T.wctags.push(t);else T.wctags.splice(i,1);renderPage();}
+function wcNew(){
+ modal('<h3>新增工作标签</h3><input class="inp" id="_nt" placeholder="例：家长沟通"><div class="btnrow"><button class="btn" onclick="closeModal()">取消</button><button class="btn p" onclick="wcNewOk()">添加</button></div>');
+}
+function wcNewOk(){
+ var v=document.getElementById('_nt').value.trim();
+ if(v&&DB.wtags.indexOf(v)<0){DB.wtags.push(v);T.wctags.push(v);}
+ closeModal();sync();
+}
+function wcSave(){
+ var d=document.getElementById('_wcd').value||today();
+ DB.wcontent[d]={tags:T.wctags.slice(),other:document.getElementById('_wco').value.trim()};
+ if(!DB.wcontent[d].tags.length&&!DB.wcontent[d].other)delete DB.wcontent[d];
+ T.wcdate=d;sync();toast('今日工作已归档');
+}
+function renderWI(){
+ var d=T.widate||today(),cur=DB.wint[d]||{};
+ T.wilevel=T.wilevel||cur.level||'适中';
+ var h='<div class="card"><div class="ch">'+I.wi.replace('class="i2"','')+'今日工作强度</div>'+
+  '<label class="lbl">日期</label><input type="date" class="inp" id="_wid" value="'+d+'" onchange="T.widate=this.value;T.wilevel=null;renderPage()">'+
+  '<label class="lbl">强度档位</label>'+chipsHtml('_wil','wilevel',['轻度','适中','高强度','超负荷'])+
+  '<label class="lbl">疲惫原因</label><input class="inp" id="_wir" value="'+esc(cur.reason||'')+'" placeholder="今天是什么让你累到啦">'+
+  '<div class="btnrow"><button class="btn p" onclick="wiSave()">保存</button></div></div>';
+ var g={};for(var k in DB.wint)g[k]=[DB.wint[k]];
+ h+='<div class="card b"><div class="ch">历史归档</div>'+archive(g,function(x){
+  return '<div style="font-size:12.5px;padding:3px 0"><span class="tag" style="background:#FFF0D0;color:#9C8244">'+esc(x.level)+'</span>'+esc(x.reason||'')+'</div>';})+'</div>';
+ return h;
+}
+function wiSave(){
+ var d=document.getElementById('_wid').value||today();
+ DB.wint[d]={level:T.wilevel,reason:document.getElementById('_wir').value.trim()};
+ T.widate=d;sync();toast('辛苦啦，记得早点休息');
+}
+function renderWO(){
+ var d=T.wodate||today(),cur=DB.woff[d]||{};
+ T.wostatus=T.wostatus||cur.status||'正常下班';
+ var ym=monthKey(d),norm=0,ot=0;
+ for(var k in DB.woff){if(k.slice(0,7)===ym){if(DB.woff[k].status==='加班')ot++;else norm++;}}
+ var h='<div class="card"><div class="ch">'+I.wo.replace('class="i2"','')+'下班打卡</div>'+
+  '<label class="lbl">日期</label><input type="date" class="inp" id="_wod" value="'+d+'" onchange="T.wodate=this.value;T.wostatus=null;renderPage()">'+
+  '<label class="lbl">下班状态</label>'+chipsHtml('_wos','wostatus',['正常下班','加班'])+
+  '<label class="lbl">加班原因（选填）</label><input class="inp" id="_wor" value="'+esc(cur.reason||'')+'" placeholder="选填">'+
+  '<div class="btnrow"><button class="btn p" onclick="woSave()">保存</button></div></div>';
+ h+='<div class="card w"><div class="ch">'+ym+' 月度统计</div><div class="g2">'+st(norm,'正常下班（天）')+st(ot,'加班（天）')+'</div></div>';
+ var g={};for(var k2 in DB.woff)g[k2]=[DB.woff[k2]];
+ h+='<div class="card b"><div class="ch">历史归档</div>'+archive(g,function(x){
+  return '<div style="font-size:12.5px;padding:3px 0"><span class="tag" style="background:'+(x.status==='加班'?'#F7E3E6;color:#B27A85':'#E4F0E2;color:#6E9B62')+'">'+esc(x.status)+'</span>'+esc(x.reason||'')+'</div>';})+'</div>';
+ return h;
+}
+function woSave(){
+ var d=document.getElementById('_wod').value||today();
+ DB.woff[d]={status:T.wostatus,reason:document.getElementById('_wor').value.trim()};
+ T.wodate=d;sync();
+ if(T.wostatus==='加班')dog('今天又加班啦，抱抱你。<br>回家路上买点好吃的犒劳自己吧~','',
+ 'hug');else toast('准时下班，超棒的！');
+}
+function renderWE(){
+ var d=T.wedate||today(),cur=DB.wemo[d]||{};
+ var h='<div class="card"><div class="ch">'+I.we.replace('class="i2"','')+'情绪复盘</div>'+
+  '<label class="lbl">日期</label><input type="date" class="inp" id="_wed" value="'+d+'" onchange="T.wedate=this.value;renderPage()">'+
+  '<label class="lbl">① 工作暖心小事</label><textarea class="ta" id="_wew" placeholder="今天有什么让你心里一暖的瞬间">'+esc(cur.warm||'')+'</textarea>'+
+  '<label class="lbl">② 糟心事件</label><textarea class="ta" id="_web" placeholder="有什么不太顺利的事">'+esc(cur.bad||'')+'</textarea>'+
+  '<label class="lbl">③ 自我调整改正方案</label><textarea class="ta" id="_wef" placeholder="下次可以怎么做呢">'+esc(cur.fix||'')+'</textarea>'+
+  '<div class="btnrow"><button class="btn p" onclick="weSave()">保存复盘</button></div></div>';
+ var g={};for(var k in DB.wemo)g[k]=[DB.wemo[k]];
+ h+='<div class="card b"><div class="ch">历史归档</div>'+archive(g,function(x){
+  return '<div style="font-size:12.5px;padding:3px 0;line-height:1.7">'+(x.warm?'<span class="tag" style="background:#E4F0E2;color:#6E9B62">暖心</span>'+esc(x.warm)+'<br>':'')+
+   (x.bad?'<span class="tag" style="background:#F7E3E6;color:#B27A85">糟心</span>'+esc(x.bad)+'<br>':'')+
+   (x.fix?'<span class="tag">调整</span>'+esc(x.fix):'')+'</div>';})+'</div>';
+ return h;
+}
+function weSave(){
+ var d=document.getElementById('_wed').value||today();
+ DB.wemo[d]={warm:document.getElementById('_wew').value.trim(),bad:document.getElementById('_web').value.trim(),fix:document.getElementById('_wef').value.trim()};
+ if(!DB.wemo[d].warm&&!DB.wemo[d].bad&&!DB.wemo[d].fix)delete DB.wemo[d];
+ T.wedate=d;sync();toast('复盘完成，你很会照顾自己');
+}
+function renderWQ(){
+ T.qmin=T.qmin||'30';
+ var d=T.qdate||today(),wd=weekDays(),W=weekSum(wd);
+ var h='<div class="card"><div class="ch">'+I.wq.replace('class="i2"','')+'刷题记录</div>'+
+  '<label class="lbl">日期</label>'+dateInput('_qd',d)+
+  '<label class="lbl">刷题科目</label><input class="inp" id="_qs" placeholder="例：教育综合知识">'+
+  '<label class="lbl">刷题时长</label>'+chipsHtml('_qm','qmin',DUR.map(function(x){return {v:x.v,t:x.t};}))+
+  '<div class="row"><div><label class="lbl">完成题目总量</label><input class="inp" id="_qt" type="number" inputmode="numeric" placeholder="0"></div>'+
+  '<div><label class="lbl">错题数量</label><input class="inp" id="_qw" type="number" inputmode="numeric" placeholder="0"></div></div>'+
+  '<label class="lbl">错题复盘笔记</label><textarea class="ta" id="_qn" placeholder="错在哪里？下次怎么避免"></textarea>'+
+  '<div class="btnrow"><button class="btn p" onclick="qSave()">保存</button></div></div>';
+ h+='<div class="card w"><div class="ch">本周统计</div><div class="g2">'+st(mins2txt(W.quizMin),'刷题总时长')+st(W.quizN,'累计题量')+'</div></div>';
+ h+='<div class="card b"><div class="ch">历史归档</div>'+archive(groupBy(DB.quiz,function(q){return q.date;}),function(q){
+  return '<div class="item"><button class="del" onclick="qDel(\''+q.id+'\')">✕</button><b style="font-weight:600">'+esc(q.subject||'刷题')+'</b> '+mins2txt(q.min)+
+   '<br><span style="color:#9C978C">'+q.total+' 题 · 错 '+q.wrong+' 题 · 正确率 '+(q.total?Math.round((q.total-q.wrong)/q.total*100):0)+'%</span>'+
+   (q.note?'<br><span style="color:#7C7768">'+esc(q.note)+'</span>':'')+'</div>';})+'</div>';
+ return h;
+}
+function qSave(){
+ DB.quiz.push({id:nid(),date:document.getElementById('_qd').value||today(),subject:document.getElementById('_qs').value.trim(),
+  min:+T.qmin,total:num(document.getElementById('_qt').value),wrong:num(document.getElementById('_qw').value),
+  note:document.getElementById('_qn').value.trim()});
+ T.qdate=document.getElementById('_qd').value;sync();toast('刷题记录已保存');
+}
+function qDel(id){DB.quiz=DB.quiz.filter(function(q){return q.id!==id;});sync();}
+
+/* =========================================================
+   一级模块 3：每日资讯
+   ========================================================= */
+var CATC={'经济学':'#DCEAF6','哲学':'#E6DEF2','历史':'#F5E7D3','美学':'#F8DCE0','摄影&艺术':'#DDEBD8','教育成长':'#FCE9B8'};
+var NEWS=[
+{c:'经济学',t:'“沉没成本”：已经花出去的钱，不该继续绑架你',
+b:['电影看了二十分钟发现很无聊，你却因为“票都买了”硬撑到散场——这就是沉没成本谬误。已经付出且无法收回的成本，在理性决策里应当被当作零。','真正该问的问题只有一个：从现在开始，继续投入还能带来多少收益？把过去的付出从算式里划掉，选择才会变轻。','这条原理在生活里的分身很多：读不下去的书、消耗你的关系、不合脚却很贵的鞋。及时止损不是浪费，而是把未来的时间还给自己。'],
+s:['书籍：《怪诞行为学》丹·艾瑞里；《思考，快与慢》丹尼尔·卡尼曼','公开课：中国大学MOOC《行为经济学》（浙江大学）','纪录片：BBC《金钱与我们》'],
+p:'今天在记账模块回看一下上周支出，找出一笔“因为已经花了所以继续花”的钱，本周暂停它。'},
+{c:'经济学',t:'先付给自己：工资到账当天就存下的那笔钱',
+b:['多数人的存钱公式是“收入−支出=储蓄”，结果一个月下来常常剩不下什么。把公式反过来：收入−储蓄=可支出，先把储蓄扣走，剩下的才是这个月的额度。','建议比例可以从 10% 起步，压力不大又能形成惯性。关键不在于金额，而在于“先”这个动作，它把储蓄从意志力问题变成了流程问题。','再进一步，可以把储蓄拆成三份：应急金（3~6个月生活费）、目标金（旅行、进修）、长期金。目标越具体，越不容易被临时消费拿走。'],
+s:['书籍：《小狗钱钱》博多·舍费尔；《富爸爸穷爸爸》','公众号：简七读财（理财入门科普）','免费网站：国家金融监督管理总局“金融消费者教育”专栏'],
+p:'去记账模块把本月总收入填上，看看“当月剩余可存”还剩多少，给下个月定一个存钱小目标。'},
+{c:'经济学',t:'机会成本：你选的那条路，价格是没走的那条',
+b:['经济学里最朴素也最锋利的概念之一：任何选择的真实成本，是你为此放弃的最高价值选项。周末加班挣的钱，成本是那天本可以拥有的休息与陪伴。','它提醒我们，"免费"往往不免费。刷两小时短视频不花钱，但花掉了两小时——那可能是一节课、一次运动、一顿好好做的饭。','用机会成本思考，不是让人苛刻地计算每一分钟，而是在重要的岔路口，把隐形的代价显影出来。'],
+s:['书籍：《经济学原理》曼昆（第1章 经济学十大原理）','公开课：Coursera《Microeconomics Principles》（宾夕法尼亚大学，可旁听）','纪录片：《美国工厂》（劳动与选择的现实样本）'],
+p:'今天挑一件常做却没什么回报的事，把那段时间换给阅读或运动模块，试一次就好。'},
+{c:'经济学',t:'通货膨胀：为什么小时候的五毛钱那么好花',
+b:['通胀是货币购买力随时间下降的现象。温和的通胀（年 2%~3%）通常被视为经济健康的信号，它鼓励消费与投资；但对现金持有者而言，它是一种沉默的税。','这意味着把钱全部放在活期账户里，长期看是在慢慢缩水。合理配置不等于冒险，先建立应急金，再考虑国债、指数基金等低门槛工具。','对普通人最实用的一条：提升自己的“定价能力”——技能、专业、口碑，是唯一不会被通胀稀释的资产。'],
+s:['书籍：《漫步华尔街》伯顿·马尔基尔','数据：国家统计局官网 月度居民消费价格指数（CPI）','公开课：中国大学MOOC《金融学》（南开大学）'],
+p:'把本月记账里“情感 / 爱好”这两栏看一眼，它们其实是在为自己的长期资产投资，别对它们太苛刻。'},
+
+{c:'哲学',t:'斯多葛派的“控制二分法”：分清什么是你的事',
+b:['爱比克泰德说，世上的事分两类：在我们控制之内的（判断、意图、行动），和不在我们控制之内的（他人评价、天气、结果）。烦恼几乎都来自把第二类当成第一类。','实践方法很简单：焦虑升起时，问自己"这件事我能做的具体动作是什么？"能做的立刻去做，不能做的，练习放手。','这不是消极认命，恰恰相反——把力气从无法改变的地方收回来，投到能改变的地方，人反而更有行动力。'],
+s:['书籍：《沉思录》马可·奥勒留；《被讨厌的勇气》岸见一郎','公众号：哲学园','免费网站：斯坦福哲学百科（plato.stanford.edu）"Stoicism"词条'],
+p:'在情绪复盘模块，把今天的糟心事写下来，然后只写一条“我能控制的下一步动作”。'},
+{c:'哲学',t:'内耗的本质，常常是“想太多，做太少”',
+b:['心理学里有个概念叫反刍思维：反复咀嚼同一件负面的事，却不产生任何解决动作。它给人一种“我在处理问题”的错觉，实际上只是在加深情绪的沟壑。','打断反刍最有效的方式是切换通道——从思考通道切到身体通道：走路、洗碗、伸展、大声读一段书。身体动起来，念头的循环就断了。','另一个方法是给担心设一个"预约时间"：告诉自己晚上七点专门想十五分钟。多数时候，到点了你已经不想想了。'],
+s:['书籍：《也许你该找个人聊聊》洛莉·戈特利布；《焦虑是种能力》','公开课：耶鲁大学《The Science of Well-Being》（Coursera 可免费旁听）','纪录片：《解密大脑》Netflix'],
+p:'今天如果开始反刍，就去运动模块记一次 30 分钟散步，让身体替你思考。'},
+{c:'哲学',t:'庄子的“无用之用”：允许生活里有不产出的部分',
+b:['庄子讲那棵长得歪歪扭扭的大树，因为不成材，反而没被砍伐，得以终其天年。无用，成了它最大的用处。','当代生活习惯用产出衡量一切：读书要有笔记，散步要有步数，休息要“高效恢复”。可有些时刻的价值恰恰在于它不指向任何结果——发呆、听雨、揉一只猫。','给自己保留一块“无用”的自留地，人才不会被彻底工具化。这不是懒惰，是留白。'],
+s:['书籍：《庄子today》傅佩荣；《人生的智慧》叔本华','公开课：中国大学MOOC《庄子哲学》（复旦大学）','纪录片：《人生果实》（日本，慢生活的极佳注脚）'],
+p:'今天允许自己有半小时不打卡任何模块，就单纯地待着——这条建议本身也不用打勾。'},
+{c:'哲学',t:'加缪：在重复的日常里，也要想象西西弗是幸福的',
+b:['西西弗被罚推石上山，石头到顶又滚落，永无止境。加缪说，我们应当想象西西弗是幸福的——因为他清醒地知道自己的处境，仍然选择走下山去。','教师的日常也有重复：同样的课文、相似的作业、周而复始的学期。荒谬感不来自重复本身，而来自“重复毫无意义”的判断。','意义不是被发现的，是被赋予的。当你在第五遍讲同一篇课文时，想着讲给某一个具体的孩子听，石头就有了不同的重量。'],
+s:['书籍：《西西弗神话》加缪；《局外人》加缪','公众号：一席（相关演讲）','免费网站：豆瓣时间《加缪：荒诞与反抗》试听章节'],
+p:'在工作内容模块，给今天最重复的一项工作写一句“它为谁而做”。'},
+
+{c:'历史',t:'宋朝的“外卖”：一千年前的城市生活有多方便',
+b:['《东京梦华录》里记载，北宋汴京夜市"直至三更尽，才五更又复开张"，市民可以叫食店送餐上门，称为"逐时施行索唤"。皇帝宋孝宗也常从市井买吃食。','这背后是坊市制度的瓦解：唐代长安的坊墙被推倒后，商业沿街铺开，夜禁取消，城市第一次拥有了真正意义上的夜生活。','制度的一点松动，长出了一整套市井文明——瓦舍勾栏、说书杂剧、茶坊酒肆。生活方式的变化，往往藏在不起眼的规则改动里。'],
+s:['书籍：《东京梦华录》孟元老；《宋：现代的拂晓时辰》吴钩','纪录片：《历史那些事》《china·瓷》；《清明上河图密码》相关解读','公开课：中国大学MOOC《中国古代史》（北京大学）'],
+p:'今天做饭或点餐时，可以在饮食模块顺手记一笔，一千年后也是史料呀。'},
+{c:'历史',t:'敦煌藏经洞：一间小屋里的四万卷时间',
+b:['1900年，道士王圆箓在莫高窟第16窟发现了一个封闭的小室，里面堆满了从4世纪到11世纪的写卷、绢画，数量超过五万件，涵盖佛经、契约、医方、乐谱、学童习字。','最动人的往往不是佛经，而是那些日常文书：借粮契约、离婚书（"愿妻娘子相离之后，重梳蝉鬓，美裙娥眉"）、小孩子抄写时的涂鸦。','历史不只由帝王将相构成。一张写坏的练习纸能穿越一千年，说明普通人的生活痕迹同样值得被保存。'],
+s:['书籍：《敦煌》井上靖；《敦煌学十八讲》荣新江','免费网站：数字敦煌（e-dunhuang.com）可高清看窟','纪录片：《敦煌》（央视）、《河西走廊》'],
+p:'今天在阅读或情绪复盘里多写两行，你的日常也在生成属于自己的“藏经洞”。'},
+{c:'历史',t:'王阳明龙场悟道：人生的低谷可能是转折点',
+b:['正德三年，王阳明被贬贵州龙场驿，那是一个瘴气弥漫、语言不通的荒僻之地。他为自己做了一具石棺，日夜静坐，终于在某夜大悟"圣人之道，吾性自足"。','心学的起点，是一个人被剥夺了所有外部支撑之后，向内寻找依据。此后他提出知行合一——知道而不去做，其实等于不知道。','这段历史给现代人的启示很实际：当外部评价体系失灵时，恰恰是重建内在标准的机会。'],
+s:['书籍：《王阳明大传》冈田武彦；《传习录》','公开课：中国大学MOOC《王阳明心学》（贵州大学）','纪录片：《王阳明》（央视五集）'],
+p:'今天在情绪复盘写下一件“知道却一直没做”的小事，然后今天就做掉它。'},
+{c:'历史',t:'活字印刷之外：中国古代的“教育普及”是怎样发生的',
+b:['毕昇发明活字印刷是在北宋庆历年间，但真正让书变便宜的，其实是雕版印刷的大规模商业化，以及宋代书院的兴起。白鹿洞、岳麓、嵩阳、应天四大书院，把教育从官学扩展到民间。','朱熹为白鹿洞书院订立的学规里写"博学之，审问之，慎思之，明辨之，笃行之"，今天读来仍是完整的学习方法论。','技术降低了知识的价格，制度决定了谁能拿到它。这两件事今天依然同时在发生。'],
+s:['书籍：《中国印刷史》张秀民；《宋代书院与士人社会》','纪录片：《书简阅中国》《典籍里的中国》','免费网站：中华书局“籍合网”部分古籍公开阅读'],
+p:'今天在刷题记录里写一条“审问之”——把一道错题背后的原理问清楚。'},
+
+{c:'美学',t:'低饱和配色为什么让人放松：盐系色彩的原理',
+b:['颜色的饱和度越高，视觉刺激越强，交感神经越活跃。降低饱和度、提高明度，色彩就从"呼喊"变成"低语"，这是盐系、莫兰迪、日系性冷淡风共同的底层逻辑。','实操上有个简单公式：主色 70% 用低饱和中性色（米白、燕麦、浅灰蓝），辅色 25% 用略深的同色系，剩下 5% 留给一个跳色（陶土橘、雾霾粉）。','跳色的作用不是抢眼，而是让整体不至于沉闷。它像句子里的一个逗号，给眼睛一个落脚点。'],
+s:['书籍：《配色设计原理》奥博斯科编辑部；《色彩的性格》','免费网站：Coolors.co、中国色（zhongguose.com）','公开课：中国大学MOOC《色彩构成》（中国美术学院）'],
+p:'今天在爱好模块给手帐或穿搭配一次“70/25/5”，感受一下克制的舒服。'},
+{c:'美学',t:'穿搭的三色原则与“质感优先”',
+b:['全身颜色不超过三种，是最省心的搭配底线。三色之内，视觉自动成立；超过三色，就需要更强的设计能力去统合。','比颜色更决定观感的其实是质感与版型：一件挺括的棉麻衬衫，比五个流行元素更耐看。廓形上遵循"上宽下窄"或"上窄下宽"，避免同宽。','盐系穿搭的核心是"干净"：无过多印花、金属件收敛、鞋包与整体色阶呼应。买之前问一句：它能和衣柜里三件以上单品搭配吗？'],
+s:['书籍：《法国女人不买衣服》；《衣柜断舍离》近藤麻理惠','公众号：黎贝卡的异想世界、Lens','纪录片：《时尚的真相》（The True Cost，反思快时尚）'],
+p:'今天出门前用三色原则搭一次衣服，顺手在心情模块记一笔今天的状态。'},
+{c:'美学',t:'家居留白：房间的空，是给生活呼吸的地方',
+b:['日本建筑师原研哉说，"空"不是没有，而是可以容纳一切的容器。家居里的留白，指的是台面、墙面、地面的空置比例，通常建议台面留白 60% 以上。','实现留白的关键不是买收纳，而是减量。每件物品都要回答"我最近三个月用过它吗"。留下的东西越少，剩下的东西越显得贵重。','视觉上还有一个技巧：统一容器与材质。同色系的收纳盒、同材质的木器，能把杂乱的信息量压下去。'],
+s:['书籍：《白》原研哉；《理想的家》松浦弥太郎','纪录片：《我的家里空无一物》（日剧，轻松版实践）','免费网站：小红书/B站搜“盐系家居 留白”（注意甄别广告）'],
+p:'今天清空一个台面，拍张照存进旅行或爱好模块，作为“空”的纪念。'},
+{c:'美学',t:'文艺赏析入门：怎么看懂一幅你“看不懂”的画',
+b:['面对一幅画，可以按四步走：先看（描述你真实看到的形状、颜色、人物），再想（画家把什么放在中心？光从哪来？），然后查（时代背景与画家生平），最后问（它让我想起什么）。','这套方法来自博物馆教育里的 VTS（视觉思维策略），核心是先充分观察再急着下判断。不懂不是问题，急着找标准答案才是。','审美不是天赋，是被看的次数喂出来的。每周认真看三幅画，一年就是一百五十幅。'],
+s:['书籍：《艺术的故事》贡布里希；《如何看一幅画》françoise Barbe-Gall','免费网站：Google Arts & Culture、故宫博物院数字文物库','纪录片：BBC《文明的轨迹》《旷世杰作的秘密》'],
+p:'今天在阅读模块记一次 30 分钟“看画”，笔记里写下第一眼看到的三个细节。'},
+
+{c:'摄影&艺术',t:'手机构图四招：三分法、引导线、框中框、留白',
+b:['打开手机的九宫格辅助线，把主体放在交点上，画面立刻稳定——这是三分法。它的原理是避免绝对居中带来的呆板。','引导线是用道路、栏杆、光影把视线牵向主体；框中框是用门洞、树枝、窗框把主体"框"起来，增加层次；留白则给主体呼吸空间，尤其适合人像与静物。','四招之外，最重要的是蹲下来或站上去——90% 的普通照片，只是因为拍摄者站着随手一拍。'],
+s:['书籍：《美国纽约摄影学院摄影教材》；《旅行摄影圣经》','免费网站：Unsplash（看优秀构图）、500px 中国','公开课：B站“手机摄影入门”系列（如“摄影师张千里”）'],
+p:'今天拍一张照片存进旅行模块，试着用一次“框中框”。'},
+{c:'摄影&艺术',t:'光的三种性格：顺光、侧光、逆光',
+b:['顺光让物体色彩饱满但缺少立体感，适合记录；侧光制造明暗交界，是塑造质感与轮廓的最佳选择；逆光带来轮廓光与氛围，但需要对主体面部补光或接受剪影。','一天中最好的两段光是日出后一小时与日落前一小时，色温偏暖、角度低，被称为黄金时刻；紧随其后的蓝调时刻，天空呈现深蓝，适合拍城市。','阴天也不是坏天气：云层是天然柔光箱，最适合拍人像与静物。'],
+s:['书籍：《光的艺术：摄影用光完全手册》','纪录片：《北方的纳努克》《寻找薇薇安·迈尔》','免费网站：PhotoPills 网页版（查日出日落与黄金时刻）'],
+p:'今天在傍晚出门散步（顺便记进运动模块），拍一张黄金时刻的照片。'},
+{c:'摄影&艺术',t:'绘画入门：从“画你看到的”到“画你理解的”',
+b:['零基础最有效的起手式是速写：每天 15 分钟，画身边的物件——杯子、鞋、手。不追求像，追求观察时间的累积。','第二步是学会把复杂形体概括成几何体：头是球，躯干是箱，四肢是圆柱。素描的明暗五调子（亮面、灰面、明暗交界线、反光、投影）能让它们立起来。','工具不必贵：一支 2B 铅笔、一本 A5 速写本足够撑过前三个月。'],
+s:['书籍：《伯里曼人体结构绘画教学》；《像艺术家一样思考》贝蒂·爱德华','免费网站：Line of Action（在线人体速写计时练习）','公开课：中国大学MOOC《素描基础》（中央美术学院相关课程）'],
+p:'今天在爱好模块新增一项“每日15分钟速写”，把落地程度设为规划中。'},
+{c:'摄影&艺术',t:'小众艺术科普：物派、极简与“少即是多”',
+b:['上世纪六七十年代，日本"物派"艺术家把石头、木材、纸张原样放置在空间里，主张让物自己说话，不施加过多人为形式。这与极简主义的"少即是多"遥相呼应。','极简不等于空洞。密斯·凡·德罗说"上帝在细节中"，越少的元素，越要求每一个元素的精确。留白的美，是建立在极高控制力上的。','理解这一点，也能反过来看待生活：把事情做少，是为了把留下的事情做透。'],
+s:['书籍：《日本物派》；《极简主义》乔舒亚·菲尔茨·米尔本','纪录片：Netflix《极简主义：记录生命中的重要事物》','免费网站：MoMA 官网 Collection 在线藏品'],
+p:'今天在 To do list 里只留三件最重要的事，其余的挪到明天。'},
+
+{c:'教育成长',t:'课堂提问的“等待三秒”：一个被低估的教学技巧',
+b:['研究发现，教师提问后平均只等待 0.9 秒就会点名或自己回答。当等待时间延长到 3~5 秒，学生回答的长度、完整度与主动举手率都会显著上升。','三秒的沉默对老师是煎熬，对学生却是思考的空间。可以用一个小动作缓解尴尬：提问后走两步、扫视全班、在心里默数。','配套技巧是"先思考后举手"：提问 → 全员静想 → 同桌互说 → 再点名。这样点到的学生不会毫无准备。'],
+s:['书籍：《可见的学习》约翰·哈蒂；《教学勇气》帕克·帕尔默','公开课：国家中小学智慧教育平台（免费教师研修课程）','公众号：中国教育报、教育研究前沿'],
+p:'今天上课试一次“等待三秒”，把感受写进工作内容的其他补充里。'},
+{c:'教育成长',t:'间隔重复与提取练习：比反复读书有效得多的两件事',
+b:['认知心理学最扎实的两个结论：一是提取练习（合上书回忆）比重读有效得多；二是间隔复习（今天、三天后、一周后、一月后）比集中突击记得牢。','对应到刷题：做完题不要立刻对答案，先自己讲一遍思路；错题隔三天再做一次，而不是当天订正完就归档。','对学生也一样：与其让他们抄五遍单词，不如让他们合上书默写一遍，再针对错的部分重来。'],
+s:['书籍：《认知天性》亨利·罗迪格；《学习之道》芭芭拉·奥克利','公开课：Coursera《Learning How to Learn》（中文字幕，免费）','免费工具：Anki（开源间隔重复卡片软件）'],
+p:'今天在刷题记录里，把三天前的错题重做一遍，看看正确率变化。'},
+{c:'教育成长',t:'和家长沟通的“三明治”结构：具体、共情、可执行',
+b:['有效的家校沟通有三层：先说具体的观察（不是评价）——"这周他主动举手了两次"；再表达共情与理解——"我知道你们下班也很晚"；最后给一个可执行的小动作——"晚饭后固定十分钟检查订正"。','避免的表达是笼统的负面判断："他就是不认真"。家长听到的是指责，防御一起来，沟通就结束了。','记录很重要：每次沟通后写一句要点，下次开场就能承接上次，家长会明显感到被重视。'],
+s:['书籍：《非暴力沟通》马歇尔·卢森堡；《正面管教》简·尼尔森','公开课：国家中小学智慧教育平台“家校共育”专题','公众号：钱志亮工作室'],
+p:'今天挑一位学生，给家长发一条“具体+共情+可执行”的消息，并记进工作内容。'},
+{c:'教育成长',t:'时间管理：先安排休息，再安排工作',
+b:['教师的时间被切得极碎，传统的“番茄钟”常常不适用。更实际的做法是识别自己的“完整时间块”——比如早自习前 40 分钟、午休 30 分钟，把最需要脑力的备课放进去。','另一个反直觉的建议：先在日历上把休息、运动、吃饭标出来，剩下的空隙才用来排工作。否则工作会自动膨胀到填满所有时间（帕金森定律）。','每天结束前花三分钟写"明天最重要的三件事"，第二天开机就有方向，避免被消息牵着走。'],
+s:['书籍：《深度工作》卡尔·纽波特；《四千周》奥利弗·伯克曼','公开课：中国大学MOOC《时间管理》（浙江大学）','免费工具：滴答清单、Notion 免费版'],
+p:'今天在 To do list 里先添加“休息/运动”两条，再填工作项。'}
+];
+function newsIndexFor(d){
+ var k=d.split('-'),n=(+k[0])*372+(+k[1])*31+(+k[2]);
+ return n%NEWS.length;
+}
+function todayNews(){
+ var d=today(),i=DB.newsPick[d]!==undefined?DB.newsPick[d]:newsIndexFor(d);
+ var n=NEWS[i%NEWS.length];
+ return {idx:i%NEWS.length,cat:n.c,color:CATC[n.c],title:n.t,n:n};
+}
+function renderNews(){
+ var cur=todayNews(),n=cur.n;
+ var faved=DB.favs.some(function(f){return f.t===n.t;});
+ var h='<div class="card news"><div style="display:flex;align-items:center;gap:6px">'+
+  '<span class="tag" style="background:'+CATC[n.c]+';color:#5C6B78;font-size:11.5px;padding:3px 10px">'+n.c+'</span>'+
+  '<span class="sp" style="margin-left:auto;font-size:11px;color:#9C978C">'+today()+'</span></div>'+
+  '<div class="nt">'+esc(n.t)+'</div>'+
+  n.b.map(function(p){return '<p class="np">'+esc(p)+'</p>';}).join('')+
+  '<div class="src"><b>拓展资源出处</b><br>'+n.s.map(function(s){return '· '+esc(s);}).join('<br>')+'</div>'+
+  '<div class="tip"><b style="font-weight:600">落地小建议</b><br>'+esc(n.p)+'</div>'+
+  '<div class="btnrow"><button class="btn y" onclick="newsRefresh()">换一条</button>'+
+  '<button class="btn'+(faved?' p':'')+'" onclick="newsFav()">'+(faved?'已收藏':'收藏')+'</button>'+
+  '<button class="btn" onclick="newsCopy()">复制</button></div></div>';
+ h+='<div class="card b"><div class="ch">六大知识板块</div><div class="chips">'+
+  Object.keys(CATC).map(function(c){return '<span class="chip" style="background:'+CATC[c]+';border-color:transparent" onclick="newsByCat(\''+esc(c)+'\')">'+esc(c)+'</span>';}).join('')+
+  '</div><div class="hint" style="margin-top:6px">点击板块，随机抽一条该板块的资讯</div></div>';
+ h+='<div class="card"><div class="ch">我的收藏<span class="sp">'+DB.favs.length+' 条</span></div>'+
+  (DB.favs.length?DB.favs.map(function(f,i){
+   return '<div class="item"><button class="del" onclick="favDel('+i+')">✕</button><span class="tag" style="background:'+CATC[f.c]+'">'+f.c+'</span><br>'+
+    '<span onclick="favOpen('+i+')" style="color:#4E7B96">'+esc(f.t)+'</span><br><span style="color:#9C978C;font-size:11px">'+f.d+' 收藏</span></div>';
+  }).join(''):'<div class="emp">还没有收藏，遇到喜欢的就存下来吧~</div>')+'</div>';
+ return h;
+}
+function newsRefresh(){
+ var d=today(),cur=todayNews().idx,i=cur;
+ while(i===cur&&NEWS.length>1)i=Math.floor(Math.random()*NEWS.length);
+ DB.newsPick[d]=i;sync();
+}
+function newsByCat(c){
+ var idxs=[];NEWS.forEach(function(n,i){if(n.c===c)idxs.push(i);});
+ if(!idxs.length)return;
+ DB.newsPick[today()]=idxs[Math.floor(Math.random()*idxs.length)];sync();
+ document.getElementById('main').scrollTop=0;
+}
+function newsFav(){
+ var n=todayNews().n;
+ if(DB.favs.some(function(f){return f.t===n.t;})){toast('已经在收藏里啦~');return;}
+ DB.favs.unshift({c:n.c,t:n.t,i:todayNews().idx,d:today()});sync();toast('已收藏');
+}
+function favDel(i){DB.favs.splice(i,1);sync();}
+function favOpen(i){DB.newsPick[today()]=DB.favs[i].i;sync();document.getElementById('main').scrollTop=0;}
+function newsCopy(){
+ var n=todayNews().n;
+ var txt='【'+n.c+'】'+n.t+'\n\n'+n.b.join('\n\n')+'\n\n— 拓展资源出处 —\n'+n.s.map(function(s){return '· '+s;}).join('\n')+'\n\n— 落地小建议 —\n'+n.p;
+ var ta=document.createElement('textarea');ta.value=txt;ta.style.position='fixed';ta.style.opacity='0';
+ document.body.appendChild(ta);ta.select();
+ try{document.execCommand('copy');toast('全文已复制，可粘贴到备忘录');}catch(e){toast('复制失败，请长按选择文字');}
+ ta.remove();
+}
+
+/* =========================================================
+   一级模块 4：个性设置
+   ========================================================= */
+function renderSetting(){
+ var h='<div class="card"><div class="ch">'+I.set2.replace('class="i2"','')+'模块开关与重命名</div>'+
+  '<div class="hint" style="margin-bottom:6px">关闭后该模块从导航与统计中隐藏；名称可直接修改，保存后自动重新渲染布局</div>';
+ NAV.forEach(function(g){
+  h+='<div class="swrow l1"><div class="nm"><input value="'+esc(nameOf(g.id,g.name))+'" onchange="setName(\''+g.id+'\',this.value)"></div>'+
+   '<button class="sw'+(isOff(g.id)?'':' on')+'" onclick="toggleMod(\''+g.id+'\')"></button></div>';
+  g.kids.forEach(function(k){
+   h+='<div class="swrow" style="padding-left:14px"><div class="nm"><input value="'+esc(nameOf(k.id,k.name))+'" onchange="setName(\''+k.id+'\',this.value)"></div>'+
+    '<button class="sw'+(isOff(k.id)?'':' on')+'" onclick="toggleMod(\''+k.id+'\')"></button></div>';
+  });
+ });
+ h+='</div>';
+ h+='<div class="card b"><div class="ch">运动热量估算参数</div><label class="lbl">体重（kg）</label>'+
+  '<input class="inp" type="number" inputmode="decimal" value="'+num(DB.cfg.weight||55)+'" onchange="DB.cfg.weight=num(this.value);sync();toast(\'已更新\')">'+
+  '<div class="hint" style="margin-top:5px">用于按运动类型 MET 值离线估算消耗热量</div></div>';
+ var cnt=DB.meals.length+DB.sports.length+DB.reads.length+DB.travels.length+DB.quiz.length+DB.hobbies.length;
+ h+='<div class="card"><div class="ch">数据管理</div>'+
+  '<div class="kv"><span>本地记录条数</span><b>'+cnt+' 条</b></div>'+
+  '<div class="kv"><span>存储方式</span><b>localStorage · 仅本机</b></div>'+
+  '<div class="btnrow"><button class="btn" onclick="exportData()">导出备份</button><button class="btn" onclick="importData()">导入恢复</button></div>'+
+  '<div class="btnrow"><button class="btn" onclick="resetAll()">清空全部数据</button></div>'+
+  '<div class="hint" style="margin-top:6px">所有数据仅保存在本机浏览器，不会上传任何服务器</div></div>';
+ return h;
+}
+function setName(id,v){v=v.trim();if(v)DB.cfg.names[id]=v;else delete DB.cfg.names[id];sync();}
+function toggleMod(id){
+ DB.cfg.off[id]=!DB.cfg.off[id];
+ if(!DB.cfg.off[id])delete DB.cfg.off[id];
+ save();
+ if(isOff(CUR)||isOff(gidOf(CUR)))CUR=firstPage();
+ render();
+}
+function exportData(){
+ var s=JSON.stringify(DB);
+ var ta=document.createElement('textarea');ta.value=s;ta.style.position='fixed';ta.style.opacity='0';
+ document.body.appendChild(ta);ta.select();
+ try{document.execCommand('copy');}catch(e){}
+ ta.remove();
+ modal('<h3>数据备份</h3><div class="hint">已复制到剪贴板，可粘贴到备忘录保存。</div><textarea class="ta" style="min-height:120px;margin-top:8px" readonly>'+esc(s)+'</textarea><div class="btnrow"><button class="btn p" onclick="closeModal()">好的</button></div>');
+}
+function importData(){
+ modal('<h3>导入恢复</h3><div class="hint">粘贴之前导出的备份文本（会覆盖当前数据）</div><textarea class="ta" id="_imp" style="min-height:120px;margin-top:8px"></textarea><div class="btnrow"><button class="btn" onclick="closeModal()">取消</button><button class="btn p" onclick="importOk()">导入</button></div>');
+}
+function importOk(){
+ try{
+  var o=JSON.parse(document.getElementById('_imp').value);
+  if(!o||typeof o!=='object')throw 0;
+  DB=o;var d=defDB();for(var k in d){if(DB[k]===undefined)DB[k]=d[k];}
+  closeModal();sync();toast('导入成功');
+ }catch(e){toast('格式不对哦，请检查备份文本');}
+}
+function resetAll(){
+ modal('<h3>确定清空全部数据吗</h3><div class="hint">此操作不可恢复，建议先导出备份。</div><div class="btnrow"><button class="btn" onclick="closeModal()">再想想</button><button class="btn p" onclick="resetOk()">确认清空</button></div>');
+}
+function resetOk(){DB=defDB();closeModal();CUR='home';sync();toast('已清空');}
+
+/* =========================================================
+   页面路由 & 启动
+   ========================================================= */
+var PAGES={
+ home:{n:'今日总览',ic:I.mHome,f:renderHome},
+ todo:{n:'To do list',ic:I.todo,f:renderTodo},
+ diet:{n:'饮食',ic:I.diet,f:renderDiet},
+ sport:{n:'运动',ic:I.sport,f:renderSport},
+ read:{n:'阅读',ic:I.read,f:renderRead},
+ money:{n:'记账',ic:I.money,f:renderMoney},
+ hobby:{n:'爱好',ic:I.hobby,f:renderHobby},
+ mood:{n:'心情',ic:I.mood,f:renderMood},
+ travel:{n:'旅行',ic:I.travel,f:renderTravel},
+ wc:{n:'工作内容',ic:I.wc,f:renderWC},
+ wi:{n:'工作强度',ic:I.wi,f:renderWI},
+ wo:{n:'下班打卡',ic:I.wo,f:renderWO},
+ we:{n:'情绪复盘',ic:I.we,f:renderWE},
+ wq:{n:'刷题记录',ic:I.wq,f:renderWQ},
+ news:{n:'综合知识资讯',ic:I.news2,f:renderNews},
+ setting:{n:'模块管理',ic:I.set2,f:renderSetting}
+};
+function renderPage(){
+ if(isOff(CUR)||isOff(gidOf(CUR)))CUR=firstPage();
+ var p=PAGES[CUR]||PAGES.home;
+ if(CUR==='travel'&&!T.tf)T.tf=emptyTravel();
+ if(CUR==='wc'&&T.wctags==null)T.wctags=((DB.wcontent[T.wcdate||today()]||{}).tags||[]).slice();
+ if(CUR==='wi'&&!T.wilevel)T.wilevel=(DB.wint[T.widate||today()]||{}).level||'适中';
+ if(CUR==='wo'&&!T.wostatus)T.wostatus=(DB.woff[T.wodate||today()]||{}).status||'正常下班';
+ var m=document.getElementById('main');
+ m.innerHTML='<div class="ptitle">'+p.ic.replace('class="i2"','').replace('class="ico"','')+esc(nameOf(CUR,p.n))+'</div>'+p.f();
+ if(CUR==='home'){
+  bindSwipe(document.getElementById('evCal'),function(dir){evMove(dir);});
+  bindSwipe(document.getElementById('ovCal'),function(dir){ovMove(dir);});
+ }
+ if(CUR==='diet'){var e=document.getElementById('_dd');if(e)e.onchange=function(){T.ddate=this.value;renderPage();};}
+ if(CUR==='sport'){var e2=document.getElementById('_sd');if(e2)e2.onchange=function(){T.sdate=this.value;renderPage();};}
+ if(CUR==='read'){var e3=document.getElementById('_rd');if(e3)e3.onchange=function(){T.rdate=this.value;};}
+ if(CUR==='money'){var e4=document.getElementById('_md');if(e4)e4.onchange=function(){T.mdate=this.value;renderPage();};}
+ if(CUR==='todo'){var e5=document.getElementById('_td');if(e5)e5.onchange=function(){T.tdate=this.value;renderPage();};
+  var i5=document.getElementById('_tt');if(i5)i5.addEventListener('keydown',function(ev){if(ev.key==='Enter')todoAdd();});}
+ if(CUR==='mood'){var e6=document.getElementById('_mod');if(e6)e6.onchange=function(){T.modate=this.value;renderPage();};}
+ if(CUR==='wq'){var e7=document.getElementById('_qd');if(e7)e7.onchange=function(){T.qdate=this.value;renderPage();};}
+}
+/* 启动 */
+(function init(){
+ if(DB.cfg.collapsed)document.body.classList.add('sbc');
+ T.tf=emptyTravel();
+ if(isOff('home')||isOff('g0'))CUR=firstPage();
+ render();
+ setTimeout(function(){
+  var d=today();
+  if(!allDone(d)&&!sessionStorage.getItem('yj_hi')){
+   sessionStorage.setItem('yj_hi','1');
+   var L=checklist(d),n=L.filter(function(x){return x.ok;}).length;
+   dog('汪汪！YJ 你回来啦～<br>今天已经完成 '+n+' / '+L.length+' 项打卡哦','点空白处关掉我，我们一起慢慢来~','cheer');
+  }
+ },420);
+ /* 跨天自动刷新日期相关内容 */
+ var lastDay=today();
+ setInterval(function(){ if(today()!==lastDay){lastDay=today();render();} },60000);
+})();
+</script>
+<!--
+==========================================================
+  vivo X300 手机使用步骤（添加到桌面，做成独立快捷应用）
+  1. 保存本 HTML 文件到手机（例如存到「我的文件 / Download」目录）；
+  2. 打开 vivo「文件管理」App，找到该 HTML 文件；
+  3. 点击文件，选择用「vivo 浏览器」打开；
+  4. 在 vivo 浏览器中点击右上角菜单（三点 / 三横），
+     选择「添加到桌面」/「发送到桌面快捷方式」，确认添加；
+  5. 回到手机桌面即可看到 YJ's buddy 图标，点击独立全屏打开使用。
+  提示：所有数据保存在本机浏览器 localStorage 中，不上传任何云端；
+        请勿在浏览器设置中「清除网站数据 / 缓存」，以免记录丢失；
+        可在「个性设置 → 模块管理 → 导出备份」定期复制一份备份文本保存。
+==========================================================
+-->
+</body>
+</html>
